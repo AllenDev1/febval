@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="social-media">
               <img src={Facebook} alt="" />
               <img src={Insta}alt="" />
-              <img src={Facebook} alt=""/>
+              <img src={Twitter} alt=""/>
 
             </div>
           </div>

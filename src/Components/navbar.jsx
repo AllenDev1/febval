@@ -8,8 +8,11 @@ import cake from "../Assets/gift shop/cakes.svg";
 import wed from "../Assets/gift shop/wed.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
+import Loginform from "./Loginform";
 
 const NavBar = () => {
+	const [modalShow, setModalShow] = React.useState(false);
+  
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
@@ -24,7 +27,11 @@ const NavBar = () => {
 							</Form>
 						</div>
 						<div className="cart-sign-div">
-							<Nav.Link href="#" className="sign-in">
+							<Nav.Link
+								href="#"
+								className="sign-in"
+								onClick={() => setModalShow(true)}
+							>
 								Sign In
 								<img src={signin} alt=".." />
 							</Nav.Link>
@@ -87,6 +94,10 @@ const NavBar = () => {
 					</Navbar.Offcanvas>
 				</Container>
 			</Navbar>
+			<Loginform
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+			/>
 		</>
 	);
 };
