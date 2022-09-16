@@ -1,0 +1,128 @@
+.main-nav {
+	.nav-container {
+		display: block;
+		.always-on-nav {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: space-between;
+			.cart-sign-div {
+				display: flex;
+				align-items: center;
+				gap: 37.69px;
+				.sign-in {
+					display: flex;
+					align-items: center;
+					gap: 16.44px;
+				}
+				.cart-link {
+					position: relative;
+					.num-0f-items-cart {
+						position: absolute;
+						height: 22px;
+						width: 22px;
+						border-radius: 100%;
+						background: #f96666;
+						right: -10px;
+						top: -10px;
+						display: flex;
+						justify-content: center;
+					}
+				}
+			}
+			.menu-btn {
+				span {
+					background-image: url("../Assets/Menu Open.svg");
+				}
+			}
+			.search-bar {
+				.search-from {
+					input {
+						background: #ffffff;
+
+						border-radius: 20px;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 14px;
+						line-height: 17px;
+						/* identical to box height */
+
+						color: rgba(0, 0, 0, 0.6);
+						background-image: url(../Assets/search.svg);
+						background-position: 95%;
+
+						background-repeat: no-repeat;
+						padding: 18px 28px;
+						width: 568.7px;
+						border: none;
+						box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
+					}
+					input:focus {
+						outline: none;
+						box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+						color: black;
+					}
+				}
+			}
+		}
+		.bottom-menu {
+			.menu-body {
+				.buttom-nav {
+					align-items: center;
+					justify-content: space-between;
+					width: 100%;
+					a {
+						gap: 10px;
+						display: flex;
+						align-items: center;
+					}
+					a:hover {
+						color: rgba(251, 121, 121, 1);
+						img {
+							filter: invert(62%) sepia(8%) saturate(3389%)
+								hue-rotate(314deg) brightness(98%)
+								contrast(101%);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@media (max-width: 768px) {
+	.main-nav {
+		.nav-container {
+			.always-on-nav {
+				.search-bar {
+					.search-from {
+						input {
+							background: #ffffff;
+
+							border-radius: 20px;
+							font-style: normal;
+							font-weight: 400;
+							font-size: 14px;
+							line-height: 17px;
+							/* identical to box height */
+
+							color: rgba(0, 0, 0, 0.6);
+							background-image: url(../Assets/search.svg);
+							background-position: 95%;
+
+							background-repeat: no-repeat;
+							padding: 18px 28px;
+							width: 100%;
+							border: none;
+							box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
+						}
+						input:focus {
+							outline: none;
+							box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+							color: black;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,10 +1,10 @@
 import React from 'react'
 import Footer from '../Components/footer'
-import Navbar from '../Components/navbar'
+import NavBar from '../Components/Navbar'
 const Home = () => {
   return (
     <>
-    <Navbar/>
+    <NavBar/>
     <Footer/>
 
     </>
