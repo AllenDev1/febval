@@ -31,7 +31,8 @@ const NavBar = () => {
 							<Nav.Link href="#c" className="cart-link">
 								<img src={cart} alt="..." />
 								<div className="num-0f-items-cart">
-                  <span>2</span> </div>
+									<span>2</span>{" "}
+								</div>
 							</Nav.Link>
 						</div>
 

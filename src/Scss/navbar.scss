@@ -93,8 +93,49 @@
 	.main-nav {
 		.nav-container {
 			.always-on-nav {
+				.logo {
+					img {
+						width: 50px;
+					}
+				}
+				.cart-sign-div {
+					display: flex;
+					align-items: center;
+					gap: 10px;
+					.sign-in {
+						display: flex;
+						align-items: center;
+						gap: 10px;
+						font-size: 10px;
+                        
+						img {
+							width: 16px;
+						}
+					}
+					.cart-link {
+						position: relative;
+						img {
+							width: 20px;
+						}
+						.num-0f-items-cart {
+							position: absolute;
+							height: 16px;
+							width: 16px;
+							border-radius: 100%;
+							background: #f96666;
+							right: -10px;
+							top: -10px;
+							display: flex;
+							justify-content: center;
+							span {
+								font-size: 10px;
+							}
+						}
+					}
+				}
 				.search-bar {
 					.search-from {
+                        margin: 0px 5px;
 						input {
 							background: #ffffff;
 
@@ -108,9 +149,9 @@
 							color: rgba(0, 0, 0, 0.6);
 							background-image: url(../Assets/search.svg);
 							background-position: 95%;
-
+							background-size: 18px;
 							background-repeat: no-repeat;
-							padding: 18px 28px;
+							padding: 12px 10px;
 							width: 100%;
 							border: none;
 							box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
