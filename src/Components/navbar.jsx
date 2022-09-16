@@ -1,10 +1,11 @@
 import React from 'react'
+import "../Scss/navbar.scss";
 
 const Navbar = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+    
+    </>
   )
 }
 
