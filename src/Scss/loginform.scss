@@ -1,0 +1,32 @@
+.login-modal {
+	.modal-dialog {
+		.modal-content {
+			.login-modal-footer {
+				.login-google {
+					background: rgba(0, 0, 0, 0.05);
+					border: 1px solid rgba(0, 0, 0, 0.1);
+					border-radius: 4px;
+					width: 100%;
+					padding: 10.5px 16px;
+					text-decoration: none;
+					display: flex;
+					gap: 14px;
+				}
+				.login-google:hover {
+					text-decoration: underline;
+				}
+				.footer-text {
+					font-style: normal;
+					font-weight: 400;
+					font-size: 12px;
+					line-height: 17px;
+					/* or 142% */
+
+					text-align: center;
+
+					color: rgba(0, 0, 0, 0.8);
+				}
+			}
+		}
+	}
+}

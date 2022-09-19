@@ -1,0 +1,19 @@
+.use-btn {
+	background: #fb7979;
+	border-radius: 10px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	/* identical to box height */
+
+	text-align: center;
+
+	color: #ffffff;
+	padding: 15px 42px;
+    border: none;
+}
+.use-btn:hover {
+	box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	background: rgba(254, 88, 88, 1);
+}
