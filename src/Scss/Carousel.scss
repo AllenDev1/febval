@@ -1,0 +1,95 @@
+
+		.team-carousel {
+            width:1140px;
+            height:250px;
+            margin:auto;
+            margin-top:139px;
+            margin-bottom:149px;
+            border-radius:20px;
+			.react-multi-carousel-track {
+
+				.card {
+					border: none;
+					
+					background-color: transparent;
+
+					.team-image {
+                        justify-self:center;
+						
+						
+					}
+					.team-card-body {
+                      
+						padding: 25px 0 0 0;
+						.team-member-name {
+							font-style: normal;
+							font-weight: 700;
+							font-size: 24px;
+							line-height: 32px;
+							color: #ffffff;
+						}
+						.team-member-work {
+							font-style: normal;
+							font-weight: 400;
+							font-size: 16px;
+							line-height: 32px;
+							color: rgba(255, 255, 255, 0.64);
+						}
+					}
+				}
+			}
+			.react-multi-carousel-dot-list {
+               
+                
+				.react-multi-carousel-dot {
+                   
+					button {
+                        
+						background-color: transparent;
+					}
+				}
+				.react-multi-carousel-dot--active {
+					button {
+						background: #FB7979 ;
+					}
+				}
+			}
+			.react-multiple-carousel__arrow {
+				top: 0;
+				background-color: transparent;
+				border: 1px solid rgba(255, 255, 255, 0.295743);
+				height: 48px;
+				width: 48px;
+			}
+			.react-multiple-carousel__arrow--left::before {
+				
+				
+				font-size: inherit;
+			}
+			.react-multiple-carousel__arrow--right::before {
+				
+				font-size: inherit;
+			}
+			.react-multiple-carousel__arrow:hover {
+				background: #FB7979;
+			}
+			.react-multiple-carousel__arrow--left {
+				left: 86%;
+			}
+		
+}
+
+@media (max-width: 768px) {
+	.our-team-bg-color {
+		margin-top: 0px;
+		.our-team-container {
+			.team-of {
+				font-style: normal;
+				font-weight: 800;
+				font-size: 40px;
+				line-height: 48px;
+				width: 100%;
+			}
+		}
+	}
+}
