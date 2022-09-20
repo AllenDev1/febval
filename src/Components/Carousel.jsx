@@ -22,7 +22,7 @@ const Carouse = () => {
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item interval={500}>
+      <Carousel.Item >
         <img
           className="d-block w-100"
           src="https://guardian.ng/wp-content/uploads/2022/02/Beautiful-eyes.-Photo-Gansforever-Osman-526x598.jpg"

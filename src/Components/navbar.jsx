@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import { Container, Navbar, Nav, Offcanvas, Form } from "react-bootstrap";
@@ -14,11 +14,27 @@ import Loginform from "./Loginform";
 const NavBar = () => {
 	const [modalShow, setModalShow] = React.useState(false);
 
+	const listenScrollEvent = (event) => {
+		if (window.scrollY < 30) {
+			console.log(window.screenY)
+			document.getElementById("buttom-nav").style.display="flex"
+		} else if (window.scrollY > 30) {
+			
+			document.getElementById("buttom-nav").style.display="none"
+			
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", listenScrollEvent);
+		return () => window.removeEventListener("scroll", listenScrollEvent);
+	}, []);
+
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
 				<Container className="nav-container">
-					<div className="always-on-nav">
+					<div className="always-on-nav" id="always-on-nav">
 						<Navbar.Brand href="/" className="logo">
 							<img src={logo} alt=".." />
 						</Navbar.Brand>
@@ -65,7 +81,7 @@ const NavBar = () => {
 							</Offcanvas.Title>
 						</Offcanvas.Header>
 						<Offcanvas.Body className="menu-body">
-							<Nav className="me-auto buttom-nav">
+							<Nav className="me-auto buttom-nav" id="buttom-nav">
 								<Nav.Link href="#features">
 									<img src={cake} alt="..." />
 									Cakes
