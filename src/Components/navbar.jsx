@@ -1,5 +1,6 @@
 import React from "react";
 import "../Scss/navbar.scss";
+import "../Scss/offcanvasmenu.scss";
 import { Container, Navbar, Nav, Offcanvas, Form } from "react-bootstrap";
 import logo from "../Assets/Company Name.svg";
 import signin from "../Assets/signin.svg";
@@ -12,7 +13,7 @@ import Loginform from "./Loginform";
 
 const NavBar = () => {
 	const [modalShow, setModalShow] = React.useState(false);
-  
+
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
@@ -35,6 +36,10 @@ const NavBar = () => {
 								Sign In
 								<img src={signin} alt=".." />
 							</Nav.Link>
+							{/* <Nav.Link href="#c" className="cart-link">
+								<img src={cart} alt="..." />
+							</Nav.Link> */}
+
 							<Nav.Link href="#c" className="cart-link">
 								<img src={cart} alt="..." />
 								<div className="num-0f-items-cart">
@@ -94,10 +99,7 @@ const NavBar = () => {
 					</Navbar.Offcanvas>
 				</Container>
 			</Navbar>
-			<Loginform
-				show={modalShow}
-				onHide={() => setModalShow(false)}
-			/>
+			<Loginform show={modalShow} onHide={() => setModalShow(false)} />
 		</>
 	);
 };
