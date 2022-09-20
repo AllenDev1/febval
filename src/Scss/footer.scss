@@ -62,11 +62,11 @@
   }
 
   .copyright-container {
-    height: 42px;
+    
     border-top: 1px solid white;
 
     .copyright-items {
-      width: 1140px;
+     
       display: flex;
       justify-content: space-between;
       margin: auto;
@@ -89,6 +89,20 @@
           line-height: 20px;
           letter-spacing: -0.012em;
           color: #ffffff;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .footer-container{
+    .container-footer{
+      .copyright-container{
+        padding: 10px 0px;
+        .copyright-items{
+          flex-wrap: wrap;
+          text-align: center;
+          align-items: center;
         }
       }
     }

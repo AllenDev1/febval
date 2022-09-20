@@ -30,11 +30,7 @@
 					}
 				}
 			}
-			.menu-btn {
-				span {
-					background-image: url("../Assets/Menu Open.svg");
-				}
-			}
+			
 			.search-bar {
 				.search-from {
 					input {
@@ -93,7 +89,19 @@
 	.main-nav {
 		.nav-container {
 			.always-on-nav {
+				display: flex;
+				justify-content: space-between;
+				.menu-btn {
+					padding: 0;
+					border: none;
+					span {
+						width: 18px;
+						background-image: url("../Assets/Menu Open.svg");
+					}
+				}
 				.logo {
+					padding: 0%;
+					margin: 0%;
 					img {
 						width: 50px;
 					}
@@ -110,12 +118,13 @@
                         
 						img {
 							width: 16px;
+							display: none;
 						}
 					}
 					.cart-link {
 						position: relative;
 						img {
-							width: 20px;
+							width: 16px;
 						}
 						.num-0f-items-cart {
 							position: absolute;
@@ -128,7 +137,13 @@
 							display: flex;
 							justify-content: center;
 							span {
-								font-size: 10px;
+								font-size: 7px;
+								align-items: center;
+								vertical-align: middle;
+								height: 100%;
+								width: 100%;
+								display: flex;
+								justify-content: center;
 							}
 						}
 					}
