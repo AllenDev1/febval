@@ -1,0 +1,40 @@
+.Categories-icons {
+    margin: auto;
+  width: 1140px;
+  h2 {
+    width: 130px;
+    margin: auto;
+    font-family: "Sacramento";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 53px;
+    text-align: center;
+    color: #4f4f4f;
+  }
+  .category-headings {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    .category-item {
+      
+      display: grid;
+      gap: 10px;
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 100px;
+      }
+      text {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #000000;
+      }
+    }
+  }
+}
