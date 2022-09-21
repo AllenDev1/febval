@@ -12,12 +12,11 @@ import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import Loginform from "./Loginform";
 
-const NavBar = () => {
+const Navbars = () => {
 	const [modalShow, setModalShow] = React.useState(false);
 
 	const listenScrollEvent = (event) => {
 		if (window.scrollY < 30) {
-			console.log(window.screenY);
 			document.getElementById("buttom-nav").style.display = "flex";
 		} else if (window.scrollY > 30) {
 			document.getElementById("buttom-nav").style.display = "none";
@@ -154,4 +153,4 @@ const NavBar = () => {
 	);
 };
 
-export default NavBar;
+export default Navbars;
