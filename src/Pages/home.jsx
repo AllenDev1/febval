@@ -1,15 +1,17 @@
 import React from "react";
 import Footer from "../Components/footer";
-import NavBar from "../Components/navbar";
+// import navbar from "../Components/navbar";
 import Carouse from "../Components/Carousel";
 import Cardsgroup from "../Components/Cardsgroup";
 import Sale from "../Components/Sale";
 import Categories from "../Components/Categories"
+ import Navbars from "../Components/Navbar";
 
 const Home = () => {
 	return (
 		<>
-			<NavBar />
+		
+			<Navbars />
 			<Carouse/>
 			<Categories/>
 			<Cardsgroup />
