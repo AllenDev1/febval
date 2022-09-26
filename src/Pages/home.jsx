@@ -14,6 +14,7 @@ const Home = () => {
 			<Categories/>
 			<Cardsgroup />
 			<Sale/>
+			<Cardsgroup />
 			<Footer />
 		</>
 	);
