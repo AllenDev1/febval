@@ -1,0 +1,131 @@
+.info-container {
+  .manage-account {
+    padding-top: 214px;
+    margin-bottom: 111px;
+    h1 {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 29px;
+      color: #000000;
+      padding-bottom: 30px;
+    }
+    .detail-container {
+      display: flex;
+
+      gap: 95px;
+      .personal-details {
+        width: 285px;
+        background: #686363;
+        border-radius: 10px;
+        padding: 10px;
+
+        .details {
+          margin: auto;
+          width: 214px;
+          text {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+          }
+          .personal-name,
+          .personal-email,
+          .personal-number {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            color: #ffffff;
+            padding-top: 5px;
+          }
+        }
+        .edit-det {
+          float: right;
+          margin-top: -20px;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 16px;
+          color: #0788fe;
+        }
+      }
+      .address-book {
+        .address {
+          width: 285px;
+          background: #686363;
+          border-radius: 10px;
+          padding: 10px 30px 10px 30px;
+          margin: auto;
+          h1 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            padding-bottom: 0px;
+          }
+          h2 {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            color: #ffffff;
+            padding-top: 5px;
+          }
+          .edit-det {
+            float: right;
+            margin-top: -20px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 16px;
+            color: #0788fe;
+          }
+        }
+      }
+    }
+  }
+  .order-container {
+    background: #d9d9d9;
+
+    .Recent-orders {
+      h1 {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        padding: 20px;
+        padding-bottom: 20px;
+      }
+      .order-titles {
+        display: flex;
+        justify-content: space-between;
+        padding: 36px 88px;
+        background: rgba(104, 99, 99, 0.32);
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+      }
+      .order-data {
+        display: flex;
+        justify-content: space-between;
+        padding: 36px 88px;
+        border-bottom: 2px solid white;
+        text {
+         
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 29px;
+          overflow: hidden;
+          padding-top: 32px;
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,10 @@ import Carouse from "../Components/Carousel";
 import Cardsgroup from "../Components/Cardsgroup";
 import Sale from "../Components/Sale";
 import Categories from "../Components/Categories"
- import Navbars from "../Components/Navbar";
+import Navbars from "../Components/navbar";
+import Foryou from "../Components/Foryou" ;
+import Email from "../Components/Email";
+
 
 const Home = () => {
 	return (
@@ -16,8 +19,10 @@ const Home = () => {
 			<Categories/>
 			<Cardsgroup />
 			<Sale/>
-			<Cardsgroup />
+			<Foryou/>
+			<Email />
 			<Footer />
+			
 		</>
 	);
 };

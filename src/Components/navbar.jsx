@@ -11,9 +11,11 @@ import wed from "../Assets/gift shop/wed.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import Loginform from "./Loginform";
+import Cart from "./Cart";
 
 const Navbars = () => {
 	const [modalShow, setModalShow] = React.useState(false);
+	const [modalS, setModalS] = React.useState(false);
 
 	const listenScrollEvent = (event) => {
 		if (window.scrollY < 30) {
@@ -54,7 +56,10 @@ const Navbars = () => {
 								<img src={cart} alt="..." />
 							</NavLink> */}
 
-							<NavLink to="#c" className="cart-link">
+							<NavLink to="#c" 
+							className="cart-link"
+							onClick={() => setModalS(true)}
+							>
 								<img src={cart} alt="..." />
 								<div className="num-0f-items-cart">
 									<span>2</span>{" "}
@@ -149,6 +154,7 @@ const Navbars = () => {
 				</Container>
 			</Navbar>
 			<Loginform show={modalShow} onHide={() => setModalShow(false)} />
+			<Cart show={modalS} onHide={() => setModalS(false)} />
 		</>
 	);
 };
