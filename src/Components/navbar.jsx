@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
@@ -16,6 +16,8 @@ import Cart from "./Cart";
 const Navbars = () => {
 	const [modalShow, setModalShow] = React.useState(false);
 	const [modalS, setModalS] = React.useState(false);
+
+	const [show, setShow] = useState(false);
 
 	const listenScrollEvent = (event) => {
 		if (window.scrollY < 30) {
@@ -35,7 +37,7 @@ const Navbars = () => {
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
 				<Container className="nav-container">
 					<div className="always-on-nav" id="always-on-nav">
-						<Navbar.Brand to="/" className="logo">
+						<Navbar.Brand href="/" className="logo">
 							<img src={logo} alt=".." />
 						</Navbar.Brand>
 						<div className="search-bar">
@@ -45,7 +47,6 @@ const Navbars = () => {
 						</div>
 						<div className="cart-sign-div">
 							<NavLink
-								to="#"
 								className="sign-in"
 								onClick={() => setModalShow(true)}
 							>
@@ -56,9 +57,11 @@ const Navbars = () => {
 								<img src={cart} alt="..." />
 							</NavLink> */}
 
-							<NavLink to="#c" 
-							className="cart-link"
-							onClick={() => setModalS(true)}
+							<NavLink
+								className="cart-link"
+								onClick={() => {
+									setShow(true);
+								}}
 							>
 								<img src={cart} alt="..." />
 								<div className="num-0f-items-cart">
@@ -154,7 +157,8 @@ const Navbars = () => {
 				</Container>
 			</Navbar>
 			<Loginform show={modalShow} onHide={() => setModalShow(false)} />
-			<Cart show={modalS} onHide={() => setModalS(false)} />
+
+			<Cart show={show} onHide={() => setShow(false)} />
 		</>
 	);
 };
