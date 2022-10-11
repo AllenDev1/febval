@@ -1,16 +1,13 @@
 import React from "react";
-import Cross from "../Assets/cross.svg";
 import "../Scss/updatedetails.scss";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { Button } from "react-bootstrap";
 
 const Updatedetails = (props) => {
 	return (
 		<>
 			<Modal
 				{...props}
-				size="md"
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
 			>
@@ -21,7 +18,6 @@ const Updatedetails = (props) => {
 				</Modal.Header>
 				<div className="update-details">
 					<div className="update-container">
-						
 						<div className="form-fill">
 							<form>
 								<label>
@@ -51,7 +47,7 @@ const Updatedetails = (props) => {
 							<Form.Check aria-label="option 1" />
 							<p>
 								You agree to the{" "}
-								<a href=""> Terms and Conditions </a>
+								<a href="/"> Terms and Conditions </a>
 							</p>
 						</div>
 
