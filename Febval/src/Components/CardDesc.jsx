@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useEffect} from "react";
 import "../Scss/description.scss";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -6,26 +6,31 @@ const CardDesc = () => {
   const imgs = document.querySelectorAll(".img-select a");
   const imgBtns = [...imgs];
   let imgId = 1;
-
-  imgBtns.forEach((imgItem) => {
-    imgItem.addEventListener("click", (event) => {
-      event.preventDefault();
-      imgId = imgItem.dataset.id;
-      slideImage();
+  const Styling = () => {
+    imgBtns.forEach((imgItem) => {
+      imgItem.addEventListener("click", (event) => {
+        event.preventDefault();
+        imgId = imgItem.dataset.id;
+        slideImage();
+      });
     });
+
+    function slideImage() {
+      const displayWidth = document.querySelector(
+        ".img-showcase img:first-child"
+      ).clientWidth;
+
+      document.querySelector(".img-showcase").style.transform = `translateX(${
+        -(imgId - 1) *  displayWidth
+      }px)`;
+    }
+
+    window.addEventListener("resize", slideImage);
+  };
+
+  useEffect(() => {
+    Styling()
   });
-
-  function slideImage() {
-    const displayWidth = document.querySelector(
-      ".img-showcase img:first-child"
-    ).clientWidth;
-
-    document.querySelector(".img-showcase").style.transform = `translateX(${
-      -(imgId - 1) * displayWidth
-    }px)`;
-  }
-
-  window.addEventListener("resize", slideImage);
   return (
     <>
       <Container className="desc-container">
@@ -81,8 +86,10 @@ const CardDesc = () => {
                     </div>
                     <div className="img-item">
                       <a href="#" data-id="4">
-                        <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg"
-                          alt="shoe "/>
+                        <img
+                          src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg"
+                          alt="shoe "
+                        />
                       </a>
                     </div>
                   </div>
@@ -91,10 +98,6 @@ const CardDesc = () => {
               <Col>
                 <div className="product-content">
                   <h2 className="product-title">nike shoes</h2>
-                  <a href="#" className="product-link">
-                    visit nike store
-                  </a>
-                
 
                   <div className="product-price">
                     <p className="last-price">
@@ -118,13 +121,9 @@ const CardDesc = () => {
                       Consequatur, perferendis eius. Dignissimos, labore
                       suscipit. Unde.
                     </p>
-                  
-                    
                   </div>
 
-                  <div className="purchase-info">
-                   
-                  </div>
+                  <div className="purchase-info"></div>
                 </div>
               </Col>
             </div>
