@@ -26,7 +26,9 @@ const Personalinfo = () => {
 									<div className="personal-number">
 										9800000000
 									</div>
-									<div className="edit-det">EDIT</div>
+									<div className="edit-det"><Button onClick={() => setModalShow(true)}>
+											EDIT
+										</Button></div>
 								</div>
 							</div>
 							<div className="address-book">

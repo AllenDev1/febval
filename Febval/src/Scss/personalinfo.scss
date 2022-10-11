@@ -17,6 +17,7 @@
       gap: 95px;
       .personal-details {
         width: 285px;
+        height:200px;
         background: #686363;
         border-radius: 10px;
         padding: 10px;
@@ -43,7 +44,7 @@
         }
         .edit-det {
           float: right;
-          margin-top: -20px;
+         
           font-weight: 400;
           font-size: 16px;
           line-height: 16px;
@@ -53,6 +54,7 @@
       .address-book {
         .address {
           width: 285px;
+          height:200px;
           background: #686363;
           border-radius: 10px;
           padding: 10px 30px 10px 30px;
@@ -74,11 +76,12 @@
           }
           .edit-det {
             float: right;
-            margin-top: -20px;
+           
             font-weight: 400;
             font-size: 16px;
             line-height: 16px;
             color: #0788fe;
+            background:transparent;
           }
         }
       }
@@ -86,6 +89,7 @@
   }
   .order-container {
     background: #d9d9d9;
+    margin-bottom: 237px;
 
     .Recent-orders {
       h1 {
