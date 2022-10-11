@@ -15,7 +15,7 @@ const Cardsgroup = () => {
 				<Row xs={1} md={4} className="g-4 cards-row">
 					{Array.from({ length: 10 }).map((_, idx) => (
 						<Col className="cards-col">
-							<Link to="/userdetails" className="card-link">
+							<Link to="/description" className="card-link">
 								<Card className="cards-card">
 									<Card.Img
 										className="cards-img"
