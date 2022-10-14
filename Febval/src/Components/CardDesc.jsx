@@ -1,137 +1,41 @@
-import {React,useEffect} from "react";
+import { React } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import "../Scss/description.scss";
-import { Container, Row, Col } from "react-bootstrap";
-
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 const CardDesc = () => {
-  const imgs = document.querySelectorAll(".img-select a");
-  const imgBtns = [...imgs];
-  let imgId = 1;
-  const Styling = () => {
-    imgBtns.forEach((imgItem) => {
-      imgItem.addEventListener("click", (event) => {
-        event.preventDefault();
-        imgId = imgItem.dataset.id;
-        slideImage();
-      });
-    });
-
-    function slideImage() {
-      const displayWidth = document.querySelector(
-        ".img-showcase img:first-child"
-      ).clientWidth;
-
-      document.querySelector(".img-showcase").style.transform = `translateX(${
-        -(imgId - 1) *  displayWidth
-      }px)`;
-    }
-
-    window.addEventListener("resize", slideImage);
-  };
-
-  useEffect(() => {
-    Styling()
-  });
-  return (
-    <>
-      <Container className="desc-container">
-        <Row>
-          <div className="card-wrapper">
-            <div className="desc-card">
-              <Col>
-                <div className="product-imgs">
-                  <div className="img-display">
-                    <div className="img-showcase">
-                      <img
-                        src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_1.jpg"
-                        alt="shoe "
-                      />
-                      <img
-                        src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_2.jpg"
-                        alt="shoe "
-                      />
-                      <img
-                        src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_3.jpg"
-                        alt="shoe "
-                      />
-                      <img
-                        src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg"
-                        alt="shoe "
-                      />
-                    </div>
-                  </div>
-                  <div className="img-select">
-                    <div className="img-item">
-                      <a href="#" data-id="1">
-                        <img
-                          src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_1.jpg"
-                          alt="shoe "
-                        />
-                      </a>
-                    </div>
-                    <div className="img-item">
-                      <a href="#" data-id="2">
-                        <img
-                          src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_2.jpg"
-                          alt="shoe "
-                        />
-                      </a>
-                    </div>
-                    <div className="img-item">
-                      <a href="#" data-id="3">
-                        <img
-                          src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_3.jpg"
-                          alt="shoe "
-                        />
-                      </a>
-                    </div>
-                    <div className="img-item">
-                      <a href="#" data-id="4">
-                        <img
-                          src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg"
-                          alt="shoe "
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Col>
-              <Col>
-                <div className="product-content">
-                  <h2 className="product-title">nike shoes</h2>
-
-                  <div className="product-price">
-                    <p className="last-price">
-                      Old Price: <span>$257.00</span>
-                    </p>
-                    <p className="new-price">
-                      New Price: <span>$249.00 (5%)</span>
-                    </p>
-                  </div>
-
-                  <div className="product-detail">
-                    <h2>about this item: </h2>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Illo eveniet veniam tempora fuga tenetur placeat sapiente
-                      architecto illum soluta consequuntur, aspernatur quidem at
-                      sequi ipsa!
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Consequatur, perferendis eius. Dignissimos, labore
-                      suscipit. Unde.
-                    </p>
-                  </div>
-
-                  <div className="purchase-info"></div>
-                </div>
-              </Col>
-            </div>
-          </div>
-        </Row>
-      </Container>
-    </>
-  );
+	return (
+		<>
+			<Container className="desc-container">
+				<Row className="cardDecRow">
+					<Col className="CDCol-Carousel">
+						<Carousel
+							className="productCarousel"
+							showArrows={false}
+							showIndicators={false}
+						>
+							<div>
+								<img src="https://media.gettyimages.com/photos/stack-of-books-picture-id157482029?s=612x612" />
+							</div>
+							<div>
+								<img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80" />
+							</div>
+							<div>
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7bEWKqvt4abueAI1cPSGgdu7ab91I2-RorDZ7qoLwGA&s" />
+							</div>
+							<div>
+								<img
+									src="https://previews.123rf.com/images/firdausexia/firdausexia1303/firdausexia130300002/18236451-only-one-tress.jpg"
+									alt="..."
+								/>
+							</div>
+						</Carousel>
+					</Col>
+					<Col className="CDCol-dec"></Col>
+				</Row>
+			</Container>
+		</>
+	);
 };
 
 export default CardDesc;

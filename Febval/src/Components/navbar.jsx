@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { Container, Form, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import "../Scss/navbar.scss";
-import "../Scss/offcanvasmenu.scss";
-import { Container, Navbar, Nav, Offcanvas, Form } from "react-bootstrap";
-import logo from "../Assets/Company Name.svg";
-import signin from "../Assets/signin.svg";
 import cart from "../Assets/cart.svg";
+import logo from "../Assets/Company Name.svg";
 import cake from "../Assets/gift shop/cakes.svg";
-import wed from "../Assets/gift shop/wed.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
-import Loginform from "./Loginform";
+import wed from "../Assets/gift shop/wed.svg";
+import signin from "../Assets/signin.svg";
+import "../Scss/navbar.scss";
+import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
+import Loginform from "./Loginform";
 
 const Navbars = () => {
-	const [modalShow, setModalShow] = React.useState(false);
-	const [modalS, setModalS] = React.useState(false);
+	const [modalShow, setModalShow] = useState(false);
 
 	const [show, setShow] = useState(false);
 
