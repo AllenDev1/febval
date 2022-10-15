@@ -1,21 +1,14 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+// Load Environment Variables
+require("dotenv").config({ path: "secrets/.env" });
 
-const  { CONNECTION } = require("./src/confg/dbConnection.js")
+// Imports
+const express = require("express");
+const { connection } = require("./database/index.js");
 
 const app = express();
-const port = 3000;
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+const PORT = process.env.EXPRESS_PORT | 3001;
 
-// parse application/json
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
-
-
-app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
+app.listen(PORT, (err) => {
+    if (err) throw err;
+    console.log(`Listening to port ${PORT}`);
 });
