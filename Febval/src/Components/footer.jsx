@@ -10,7 +10,7 @@ const Footer = () => {
 	return (
 		<>
 			<div className="footer-container">
-				<Container>
+				<Container className="container-footer">
 					<div className="footer-contents">
 						<div className="footer-logo">
 							<img src={Logo} />
@@ -38,7 +38,9 @@ const Footer = () => {
 							</div>
 						</div>
 					</div>
-					<div className="copyright-container">
+				</Container>
+				<div className="copyright-container">
+					<Container>
 						<div className="copyright-items">
 							<div className="footer-copyright-l">
 								Copyright @2022 FEBVAL
@@ -48,8 +50,8 @@ const Footer = () => {
 								<text>Privacy Policy</text>
 							</div>
 						</div>
-					</div>
-				</Container>
+					</Container>
+				</div>
 			</div>
 		</>
 	);

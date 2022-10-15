@@ -1,0 +1,118 @@
+.card-container {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	.feature-products {
+		font-style: normal;
+		font-weight: 400;
+		font-size: 36px;
+		line-height: 53px;
+		/* identical to box height */
+
+		text-align: left;
+
+		color: #4f4f4f;
+        p{
+            text-decoration: underline;
+            text-underline-offset: 5px;
+        }
+		
+	}
+	.cards-row {
+		.cards-col {
+			.card-link {
+				text-decoration: none;
+				.cards-card {
+					background-color: transparent;
+					border-radius: 10px;
+
+					.cards-img {
+						border-radius: 10px;
+					}
+					.cards-card-body {
+						padding: 10px;
+						.cards-title {
+							font-style: normal;
+							font-weight: 500;
+							font-size: 16px;
+							line-height: 20px;
+							text-align: center;
+
+							/* Dark */
+
+							color: #4f4f4f;
+						}
+						.card-text {
+							font-style: normal;
+							font-weight: 700;
+							font-size: 18px;
+							line-height: 22px;
+							text-align: center;
+							display: flex;
+							justify-content: space-between;
+							/* Primary */
+							.price-cards {
+								/* Primary */
+
+								color: #fb7979;
+								margin: 0%;
+							}
+							span {
+								background: #fb7979;
+								border-radius: 10px;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 12px;
+								line-height: 15px;
+								/* identical to box height */
+
+								color: #ffffff;
+								height: auto;
+								width: auto;
+								padding: 4px 10px;
+								text-align: center;
+								display: flex;
+								align-items: center;
+							}
+						}
+					}
+				}
+			}
+			.card-link:hover {
+				.cards-card {
+					box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+				}
+			}
+		}
+	}
+	.seemore-btn {
+		margin-top: 29px;
+		display: flex;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+}
+@media (max-width: 768px) {
+	.card-container {
+		.cards-row {
+			.cards-col {
+				.card-link {
+					.cards-card {
+						.cards-card-body {
+							.cards-text {
+								.price-cards {
+									font-size: 12px;
+								}
+								span {
+									font-size: 7px;
+									height: auto;
+									width: auto;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
