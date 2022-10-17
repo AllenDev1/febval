@@ -12,3 +12,8 @@ app.listen(PORT, (err) => {
     if (err) throw err;
     console.log(`Listening to port ${PORT}`);
 });
+
+
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
