@@ -4,25 +4,22 @@ import Footer from "../Components/footer";
 import Carouse from "../Components/Carousel";
 import Cardsgroup from "../Components/Cardsgroup";
 import Sale from "../Components/Sale";
-import Categories from "../Components/Categories"
+import Categories from "../Components/Categories";
 import Navbars from "../Components/navbar";
-import Foryou from "../Components/Foryou" ;
+import Foryou from "../Components/Foryou";
 import Email from "../Components/Email";
-
 
 const Home = () => {
 	return (
 		<>
-		
 			<Navbars />
-			<Carouse/>
-			<Categories/>
+			<Carouse />
+			<Categories />
 			<Cardsgroup />
-			<Sale/>
-			<Foryou/>
+			<Sale />
+			<Foryou />
 			<Email />
 			<Footer />
-			
 		</>
 	);
 };
