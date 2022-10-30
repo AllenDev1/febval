@@ -104,7 +104,7 @@ const Navbars = () => {
 						<Offcanvas.Body className="menu-body">
 							<Nav className="me-auto buttom-nav" id="buttom-nav">
 								<NavLink
-									to="/cakes"
+									to="/navcategory"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}

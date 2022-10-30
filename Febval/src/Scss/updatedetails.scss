@@ -1,7 +1,6 @@
 .update-details {
-  width: 410px;
+  width: 392px;
   background: white;
-  height: 620px;
   .update-container {
     .update-header {
       display: flex;
@@ -10,7 +9,6 @@
       width: 388px;
 
       text {
-     
         font-style: normal;
         font-weight: 500;
         font-size: 24px;
@@ -21,7 +19,6 @@
     form {
       margin: 20px;
       label {
-     
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
@@ -52,19 +49,27 @@
       padding: 20px;
       padding-right: 60px;
     }
-    
+
     button {
       float: right;
       margin: 20px;
-        align-items: center;
-        padding: 15px 42px;
-        width: 166px;
-        height: 52px;
-        background: #fb7979;
-        border-radius: 10px;
-        border: none;
-        color:white;
-      }
+      align-items: center;
+      padding: 15px 42px;
+      width: 166px;
+      height: 52px;
+      background: #fb7979;
+      border-radius: 10px;
+      border: none;
+      color: white;
     }
+  }
+}
+.modal-content{
+  width:394px;
+  .modal-header {
+    width:390px;
+  }
 
 }
+
+

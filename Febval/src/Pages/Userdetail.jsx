@@ -8,7 +8,6 @@ const Userdetail = () => {
 		<>
 			<Navbars />
 			<Personalinfo />
-
 			<Footer />
 		</>
 	);

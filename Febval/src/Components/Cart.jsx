@@ -71,12 +71,17 @@ const Cart = (  props ) => {
 								</div>
 							</div>
 						</div>
-						<div className="cart-footer">
+						
+					</div>
+				</Offcanvas.Body>
+				<div className="cart-footer">
 							<div className="item-total">
 								<text>2 items</text>
 								<text>Subtotal : Rs 14200/-</text>
 							</div>
-							<div className="button-footer">
+						
+						</div>
+				<div className="button-footer">
 								<button>
 									<img src={Checkout} alt="" />
 									<text>Checkout</text>
@@ -86,9 +91,6 @@ const Cart = (  props ) => {
 									<text>Continue Shopping</text>
 								</button>
 							</div>
-						</div>
-					</div>
-				</Offcanvas.Body>
 			</Offcanvas>
 			
 		</>
