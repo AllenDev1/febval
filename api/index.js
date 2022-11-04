@@ -11,6 +11,8 @@ const { expressjwt: jwt } = require("express-jwt");
 const jwks = require("jwks-rsa");
 const ProtectedRoutes = require("./routes/ProtectedRoutes");
 const axios = require("axios");
+const auth_middleware = require("./middlewares/oauth.js")
+
 // require("./database/index.js");
 
 const app = express();
@@ -33,31 +35,8 @@ const jwtCheck = jwt({
 	algorithms: ["RS256"],
 });
 
-app.get("/api/token", (req, res) => {
-    const auth_code = req.query.code;
-    const state = req.query.state;
-	const options = {
-		method: "POST",
-		url: `https://dev-vbeq9sic.us.auth0.com/oauth/token`,
-		headers: { "content-type": "application/x-www-form-urlencoded" },
-		data: new URLSearchParams({
-			grant_type: "authorization_code",
-			client_id: process.env.AUTH0_CLIENT_ID,
-			client_secret: process.env.AUTH0_CLIENT_SECRET,
-			code: auth_code,
-            redirect_uri: process.env.AUTH0_REDIRECT_URI,
-            state:state
-		}),
-	};
-
-	axios
-		.request(options)
-		.then(function (response) {
-			res.send(response.data);
-		})
-		.catch(function (error) {
-			res.send(error);
-		});
+app.get("/api/token", auth_middleware, (req, res) => {
+    res.send(req.oauth.access_token);
 });
 
 app.use("/api/*", jwtCheck, ProtectedRoutes);

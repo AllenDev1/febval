@@ -12,12 +12,9 @@ import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
-import { useAuth0 } from "@auth0/auth0-react";
+import {login, logout, isLoggedIn} from "../Auth/auth";
 
 const Navbars = () => {
-	const { loginWithRedirect } = useAuth0();
-	const { getAccessTokenSilently } = useAuth0();
-
 	const [modalShow, setModalShow] = useState(false);
 
 	const [show, setShow] = useState(false);
@@ -52,7 +49,7 @@ const Navbars = () => {
 							<NavLink
 								className="sign-in"
 								onClick={() => {
-									loginWithRedirect();
+									login();
 								}}
 							>
 								Sign In
@@ -64,19 +61,6 @@ const Navbars = () => {
 
 							<NavLink
 								className="cart-link"
-								onClick={async () => {
-									// setShow(true);
-									try {
-										const token =
-											await getAccessTokenSilently({
-												audience: "https://febval-api",
-												scope: "full:admin"
-											});
-										console.log(token);
-									} catch (e) {
-										console.error(e);
-									}
-								}}
 							>
 								<img src={cart} alt="..." />
 								<div className="num-0f-items-cart">
