@@ -7,7 +7,7 @@ import AutoButton from "./AutoButton";
 import da from "./data file/datafiles.json";
 import { productDes } from "./data file/dummydata";
 
-const Cardsgroup = () => {
+const Cardsgroup = ({}) => {
 	return (
 		<>
 			<Container className="card-container">
@@ -17,7 +17,10 @@ const Cardsgroup = () => {
 				<Row xs={1} md={4} className="g-4 cards-row">
 					{productDes.map((_, idx) => (
 						<Col className="cards-col">
-							<Link to="/description" className="card-link">
+							<Link
+								to={`/description/${_.id}`}
+								className="card-link"
+							>
 								<Card className="cards-card">
 									<Card.Img
 										className="cards-img"
@@ -26,7 +29,7 @@ const Cardsgroup = () => {
 									/>
 									<Card.Body className="cards-card-body">
 										<Card.Title className="cards-title">
-                                        {_.title}
+											{_.title}
 										</Card.Title>
 
 										<Card.Text className="cards-text">

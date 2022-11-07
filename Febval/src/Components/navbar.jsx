@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Container, Form, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import {
+	Container,
+	Dropdown,
+	Form,
+	Nav,
+	Navbar,
+	Offcanvas,
+} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
@@ -12,7 +19,6 @@ import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
-import { login, logout, isLoggedIn } from "../Auth/auth";
 
 const Navbars = ({ user }) => {
 	const [modalShow, setModalShow] = useState(false);
@@ -55,15 +61,36 @@ const Navbars = ({ user }) => {
 							<div className="cart-sign-div">
 								{user ? (
 									<>
-										<NavLink
-											to="/userdetails"
-											className="cart-link user-image"
-										>
-											<img
-												src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4CtaDk3U49ukzwQTk5h6n1mwtWT9HULw-piOF2eF4&s"
-												alt="..."
-											/>
-										</NavLink>
+										<Dropdown className="cart-link user-image">
+											<Dropdown.Toggle
+												variant="white"
+												id="dropdown-basic"
+											>
+												<img
+													src={user.photos[0].value}
+													alt="..."
+												/>
+											</Dropdown.Toggle>
+
+											<Dropdown.Menu>
+												<Dropdown.Item href="/userdetails">
+													Profile
+												</Dropdown.Item>
+												<Dropdown.Item href="/userdetails">
+													Orders
+												</Dropdown.Item>
+												<Dropdown.Item
+													onClick={() => {
+														window.open(
+															"http://localhost:3001/auth/logout",
+															"_self"
+														);
+													}}
+												>
+													Logout
+												</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
 
 										<NavLink
 											className="cart-link"
