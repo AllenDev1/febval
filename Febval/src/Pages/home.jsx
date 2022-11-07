@@ -12,7 +12,6 @@ import Email from "../Components/Email";
 const Home = () => {
 	return (
 		<>
-			<Navbars />
 			<Carouse />
 			<Categories />
 			<Cardsgroup />

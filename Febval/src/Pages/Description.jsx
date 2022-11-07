@@ -6,7 +6,6 @@ import Footer from "../Components/footer";
 const Description = () => {
 	return (
 		<div>
-			<Navbars />
 			<CardDesc />
 			<Footer />
 		</div>

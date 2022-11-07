@@ -6,7 +6,7 @@ import Personalinfo from "../Components/Personalinfo";
 const Userdetail = () => {
 	return (
 		<>
-			<Navbars />
+			
 			<Personalinfo />
 			<Footer />
 		</>
