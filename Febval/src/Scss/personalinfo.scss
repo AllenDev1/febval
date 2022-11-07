@@ -13,7 +13,7 @@
     }
     .detail-container {
       display: flex;
-
+      flex-wrap: wrap;
       gap: 95px;
       .personal-details {
         width: 285px;

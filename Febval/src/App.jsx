@@ -47,7 +47,7 @@ console.log(user)
 					<Route exact path="/home" element={<Home />} />
 					<Route
 						path="/userdetails"
-						element={user ? <Userdetail /> : <Navigate to="/" />}
+						element={ <Userdetail /> }
 					/>
 					<Route path="/description/:id" element={<Description />} />
 					<Route path="/navcategory" element={<Navcategory />} />

@@ -36,7 +36,7 @@ const CardDesc = () => {
 								</Col>
 								<Col className="CDCol-dec"></Col>
 							</>
-							;
+							
 						</>
 					) : (
 						<><h1>no data</h1></>

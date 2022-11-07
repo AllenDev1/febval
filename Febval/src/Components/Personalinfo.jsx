@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "../Scss/personalinfo.scss";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Table } from "react-bootstrap";
 import Order from "../Assets/order.svg";
 import Updatedetails from "./Updatedetails";
 
@@ -26,9 +26,13 @@ const Personalinfo = () => {
 									<div className="personal-number">
 										9800000000
 									</div>
-									<div className="edit-det"><Button onClick={() => setModalShow(true)}>
+									<div className="edit-det">
+										<Button
+											onClick={() => setModalShow(true)}
+										>
 											EDIT
-										</Button></div>
+										</Button>
+									</div>
 								</div>
 							</div>
 							<div className="address-book">
@@ -39,7 +43,9 @@ const Personalinfo = () => {
 										30, kathmandu
 									</h2>
 									<div className="edit-det">
-										<Button onClick={() => setModalShow(true)}>
+										<Button
+											onClick={() => setModalShow(true)}
+										>
 											EDIT
 										</Button>
 									</div>
@@ -48,33 +54,31 @@ const Personalinfo = () => {
 						</div>
 					</div>
 					<div className="order-container">
-						<div className="Recent-orders">
-							<h1>Recent Orders</h1>
-							<div className="order-titles">
-								<text>Orders</text>
-								<text>Placed on</text>
-								<text>Items</text>
-								<text>Total</text>
-							</div>
-							<div className="order-data">
-								<text>14555</text>
-								<text>2020/3/4</text>
-								<img src={Order} alt="" />
-								<text>Total</text>
-							</div>
-							<div className="order-data">
-								<text>1555</text>
-								<text>2020/3/4</text>
-								<img src={Order} alt="" />
-								<text>Total</text>
-							</div>
-							<div className="order-data">
-								<text>12345</text>
-								<text>2020/3/4</text>
-								<img src={Order} alt="" />
-								<text>Total</text>
-							</div>
-						</div>
+						<Table striped bordered hover responsive>
+							<thead>
+								<tr>
+									<th>Order#</th>
+									<th>Placed on</th>
+									<th>Items</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>01065554</td>
+									<td>11/12/1900</td>
+									<td><img src={Order} alt="..." /></td>
+									<td>Rs. 900</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Jacob</td>
+									<td>Thornton</td>
+									<td>@fat</td>
+								</tr>
+								
+							</tbody>
+						</Table>
 					</div>
 				</div>
 			</Container>
