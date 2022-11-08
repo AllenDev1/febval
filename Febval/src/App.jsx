@@ -5,11 +5,14 @@ import {
 	Routes,
 	Navigate,
 } from "react-router-dom";
+import axios from "axios";
 import Home from "./Pages/home";
 import Userdetail from "./Pages/Userdetail";
 import Description from "./Pages/Description";
 import Navcategory from "./Pages/Navcategory";
 import Navbars from "./Components/navbar";
+import Personalinfo from "./Components/Personalinfo";
+import Footer from "./Components/footer";
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -36,8 +39,13 @@ const App = () => {
 				});
 		};
 		getUser();
+		checking();
 	}, []);
-	console.log(user);
+	// console.log(user);
+
+	const checking = () => {
+		// user ? alert("hello") : alert("bye");
+	};
 	return (
 		<>
 			<Router>
@@ -48,19 +56,21 @@ const App = () => {
 					<Route
 						path="/userdetails"
 						element={
-							user ? (
-								<Userdetail user={user} />
-							) : (
-								<Navigate to="/home" />
-							)
+							// user ? (
+								<Personalinfo user={user} />
+							// ) : (
+								// <Navigate to="/" />
+							// )
 						}
 					/>
+
 					<Route path="/description/:id" element={<Description />} />
 					<Route path="/navcategory" element={<Navcategory />} />
 
 					<Route path="*" element={<p>Page not found</p>} />
 				</Routes>
 			</Router>
+			<Footer />
 		</>
 	);
 };

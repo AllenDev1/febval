@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Scss/personalinfo.scss";
 import { Container, Button, Table } from "react-bootstrap";
 import Order from "../Assets/order.svg";
@@ -7,6 +7,7 @@ import Updatedetails from "./Updatedetails";
 const Personalinfo = ({ user }) => {
 	const [modalShow, setModalShow] = useState(false);
 
+	console.log(user);
 	return (
 		<>
 			<Container>
@@ -18,10 +19,10 @@ const Personalinfo = ({ user }) => {
 								<div className="details">
 									<text>Personal Details</text>
 									<div className="personal-name">
-										{user.displayName}
+										{user ? user.displayName : "Loading..."}
 									</div>
 									<div className="personal-email">
-										{user.email}
+										{user ? user.email : "Loading..."}
 									</div>
 									<div className="personal-number">
 										9800000000

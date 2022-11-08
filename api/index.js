@@ -17,22 +17,22 @@ const passport = require("passport");
 const authRoutes = require("./routes/auth");
 require("./passport");
 const { Sequelize } = require("sequelize");
-require("./database/index.js");
+// require("./database/index.js");
 
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
 
-const db = new Sequelize({
-	dialect: 'mysql',
-	storage: "./mysql/MyDB.sql"
-  });
+// const db = new Sequelize({
+// 	dialect: 'mysql',
+// 	storage: "./mysql/MyDB.sql"
+//   });
 
-  try {
-	 db.authenticate();
-	console.log('Connection has been established successfully.');
-  } catch (error) {
-	console.error('Unable to connect to the database:', error);
-  }
+//   try {
+// 	 db.authenticate();
+// 	console.log('Connection has been established successfully.');
+//   } catch (error) {
+// 	console.error('Unable to connect to the database:', error);
+//   }
 app.use(
 	cookieSession({
 		name: "session",

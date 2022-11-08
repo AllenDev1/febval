@@ -10,6 +10,7 @@ import Foryou from "../Components/Foryou";
 import Email from "../Components/Email";
 
 const Home = () => {
+	
 	return (
 		<>
 			<Carouse />
@@ -18,7 +19,7 @@ const Home = () => {
 			<Sale />
 			<Foryou />
 			<Email />
-			<Footer />
+		
 		</>
 	);
 };

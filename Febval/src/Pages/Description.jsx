@@ -7,7 +7,6 @@ const Description = () => {
 	return (
 		<div>
 			<CardDesc />
-			<Footer />
 		</div>
 	);
 };
