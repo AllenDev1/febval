@@ -37,7 +37,7 @@ const App = () => {
 		};
 		getUser();
 	}, []);
-console.log(user)
+	console.log(user);
 	return (
 		<>
 			<Router>
@@ -47,7 +47,13 @@ console.log(user)
 					<Route exact path="/home" element={<Home />} />
 					<Route
 						path="/userdetails"
-						element={ <Userdetail /> }
+						element={
+							user ? (
+								<Userdetail user={user} />
+							) : (
+								<Navigate to="/home" />
+							)
+						}
 					/>
 					<Route path="/description/:id" element={<Description />} />
 					<Route path="/navcategory" element={<Navcategory />} />

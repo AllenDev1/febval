@@ -16,35 +16,23 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const authRoutes = require("./routes/auth");
 require("./passport");
-
-// require("./database/index.js");
+const { Sequelize } = require("sequelize");
+require("./database/index.js");
 
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
 
-// app.use(helmet());
-// app.use(bodyParser.json());
-// app.use(cors());
-// app.use(morgan("combined"));
+const db = new Sequelize({
+	dialect: 'mysql',
+	storage: "./mysql/MyDB.sql"
+  });
 
-// const jwtCheck = jwt({
-// 	secret: jwks.expressJwtSecret({
-// 		cache: true,
-// 		rateLimit: true,
-// 		jwksRequestsPerMinute: 5,
-// 		jwksUri: process.env.AUTH0_jwksUri,
-// 	}),
-// 	audience: process.env.AUTH0_audience,
-// 	issuer: process.env.AUTH0_issuer,
-// 	algorithms: ["RS256"],
-// });
-
-// app.get("/api/token", auth_middleware, (req, res) => {
-//     res.send(req.oauth.access_token);
-// });
-
-// app.use("/api/*", jwtCheck, ProtectedRoutes);
-
+  try {
+	 db.authenticate();
+	console.log('Connection has been established successfully.');
+  } catch (error) {
+	console.error('Unable to connect to the database:', error);
+  }
 app.use(
 	cookieSession({
 		name: "session",
@@ -58,7 +46,7 @@ app.use(passport.session());
 
 app.use(cors({ origin: true, credentials: true }));
 
-app.use("/auth", authRoutes)
+app.use("/auth", authRoutes);
 
 app.listen(PORT, (err) => {
 	if (err) throw err;

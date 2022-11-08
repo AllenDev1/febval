@@ -4,7 +4,7 @@ import { Container, Button, Table } from "react-bootstrap";
 import Order from "../Assets/order.svg";
 import Updatedetails from "./Updatedetails";
 
-const Personalinfo = () => {
+const Personalinfo = ({ user }) => {
 	const [modalShow, setModalShow] = useState(false);
 
 	return (
@@ -18,10 +18,10 @@ const Personalinfo = () => {
 								<div className="details">
 									<text>Personal Details</text>
 									<div className="personal-name">
-										Rupesh dai
+										{user.displayName}
 									</div>
 									<div className="personal-email">
-										Khaik@hgmail.com
+										{user.email}
 									</div>
 									<div className="personal-number">
 										9800000000
@@ -67,7 +67,9 @@ const Personalinfo = () => {
 								<tr>
 									<td>01065554</td>
 									<td>11/12/1900</td>
-									<td><img src={Order} alt="..." /></td>
+									<td>
+										<img src={Order} alt="..." />
+									</td>
 									<td>Rs. 900</td>
 								</tr>
 								<tr>
@@ -76,7 +78,6 @@ const Personalinfo = () => {
 									<td>Thornton</td>
 									<td>@fat</td>
 								</tr>
-								
 							</tbody>
 						</Table>
 					</div>
