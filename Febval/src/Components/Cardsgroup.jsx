@@ -16,7 +16,7 @@ const Cardsgroup = ({}) => {
 				</div>
 				<Row xs={1} md={4} className="g-4 cards-row">
 					{productDes.map((_, idx) => (
-						<Col className="cards-col">
+						<Col className="cards-col" key={idx}>
 							<Link
 								to={`/description/${_.id}`}
 								className="card-link"

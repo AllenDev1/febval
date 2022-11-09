@@ -39,13 +39,8 @@ const App = () => {
 				});
 		};
 		getUser();
-		checking();
 	}, []);
-	// console.log(user);
 
-	const checking = () => {
-		// user ? alert("hello") : alert("bye");
-	};
 	return (
 		<>
 			<Router>
@@ -57,9 +52,9 @@ const App = () => {
 						path="/userdetails"
 						element={
 							// user ? (
-								<Personalinfo user={user} />
+							<Personalinfo user={user} />
 							// ) : (
-								// <Navigate to="/" />
+							// <Navigate to="/" />
 							// )
 						}
 					/>
