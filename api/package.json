@@ -21,10 +21,12 @@
     "helmet": "^6.0.0",
     "jwks-rsa": "^2.1.5",
     "morgan": "^1.10.0",
+    "morgan-body": "^2.6.8",
     "mysql2": "^2.3.3",
     "passport": "^0.5.3",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
-    "sequelize": "^6.25.5"
+    "sequelize": "^6.25.5",
+    "sqlite3": "^5.1.2"
   }
 }

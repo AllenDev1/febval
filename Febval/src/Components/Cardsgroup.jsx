@@ -18,14 +18,14 @@ const Cardsgroup = ({}) => {
 					{productDes.map((_, idx) => (
 						<Col className="cards-col" key={idx}>
 							<Link
-								to={`/description/${_.id}`}
+								to={`/description/${_.id}/${_.title}`}
 								className="card-link"
 							>
 								<Card className="cards-card">
 									<Card.Img
 										className="cards-img"
 										variant="top"
-										src={_.img1}
+										src={_.images[0]}
 									/>
 									<Card.Body className="cards-card-body">
 										<Card.Title className="cards-title">

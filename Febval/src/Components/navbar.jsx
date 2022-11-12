@@ -15,12 +15,14 @@ import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import wed from "../Assets/gift shop/wed.svg";
 import signin from "../Assets/signin.svg";
+import { getUser } from "../Auth/auth";
 import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
 
-const Navbars = ({ user }) => {
+const Navbars = () => {
+	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 
 	const [show, setShow] = useState(false);
@@ -36,6 +38,14 @@ const Navbars = ({ user }) => {
 	useEffect(() => {
 		window.addEventListener("scroll", listenScrollEvent);
 		return () => window.removeEventListener("scroll", listenScrollEvent);
+	}, []);
+
+	useEffect(() => {
+		getUser().then((user) => {
+			setUser(user);
+		}).catch((err) => {
+			setUser(null);
+		});
 	}, []);
 
 	return (
@@ -67,7 +77,7 @@ const Navbars = ({ user }) => {
 												id="dropdown-basic"
 											>
 												<img
-													src={user.photos[0].value}
+													src={user.image}
 													alt="..."
 												/>
 											</Dropdown.Toggle>

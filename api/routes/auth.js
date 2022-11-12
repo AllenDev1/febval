@@ -1,34 +1,39 @@
 const router = require("express").Router();
 const passort = require("passport");
 
-router.get("/google", passort.authenticate("google", { scope: ["profile"] }));
+router.get(
+    "/google",
+    passort.authenticate("google", { scope: ["profile", "email"] })
+);
 
 router.get("/login/failure", (req, res) => {
-	res.send("Failed to login");
+    return res.send("Failed to login");
 });
 
 router.get("/login/success", (req, res) => {
-    if(req.user){
-        res.send({
+    if (req.user) {
+        return res.send({
             success: true,
             message: "user has successfully authenticated",
             user: req.user,
-            cookies: req.cookies
+            cookies: req.cookies,
         });
+    } else {
+        return res.sendStatus(401).send("User not authenticated");
     }
 });
 
 router.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("http://localhost:3000/");
+    return res.redirect("http://localhost:3000/");
 });
 
 router.get(
-	"/google/callback",
-	passort.authenticate("google",{
+    "/google/callback",
+    passort.authenticate("google", {
         successRedirect: "http://localhost:3000/",
-        failureRedirect: "/login/failure"
-    }
-));
+        failureRedirect: "/login/failure",
+    })
+);
 
 module.exports = router;
