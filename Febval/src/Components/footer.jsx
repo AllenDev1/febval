@@ -15,11 +15,11 @@ const Footer = () => {
 						<div className="footer-logo">
 							<img src={Logo} />
 							<div className="tagline">
-								<text>The joy of giving</text>
+								<p>The joy of giving</p>
 							</div>
 						</div>
 						<div className="footer-links">
-							<text>Quick Links</text>
+							<p>Quick Links</p>
 							<div className="Quick-links">
 								<a href="#">Product</a>
 								<a href="#">How does it work? </a>
@@ -30,7 +30,7 @@ const Footer = () => {
 							</div>
 						</div>
 						<div className="footer-sites">
-							<text>Find us on</text>
+							<p>Find us on</p>
 							<div className="social-media">
 								<img src={Facebook} alt="" />
 								<img src={Insta} alt="" />
@@ -46,8 +46,8 @@ const Footer = () => {
 								Copyright @2022 FEBVAL
 							</div>
 							<div className="footer-copyright-r">
-								<text>Terms of Use</text>
-								<text>Privacy Policy</text>
+								<p>Terms of Use</p>
+								<p>Privacy Policy</p>
 							</div>
 						</div>
 					</Container>

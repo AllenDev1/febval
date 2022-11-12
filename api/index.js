@@ -7,7 +7,9 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const authRoutes = require("./routes/auth");
 require("./passport");
-
+const ProductRoute = require("./routes/productsRoute.js");
+const CartRoutes = require("./routes/CartRoutes.js");
+const OrderRoutes = require("./routes/OrderRoutes.js");
 const sequelize = require("./database/sequelize");
 const User = require("./models/user.model");
 
@@ -37,6 +39,13 @@ app.use(passport.session());
 app.use(cors({ origin: true, credentials: true }));
 
 app.use("/auth", authRoutes);
+
+//product routes
+app.use(express.json());
+app.use("/api/products", ProductRoute);
+
+app.use("/api/cart", CartRoutes);
+app.use("/api/order", OrderRoutes);
 
 app.listen(PORT, (err) => {
     if (err) throw err;

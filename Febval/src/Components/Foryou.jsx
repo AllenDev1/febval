@@ -24,7 +24,8 @@ const Foryou = () => {
 									/>
 									<Card.Body className="cards-card-body">
 										<Card.Title className="cards-title">
-                                        is used to define the distance of the 
+											is used to define the distance of
+											the
 										</Card.Title>
 
 										<Card.Text className="cards-text">

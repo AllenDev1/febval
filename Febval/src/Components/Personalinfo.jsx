@@ -34,7 +34,7 @@ const Personalinfo = () => {
                                 <div className="details">
                                     <text>Personal Details</text>
                                     <div className="personal-name">
-                                        {user ? user.displayName : "Loading..."}
+                                        {user ? user.firstName : "Loading..."}
                                     </div>
                                     <div className="personal-email">
                                         {user ? user.email : "Loading..."}

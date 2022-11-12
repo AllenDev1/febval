@@ -7,7 +7,7 @@ import {
 	Navbar,
 	Offcanvas,
 } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
 import cake from "../Assets/gift shop/cakes.svg";
@@ -84,7 +84,7 @@ const Navbars = () => {
 
 											<Dropdown.Menu>
 												<Dropdown.Item href="/userdetails">
-													Profile
+													<Link to={`/userdetails/${user.googleId}`}> Profile</Link>
 												</Dropdown.Item>
 												<Dropdown.Item href="/userdetails">
 													Orders
