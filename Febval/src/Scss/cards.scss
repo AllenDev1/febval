@@ -11,11 +11,10 @@
 		text-align: left;
 
 		color: #4f4f4f;
-        p{
-            text-decoration: underline;
-            text-underline-offset: 5px;
-        }
-		
+		p {
+			text-decoration: underline;
+			text-underline-offset: 5px;
+		}
 	}
 	.cards-row {
 		.cards-col {
@@ -27,6 +26,7 @@
 
 					.cards-img {
 						border-radius: 10px;
+						height: 300px;
 					}
 					.cards-card-body {
 						padding: 10px;

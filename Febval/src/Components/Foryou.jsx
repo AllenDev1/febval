@@ -14,7 +14,7 @@ const Foryou = () => {
 				</div>
 				<Row xs={1} md={4} className="g-4 cards-row">
 					{Array.from({ length: 10 }).map((_, idx) => (
-						<Col className="cards-col">
+						<Col className="cards-col" key={idx}>
 							<Link to="/" className="card-link">
 								<Card className="cards-card">
 									<Card.Img
@@ -24,7 +24,8 @@ const Foryou = () => {
 									/>
 									<Card.Body className="cards-card-body">
 										<Card.Title className="cards-title">
-                                        is used to define the distance of the 
+											is used to define the distance of
+											the
 										</Card.Title>
 
 										<Card.Text className="cards-text">

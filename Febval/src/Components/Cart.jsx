@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "../Scss/Cart.scss";
 import Modal from "react-bootstrap/Modal";
 import Cross from "../Assets/cross.svg";
@@ -7,11 +7,10 @@ import Checkout from "../Assets/Checkout.svg";
 import Shop from "../Assets/Shopp.svg";
 import { Offcanvas } from "react-bootstrap";
 
-const Cart = (  props ) => {
-	
+const Cart = (props) => {
 	return (
 		<>
-			<Offcanvas  placement="end" backdrop="static" {...props}>
+			<Offcanvas placement="end" backdrop="static" {...props}>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>
 						<h1>Cart</h1>
@@ -28,20 +27,20 @@ const Cart = (  props ) => {
 									</div>
 									<div className="calculation">
 										<div className="first-row">
-											<text>14th aug, 2022</text>
-											<text>Rs. 7500 + 200</text>
+											<p>14th aug, 2022</p>
+											<p>Rs. 7500 + 200</p>
 										</div>
 										<div className="second-row">
-											<text>Total:</text>
-											<text>Rs. 7700 /-</text>
-											<text>Rs. 7100 /-</text>
+											<p>Total:</p>
+											<p>Rs. 7700 /-</p>
+											<p>Rs. 7100 /-</p>
 										</div>
 									</div>
 									<img src={Delete} alt="" className="del" />
 									<div className="cart-buttons">
 										<button>
 											<img src={Checkout} alt="" />
-											<text>Checkout</text>
+											<p>Checkout</p>
 										</button>
 									</div>
 								</div>
@@ -52,47 +51,44 @@ const Cart = (  props ) => {
 									</div>
 									<div className="calculation">
 										<div className="first-row">
-											<text>14th aug, 2022</text>
-											<text>Rs. 7500 + 200</text>
+											<p>14th aug, 2022</p>
+											<p>Rs. 7500 + 200</p>
 										</div>
 										<div className="second-row">
-											<text>Total:</text>
-											<text>Rs. 7700 /-</text>
-											<text>Rs. 7100 /-</text>
+											<p>Total:</p>
+											<p>Rs. 7700 /-</p>
+											<p>Rs. 7100 /-</p>
 										</div>
 									</div>
 									<img src={Delete} alt="" className="del" />
 									<div className="cart-buttons">
 										<button>
 											<img src={Checkout} alt="" />
-											<text>Checkout</text>
+											<p>Checkout</p>
 										</button>
 									</div>
 								</div>
 							</div>
 						</div>
-						
 					</div>
 				</Offcanvas.Body>
 				<div className="cart-footer">
-							<div className="item-total">
-								<text>2 items</text>
-								<text>Subtotal : Rs 14200/-</text>
-							</div>
-						
-						</div>
+					<div className="item-total">
+						<p>2 items</p>
+						<p>Subtotal : Rs 14200/-</p>
+					</div>
+				</div>
 				<div className="button-footer">
-								<button>
-									<img src={Checkout} alt="" />
-									<text>Checkout</text>
-								</button>
-								<button className="shop">
-									<img src={Shop} alt="" />
-									<text>Continue Shopping</text>
-								</button>
-							</div>
+					<button>
+						<img src={Checkout} alt="" />
+						<p>Checkout</p>
+					</button>
+					<button className="shop">
+						<img src={Shop} alt="" />
+						<p>Continue Shopping</p>
+					</button>
+				</div>
 			</Offcanvas>
-			
 		</>
 	);
 };

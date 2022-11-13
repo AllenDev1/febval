@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import "../Scss/cards.scss";
 import AutoButton from "./AutoButton";
 import da from "./data file/datafiles.json";
-const Cardsgroup = () => {
+import { productDes } from "./data file/dummydata";
+
+const Cardsgroup = ({}) => {
 	return (
 		<>
 			<Container className="card-container">
@@ -13,24 +15,26 @@ const Cardsgroup = () => {
 					<p>Featured Products</p>
 				</div>
 				<Row xs={1} md={4} className="g-4 cards-row">
-					{Array.from({ length: 10 }).map((_, idx) => (
-						<Col className="cards-col">
-							<Link to="/description" className="card-link">
+					{productDes.map((_, idx) => (
+						<Col className="cards-col" key={idx}>
+							<Link
+								to={`/description/${_.id}/${_.title}`}
+								className="card-link"
+							>
 								<Card className="cards-card">
 									<Card.Img
 										className="cards-img"
 										variant="top"
-										src="https://static3.depositphotos.com/1001651/137/i/950/depositphotos_1376093-stock-photo-cofee-cup.jpg"
+										src={_.images[0]}
 									/>
 									<Card.Body className="cards-card-body">
 										<Card.Title className="cards-title">
-                                        is used to define the distance of the 
+											{_.title}
 										</Card.Title>
 
 										<Card.Text className="cards-text">
 											<p className="price-cards">
-												{" "}
-												Rs. 400.00
+												Rs. {_.discount_price}
 											</p>
 											<span>Buy Now</span>
 										</Card.Text>

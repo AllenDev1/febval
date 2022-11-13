@@ -25,12 +25,19 @@ const Loginform = (props) => {
 					<img src={img} alt="..." className="w-100" />
 				</Modal.Body>
 				<Modal.Footer className="login-modal-footer">
-					<a href="#" className="login-google">
+					<a
+						href="#"
+						className="login-google"
+						onClick={() => {
+							window.open(
+								"http://localhost:3001/auth/google",
+								"_self"
+							);
+						}}
+					>
 						<img src={google} alt=".." /> Login with Google
 					</a>
-					<a href="#" className="login-google">
-						<img src={fb} alt=".." /> Login with facebook
-					</a>
+
 					<p className="footer-text">
 						If you continue, you are accepting FEBVAL{" "}
 						<a href=""> Terms and Conditions </a>and{" "}

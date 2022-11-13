@@ -8,7 +8,7 @@ const Navcategory = () => {
     <>
     <Navbars/>
    
-    <Footer/>
+  
     </>
   )
 }
