@@ -15,7 +15,6 @@ const App = () => {
 					<Route exact path="/userdetails" element={<Userdetail />} />
 					<Route exact path="/description" element={<Description />} />
 					<Route exact path="/navcategory" element={<Navcategory />} />
-
 					<Route path="*" element={<p>Page not found</p>} />
 				</Routes>
 			</Router>
