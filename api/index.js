@@ -8,6 +8,7 @@ const passport = require("passport");
 const authRoutes = require("./routes/auth");
 require("./passport");
 const ProductRoute = require("./routes/productsRoute.js");
+// const protectedRoute = require("./routes/protectedRoutes.js");
 const CartRoutes = require("./routes/CartRoutes.js");
 const OrderRoutes = require("./routes/OrderRoutes.js");
 const sequelize = require("./database/sequelize");
@@ -45,7 +46,7 @@ app.use(express.json());
 app.use("/api/products", ProductRoute);
 
 app.use("/api/cart", CartRoutes);
-app.use("/api/order", OrderRoutes);
+// app.use("/api/order", OrderRoutes);
 
 app.listen(PORT, (err) => {
     if (err) throw err;

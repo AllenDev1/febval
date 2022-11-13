@@ -14,6 +14,7 @@ import cake from "../Assets/gift shop/cakes.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import wed from "../Assets/gift shop/wed.svg";
+import events from "../Assets/events.svg";
 import signin from "../Assets/signin.svg";
 import { getUser } from "../Auth/auth";
 import "../Scss/navbar.scss";
@@ -204,6 +205,15 @@ const Navbars = () => {
 								>
 									<img src={giftbox} alt="..." />
 									Birthday
+								</NavLink>
+								<NavLink
+									to="/events"
+									className={({ isActive }) =>
+										isActive ? "active" : ""
+									}
+								>
+									<img src={events} alt="..." />
+									Events
 								</NavLink>
 								<NavLink
 									to="/other"

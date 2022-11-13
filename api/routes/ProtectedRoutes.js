@@ -6,10 +6,10 @@ const Product = require('../models/product.model');
 const User = require('../models/user.model');
 const Order = require('../models/order.model');
 const { Op } = require('sequelize');
-// const { isAuth } = require("../middlewares/auth");
+const { isAdmin } = require("../middlewares/Auth");
 
 // create product
-router.post('/create', isAuth, async (req, res) => {
+router.post('/create', isAdmin, async (req, res) => {
     try {
         const { name, description, category, discount, price, image, quantity, active } = req.body;
         const product = await Product.create({
@@ -22,14 +22,14 @@ router.post('/create', isAuth, async (req, res) => {
             quantity: quantity,
             active: active
         });
-        res.status(201).json({ product });
+       return res.status(201).json({ product });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+       return res.status(500).json({ error: error.message });
     }
 });
 
 //Update product
-router.put('/update/:id', isAuth, async (req, res) => {
+router.put('/update/:id', isAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         const { name, description, category, discount, price, image, quantity, active } = req.body;
@@ -51,12 +51,12 @@ router.put('/update/:id', isAuth, async (req, res) => {
         }
         throw new Error('Product not found');
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
     }
 });
 
 //Delete product
-router.delete('/delete/:id', isAuth, async (req, res) => {
+router.delete('/delete/:id', isAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         const deleted = await Product.destroy({
@@ -67,7 +67,7 @@ router.delete('/delete/:id', isAuth, async (req, res) => {
         }
         throw new Error("Product not found");
     } catch (error) {
-        res.status(500).json({ error: error.message });
+       return res.status(500).json({ error: error.message });
     }
 });
 
