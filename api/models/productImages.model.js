@@ -1,25 +1,15 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database/sequelize");
-const Product = require("./product.model");
-const User = require("./user.model");
 
-// Order ==> Product (One to Many)
-// Product ==> Order (One to Many)
-
-// Order model
-const Order = sequelize.define(
-    "Order",
+const ProductImages = sequelize.define(
+    "ProductImages",
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        total: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        status: {
+        image: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -29,5 +19,4 @@ const Order = sequelize.define(
     }
 );
 
-
-module.exports = Order;
+module.exports = ProductImages;
