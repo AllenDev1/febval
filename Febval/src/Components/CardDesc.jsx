@@ -1,5 +1,5 @@
 import { React } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import "../Scss/description.scss";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -33,7 +33,11 @@ const CardDesc = ({ id, name }) => {
                                         ))}
                                     </Carousel>
                                 </Col>
-                                <Col className="CDCol-dec"></Col>
+                                <Col className="CDCol-dec">
+                                   <Button>
+                                    cart add
+                                   </Button>
+                                </Col>
                             </>
                         </>
                     ) : (

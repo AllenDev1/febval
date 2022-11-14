@@ -22,6 +22,7 @@ import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
 
+
 const Navbars = () => {
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
