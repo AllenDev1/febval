@@ -17,7 +17,7 @@ const Email = () => {
 	};
 	return (
 		<>
-			<div className="bg-email">
+			<div className="bg-email mt-5">
 				<Container className="email-container">
 					<Row className="email-row">
 						<Col className="newsletter-col">

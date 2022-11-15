@@ -9,8 +9,8 @@ const authRoutes = require("./routes/auth");
 require("./passport");
 const ProductRoutes = require("./routes/products.routes");
 const CartRoutes = require("./routes/cart.routes");
-
-const sequelize = require("./models/index");
+const OrderRoutes = require("./routes/order.routes");
+const {sequelize} = require("./models/index");
 
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
@@ -46,7 +46,7 @@ app.use(express.json());
 app.use("/api/products", ProductRoutes);
 
 app.use("/api/cart", CartRoutes);
-// app.use("/api/order", OrderRoutes);
+app.use("/api/order", OrderRoutes);
 
 app.listen(PORT, (err) => {
     if (err) throw err;

@@ -10,7 +10,8 @@ import Navbars from "./Components/navbar";
 import Personalinfo from "./Components/Personalinfo";
 import Description from "./Pages/Description";
 import Home from "./Pages/home";
-import Navcategory from "./Pages/Navcategory";
+import ProductsByCategory from "./Pages/ProductsByCategory";
+import Navcategory from "./Pages/ProductsByCategory";
 
 const App = () => {
 	return (
@@ -21,12 +22,15 @@ const App = () => {
 					<Route exact path="/" element={<Home />} />
 					<Route exact path="/home" element={<Home />} />
 					<Route path="/userdetails/:id" element={<Personalinfo />} />
-
+					
+					<Route
+						path="/products/:cat"
+						element={<ProductsByCategory />}
+					/>
 					<Route
 						path="/description/:id/:name"
 						element={<Description />}
 					/>
-					<Route path="/navcategory" element={<Navcategory />} />
 
 					<Route path="*" element={<p>Page not found</p>} />
 				</Routes>

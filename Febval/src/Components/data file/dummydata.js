@@ -12,6 +12,7 @@ export const productDes = [
         discount_price: 1500,
         location: "new planet",
         size: ["xl", "xxl", "M", "S"],
+        cat: "Trees",
     },
     {
         id: 2,
@@ -26,6 +27,8 @@ export const productDes = [
         discount_price: 2500,
         location: "new planet",
         size: ["xl", "xxl", "M", "S"],
+        cat: "apple",
+
     },
     {
         id: 3,
@@ -40,5 +43,7 @@ export const productDes = [
         discount_price: 1500,
         location: "new planet",
         size: ["xl", "xxl", "M", "S"],
+        cat: "Trees",
+
     },
 ];

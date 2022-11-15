@@ -8,6 +8,7 @@ import Categories from "../Components/Categories";
 import Navbars from "../Components/navbar";
 import Foryou from "../Components/Foryou";
 import Email from "../Components/Email";
+import FeaturedProducts from "../Components/FeaturedProducts";
 
 const Home = () => {
 	
@@ -15,7 +16,7 @@ const Home = () => {
 		<>
 			<Carouse />
 			<Categories />
-			<Cardsgroup />
+			<FeaturedProducts />
 			<Sale />
 			<Foryou />
 			<Email />

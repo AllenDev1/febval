@@ -21,9 +21,11 @@ import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
+import { productDes } from "./data file/dummydata";
 
 
 const Navbars = () => {
+	
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 
@@ -154,7 +156,7 @@ const Navbars = () => {
 						<Offcanvas.Body className="menu-body">
 							<Nav className="me-auto buttom-nav" id="buttom-nav">
 								<NavLink
-									to="/navcategory"
+									to="/products/cake"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -163,7 +165,7 @@ const Navbars = () => {
 									Cakes
 								</NavLink>
 								<NavLink
-									to="/wedding"
+									to="/products/wedding"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -172,7 +174,7 @@ const Navbars = () => {
 									Wedding
 								</NavLink>
 								<NavLink
-									to="/him"
+									to="/products/him"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -181,7 +183,7 @@ const Navbars = () => {
 									Him
 								</NavLink>
 								<NavLink
-									to="/her"
+									to="/products/her"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -190,7 +192,7 @@ const Navbars = () => {
 									Her
 								</NavLink>
 								<NavLink
-									to="/kids"
+									to="/products/kids"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -199,7 +201,7 @@ const Navbars = () => {
 									Kids
 								</NavLink>
 								<NavLink
-									to="/birthday"
+									to="/products/birthday"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -208,7 +210,7 @@ const Navbars = () => {
 									Birthday
 								</NavLink>
 								<NavLink
-									to="/events"
+									to="/products/events"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -217,7 +219,7 @@ const Navbars = () => {
 									Events
 								</NavLink>
 								<NavLink
-									to="/other"
+									to="/products/other"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}

@@ -30,23 +30,24 @@ const ProductOrder = sequelize.define(
     }
 );
 
-Product.hasMany(ProductImages, {
+Product.ProductImages = Product.hasMany(ProductImages, {
     foreignKey: "productId",
     sourceKey: "id",
+    as: "productImages"
 });
 
-User.hasMany(Order, {
+User.Order = User.hasMany(Order, {
     foreignKey: "userId",
     sourceKey: "id",
 });
 
-Product.belongsToMany(Order, {
+Product.Order = Product.belongsToMany(Order, {
     through: ProductOrder,
     foreignKey: "productId",
     otherKey: "orderId",
 });
 
-Order.belongsToMany(Product, {
+Order.Product = Order.belongsToMany(Product, {
     through: ProductOrder,
     foreignKey: "orderId",
     otherKey: "productId",
@@ -61,6 +62,5 @@ module.exports = {
     Cart,
     SalesBanner,
     SalesCarousel,
+    sequelize
 };
-
-module.exports = sequelize;
