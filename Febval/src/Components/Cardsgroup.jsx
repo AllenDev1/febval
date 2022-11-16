@@ -45,34 +45,63 @@ const Cardsgroup = ({ cat, sort }) => {
 		<>
 			<Container className="card-container">
 				<Row xs={1} md={4} className="g-4 cards-row">
-					{sortedProducts.map((_, idx) => (
-						<Col className="cards-col" key={idx}>
-							<Link
-								to={`/description/${_.id}/${_.name}`}
-								className="card-link"
-							>
-								<Card className="cards-card">
-									<Card.Img
-										className="cards-img"
-										variant="top"
-										src={_.productImages[0].image}
-									/>
-									<Card.Body className="cards-card-body">
-										<Card.Title className="cards-title">
-											{_.name}
-										</Card.Title>
+					{cat ? (
+						sortedProducts.map((_, idx) => (
+							<Col className="cards-col" key={idx}>
+								<Link
+									to={`/description/${_.id}/${_.name}`}
+									className="card-link"
+								>
+									<Card className="cards-card">
+										<Card.Img
+											className="cards-img"
+											variant="top"
+											src={_.productImages[0].image}
+										/>
+										<Card.Body className="cards-card-body">
+											<Card.Title className="cards-title">
+												{_.name}
+											</Card.Title>
 
-										<Card.Text className="cards-text">
-											<p className="price-cards">
+											<Card.Text className="cards-text price-cards">
 												Rs. {_.price}
-											</p>
-											<span>Buy Now</span>
-										</Card.Text>
-									</Card.Body>
-								</Card>
-							</Link>
-						</Col>
-					))}
+												<span>Buy Now</span>
+											</Card.Text>
+										</Card.Body>
+									</Card>
+								</Link>
+							</Col>
+						))
+					) : (
+						<>
+							{products.map((_, idx) => (
+								<Col className="cards-col" key={idx}>
+									<Link
+										to={`/description/${_.id}/${_.name}`}
+										className="card-link"
+									>
+										<Card className="cards-card">
+											<Card.Img
+												className="cards-img"
+												variant="top"
+												// src={_.productImages[0].image}
+											/>
+											<Card.Body className="cards-card-body">
+												<Card.Title className="cards-title">
+													{_.name}
+												</Card.Title>
+
+												<Card.Text className="cards-text price-cards">
+													Rs. {_.price}
+													<span>Buy Now</span>
+												</Card.Text>
+											</Card.Body>
+										</Card>
+									</Link>
+								</Col>
+							))}
+						</>
+					)}
 				</Row>
 			</Container>
 		</>

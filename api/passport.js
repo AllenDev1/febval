@@ -26,7 +26,7 @@ passport.use(
                     firstName: givenName,
                     lastName: familyName,
                     image: image,
-					role: "user",
+					role: "admin",
                 });
                 done(null, user);
             }

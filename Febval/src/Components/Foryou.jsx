@@ -31,7 +31,7 @@ const Foryou = () => {
 						<option>Price: Low to High</option>
 					</Form.Select>
 				</div>
-				<Cardsgroup cat={cat} sort={sort} />
+				<Cardsgroup sort={sort} cart= {cat} />
 				<div className="seemore-btn">{AutoButton(da["see more"])}</div>
 			</Container>
 		</>
