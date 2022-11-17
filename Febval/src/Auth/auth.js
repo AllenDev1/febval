@@ -1,5 +1,5 @@
 export const getUser = async () => {
-    const response = await fetch("http://localhost:3001/auth/login/success", {
+    const response = await fetch("/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {

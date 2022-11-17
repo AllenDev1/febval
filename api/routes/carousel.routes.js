@@ -61,7 +61,7 @@ router.delete("/delete/:id", ensureAdmin, async (req, res) => {
 });
 
 //Get all carousels
-router.get("/", async (req, res) => {
+router.get("/all", async (req, res) => {
 	try {
 		const carousels = await SalesCarousel.findAll();
 		res.status(200).json({ carousels });

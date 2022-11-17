@@ -1,9 +1,7 @@
 //cart Routes
 const express = require("express");
 const router = express.Router();
-const Cart = require("../models/cart.model.js");
-const Product = require("../models/product.model.js");
-const User = require("../models/user.model.js");
+const {User, Product, Cart} = require ("../models/index")
 const { Op } = require("sequelize");
 const { ensureLoggedIn } = require("../middlewares/Auth.js");
 

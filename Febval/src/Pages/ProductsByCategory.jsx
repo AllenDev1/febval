@@ -12,7 +12,7 @@ const ProductsByCategory = () => {
 	const location = useLocation();
 	const whereAt = location.pathname.split("/")[2];
 	const { cat } = useParams();
-	const [sort, SetSort] = useState("Sort");
+	const [sort, SetSort] = useState("new");
 
 	return (
 		<>

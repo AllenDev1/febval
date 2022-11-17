@@ -32,26 +32,25 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 	}, [cat]);
 
 	useEffect(() => {
+		let products_ = [...products];
+
 		if (sort === "new") {
-			setSortedProducts(
-				products.sort((a, b) => {
-					return b.createdAt - a.createdAt;
-				})
-			);
-		} else if (sort === "high") {
-			setSortedProducts(
-				products.sort((a, b) => {
-					return a.price - b.price;
-				})
-			);
+			products_.sort((a, b) => {
+				return b.createdAt - a.createdAt;
+			});
+			setSortedProducts(products_);
+		} else if (sort === "low") {
+			products_.sort((a, b) => {
+				return a.price - b.price;
+			});
+			setSortedProducts(products_);
 		} else {
-			setSortedProducts(
-				products.sort((a, b) => {
-					return b.price - a.price;
-				})
-			);
+			products_.sort((a, b) => {
+				return b.price - a.price;
+			});
+			setSortedProducts(products_);
 		}
-	}, [sort, products, sortedProducts]);
+	}, [sort, products]);
 
 	return (
 		<>
@@ -97,7 +96,10 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 													<Card.Img
 														className="cards-img"
 														variant="top"
-														// src={_.productImages[0].image}
+														src={
+															_.productImages[0]
+																?.image
+														}
 													/>
 													<Card.Body className="cards-card-body">
 														<Card.Title className="cards-title">
@@ -113,7 +115,7 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 											</Link>
 										</Col>
 								  ))
-								: products.map((_, idx) => (
+								: sortedProducts.map((_, idx) => (
 										<Col className="cards-col" key={idx}>
 											<Link
 												to={`/description/${_.id}/${_.name}`}
@@ -123,10 +125,10 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 													<Card.Img
 														className="cards-img"
 														variant="top"
-														// src={
-														// 	_.productImages[0]
-														// 		.image
-														// }
+														src={
+															_.productImages[0]
+																?.image
+														}
 													/>
 													<Card.Body className="cards-card-body">
 														<Card.Title className="cards-title">
