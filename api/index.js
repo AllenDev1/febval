@@ -11,7 +11,7 @@ const ProductRoutes = require("./routes/products.routes");
 const CartRoutes = require("./routes/cart.routes");
 const OrderRoutes = require("./routes/order.routes");
 const {sequelize} = require("./models/index");
-
+const CarouselRoutes = require("./routes/carousel.routes");
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
 
@@ -47,6 +47,8 @@ app.use("/api/products", ProductRoutes);
 
 app.use("/api/cart", CartRoutes);
 app.use("/api/order", OrderRoutes);
+
+app.use("api/carousel", CarouselRoutes);
 
 app.listen(PORT, (err) => {
     if (err) throw err;

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import { Link, useLocation } from "react-router-dom";
+import { Container, Form } from "react-bootstrap";
+import { useParams } from 'react-router-dom';
 import "../Scss/Foryou.scss";
 import AutoButton from "./AutoButton";
 import Cardsgroup from "./Cardsgroup";
 import da from "./data file/datafiles.json";
 
 const Foryou = () => {
-	const location = useLocation();
-	const cat = location.pathname.split("/")[2];
+	const { cat } = useParams();
 	const [sort, SetSort] = useState("Sort");
 
 	return (
@@ -25,10 +23,10 @@ const Foryou = () => {
 							SetSort(e.target.value);
 						}}
 					>
-						<option>Sort</option>
+						<option value="new">Sort</option>
 
-						<option>Price: High to Low</option>
-						<option>Price: Low to High</option>
+						<option value="high">Price: High to Low</option>
+						<option value="low">Price: Low to High</option>
 					</Form.Select>
 				</div>
 				<Cardsgroup sort={sort} cart= {cat} />

@@ -210,7 +210,7 @@ const Navbars = () => {
 									Birthday
 								</NavLink>
 								<NavLink
-									to="/products/events"
+									to="/events"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}

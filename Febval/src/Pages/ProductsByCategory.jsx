@@ -17,7 +17,7 @@ const ProductsByCategory = () => {
 	return (
 		<>
 			<Container className="products-list-cat">
-				<Row>
+				<Row className="mb-5">
 					<Col>
 						<Breadcrumb>
 							<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -32,8 +32,7 @@ const ProductsByCategory = () => {
 								SetSort(e.target.value);
 							}}
 						>
-							<option value="sort">Sort</option>
-
+							<option value="new">Sort</option>
 							<option value="high">Price: High to Low</option>
 							<option value="low">Price: Low to High</option>
 						</Form.Select>

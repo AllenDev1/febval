@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../Scss/cards.scss";
 import axios from "axios";
 
-const Cardsgroup = ({ cat, sort }) => {
+const Cardsgroup = ({ cat, sort, feature }) => {
 	const [products, setProducts] = useState([]);
 	const [sortedProducts, setSortedProducts] = useState([]);
 
@@ -32,14 +32,26 @@ const Cardsgroup = ({ cat, sort }) => {
 	}, [cat]);
 
 	useEffect(() => {
-		if (sort === "high") {
-			setSortedProducts(products.sort((a, b) => b.price - a.price));
-		} else if (sort === "low") {
-			setSortedProducts(products.sort((a, b) => a.price - b.price));
+		if (sort === "new") {
+			setSortedProducts(
+				products.sort((a, b) => {
+					return b.createdAt - a.createdAt;
+				})
+			);
+		} else if (sort === "high") {
+			setSortedProducts(
+				products.sort((a, b) => {
+					return a.price - b.price;
+				})
+			);
 		} else {
-			setSortedProducts(products);
+			setSortedProducts(
+				products.sort((a, b) => {
+					return b.price - a.price;
+				})
+			);
 		}
-	}, [sort, products, cat]);
+	}, [sort, products, sortedProducts]);
 
 	return (
 		<>
@@ -74,32 +86,62 @@ const Cardsgroup = ({ cat, sort }) => {
 						))
 					) : (
 						<>
-							{products.map((_, idx) => (
-								<Col className="cards-col" key={idx}>
-									<Link
-										to={`/description/${_.id}/${_.name}`}
-										className="card-link"
-									>
-										<Card className="cards-card">
-											<Card.Img
-												className="cards-img"
-												variant="top"
-												// src={_.productImages[0].image}
-											/>
-											<Card.Body className="cards-card-body">
-												<Card.Title className="cards-title">
-													{_.name}
-												</Card.Title>
+							{feature
+								? products.slice(0, 8).map((_, idx) => (
+										<Col className="cards-col" key={idx}>
+											<Link
+												to={`/description/${_.id}/${_.name}`}
+												className="card-link"
+											>
+												<Card className="cards-card">
+													<Card.Img
+														className="cards-img"
+														variant="top"
+														// src={_.productImages[0].image}
+													/>
+													<Card.Body className="cards-card-body">
+														<Card.Title className="cards-title">
+															{_.name}
+														</Card.Title>
 
-												<Card.Text className="cards-text price-cards">
-													Rs. {_.price}
-													<span>Buy Now</span>
-												</Card.Text>
-											</Card.Body>
-										</Card>
-									</Link>
-								</Col>
-							))}
+														<Card.Text className="cards-text price-cards">
+															Rs. {_.price}
+															<span>Buy Now</span>
+														</Card.Text>
+													</Card.Body>
+												</Card>
+											</Link>
+										</Col>
+								  ))
+								: products.map((_, idx) => (
+										<Col className="cards-col" key={idx}>
+											<Link
+												to={`/description/${_.id}/${_.name}`}
+												className="card-link"
+											>
+												<Card className="cards-card">
+													<Card.Img
+														className="cards-img"
+														variant="top"
+														// src={
+														// 	_.productImages[0]
+														// 		.image
+														// }
+													/>
+													<Card.Body className="cards-card-body">
+														<Card.Title className="cards-title">
+															{_.name}
+														</Card.Title>
+
+														<Card.Text className="cards-text price-cards">
+															Rs. {_.price}
+															<span>Buy Now</span>
+														</Card.Text>
+													</Card.Body>
+												</Card>
+											</Link>
+										</Col>
+								  ))}
 						</>
 					)}
 				</Row>
