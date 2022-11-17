@@ -13,7 +13,7 @@ const Foryou = () => {
 	return (
 		<>
 			<Container className="card-container">
-				<div className="feature-products d-flex justify-content-between">
+				<div className="feature-products d-flex justify-content-between flex-wrap mb-5">
 					<p>Only For You</p>
 
 					<Form.Select
