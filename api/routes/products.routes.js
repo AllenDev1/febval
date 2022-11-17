@@ -1,10 +1,11 @@
 //produt route
 const express = require("express");
+const { ensureAdmin } = require("../middlewares/Auth.js");
 const router = express.Router();
-const Product = require("../models/product.model.js");
+const { Product, ProductImages } = require("../models");
 
 // create product
-router.post("/create", async (req, res) => {
+router.post("/create", ensureAdmin, async (req, res) => {
 	try {
 		const {
 			name,
@@ -12,20 +13,33 @@ router.post("/create", async (req, res) => {
 			category,
 			discount,
 			price,
-			image,
+			images,
 			quantity,
 			active,
 		} = req.body;
-		const product = await Product.create({
-			name: name,
-			description: description,
-			category: category,
-			discount: discount,
-			price: price,
-			image: image,
-			quantity: quantity,
-			active: active,
+
+		// images = ["url1", "url2"]
+		// productImages = [{image: "url1"}, {image: "url2"}]
+		const productImages = images.map((item) => {
+			return { image: item };
 		});
+
+		const product = await Product.create(
+			{
+				name: name,
+				description: description,
+				category: category,
+				discount: discount,
+				price: price,
+				productImages: productImages,
+				quantity: quantity,
+				active: active,
+			},
+			{
+				include: [Product.ProductImages],
+			}
+		);
+
 		res.status(201).json({ product });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
@@ -33,7 +47,7 @@ router.post("/create", async (req, res) => {
 });
 
 //Update product
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", ensureAdmin, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const {
@@ -42,10 +56,14 @@ router.put("/update/:id", async (req, res) => {
 			category,
 			discount,
 			price,
-			image,
+			images,
 			quantity,
 			active,
 		} = req.body;
+
+		const productImages = images.map((item) => {
+			return { image: item };
+		});
 		const [updated] = await Product.update(
 			{
 				name: name,
@@ -53,13 +71,13 @@ router.put("/update/:id", async (req, res) => {
 				category: category,
 				discount: discount,
 				price: price,
-
-				image: image,
+				productImages: productImages,
 				quantity: quantity,
 				active: active,
 			},
 			{
 				where: { id: id },
+				include: { model: ProductImages, as: "productImages" },
 			}
 		);
 		if (updated) {
@@ -73,7 +91,7 @@ router.put("/update/:id", async (req, res) => {
 });
 
 //Delete product
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", ensureAdmin, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const deleted = await Product.destroy({
@@ -89,9 +107,21 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 //Get all products
-router.get("/all", async (req, res) => {
+router.get("/", async (req, res) => {
+	const { cat } = req.query;
 	try {
-		const products = await Product.findAll();
+		let products;
+		if (cat) {
+			products = await Product.findAll({
+				include: { model: ProductImages, as: "productImages" },
+				where: { category: cat },
+			});
+		} else {
+			products = await Product.findAll({
+				include: { model: ProductImages, as: "productImages" },
+			});
+		}
+
 		res.status(200).json({ products });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
@@ -104,6 +134,7 @@ router.get("/get/:id", async (req, res) => {
 		const { id } = req.params;
 		const product = await Product.findOne({
 			where: { id: id },
+			include: { model: ProductImages, as: "productImages" },
 		});
 		if (product) {
 			return res.status(200).json({ product });
@@ -204,5 +235,7 @@ router.get("/price/descending", async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 });
+
+module.exports = router;
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database/sequelize");
+const Order = require("./order.model");
 
 //define product model
 const Product = sequelize.define(
@@ -23,16 +24,13 @@ const Product = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+
 		discount: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 		price: {
 			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
-		image: {
-			type: DataTypes.STRING,
 			allowNull: false,
 		},
 		quantity: {

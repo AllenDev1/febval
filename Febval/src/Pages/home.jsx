@@ -8,14 +8,15 @@ import Categories from "../Components/Categories";
 import Navbars from "../Components/navbar";
 import Foryou from "../Components/Foryou";
 import Email from "../Components/Email";
+import FeaturedProducts from "../Components/FeaturedProducts";
 
 const Home = () => {
 	
 	return (
 		<>
 			<Carouse />
-			<Categories />
-			<Cardsgroup />
+			{/* <Categories /> */}
+			<FeaturedProducts />
 			<Sale />
 			<Foryou />
 			<Email />

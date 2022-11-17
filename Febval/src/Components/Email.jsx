@@ -13,17 +13,18 @@ const Email = () => {
 			headers: { "Content-Type": "application/json" },
 			data: { email: email },
 		};
-
 	};
 	return (
 		<>
 			<div className="bg-email">
 				<Container className="email-container">
 					<Row className="email-row">
-						<Col className="newsletter-col">
+						<Col className="newsletter-col mb-3">
 							<h1>Newsletter</h1>
-                            <p>Join our Newsletter to receive information abut the latest Products, Discounts and Offers</p>
-
+							<p>
+								Join our Newsletter to receive information abut
+								the latest Products, Discounts and Offers
+							</p>
 						</Col>
 						<Col className="sub-col">
 							<Form onSubmit={postEmail} className="email-fomr">

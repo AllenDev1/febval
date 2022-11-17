@@ -14,14 +14,18 @@ import cake from "../Assets/gift shop/cakes.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import wed from "../Assets/gift shop/wed.svg";
+import events from "../Assets/events.svg";
 import signin from "../Assets/signin.svg";
 import { getUser } from "../Auth/auth";
 import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
+import { productDes } from "./data file/dummydata";
+
 
 const Navbars = () => {
+	
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 
@@ -152,7 +156,7 @@ const Navbars = () => {
 						<Offcanvas.Body className="menu-body">
 							<Nav className="me-auto buttom-nav" id="buttom-nav">
 								<NavLink
-									to="/navcategory"
+									to="/products/cake"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -161,7 +165,7 @@ const Navbars = () => {
 									Cakes
 								</NavLink>
 								<NavLink
-									to="/wedding"
+									to="/products/wedding"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -170,7 +174,7 @@ const Navbars = () => {
 									Wedding
 								</NavLink>
 								<NavLink
-									to="/him"
+									to="/products/him"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -179,7 +183,7 @@ const Navbars = () => {
 									Him
 								</NavLink>
 								<NavLink
-									to="/her"
+									to="/products/her"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -188,7 +192,7 @@ const Navbars = () => {
 									Her
 								</NavLink>
 								<NavLink
-									to="/kids"
+									to="/products/kids"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -197,7 +201,7 @@ const Navbars = () => {
 									Kids
 								</NavLink>
 								<NavLink
-									to="/birthday"
+									to="/products/birthday"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -206,7 +210,16 @@ const Navbars = () => {
 									Birthday
 								</NavLink>
 								<NavLink
-									to="/other"
+									to="/events"
+									className={({ isActive }) =>
+										isActive ? "active" : ""
+									}
+								>
+									<img src={events} alt="..." />
+									Events
+								</NavLink>
+								<NavLink
+									to="/products/other"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}

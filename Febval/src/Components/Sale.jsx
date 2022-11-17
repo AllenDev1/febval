@@ -6,7 +6,7 @@ import "../Scss/Sale.scss";
 const Sale = () => {
 	return (
 		<>
-			<Container>
+			<Container className="my-5">
 				<div className="banner-container">
 					<img src={Banner} alt="..." />
 				</div>

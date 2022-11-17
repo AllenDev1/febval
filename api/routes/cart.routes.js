@@ -5,14 +5,17 @@ const Cart = require("../models/cart.model.js");
 const Product = require("../models/product.model.js");
 const User = require("../models/user.model.js");
 const { Op } = require("sequelize");
+const { ensureLoggedIn } = require("../middlewares/Auth.js");
 
 // create cart
 
-router.post("/create", async (req, res) => {
+router.post("/create", ensureLoggedIn, async (req, res) => {
+	console.log(req.user);
+	const user = req.user;
 	try {
-		const { userId, productId, quantity } = req.body;
+		const { productId, quantity } = req.body;
 		const cart = await Cart.create({
-			userId: userId,
+			userId: user.id,
 			productId: productId,
 			quantity: quantity,
 		});
@@ -23,13 +26,14 @@ router.post("/create", async (req, res) => {
 });
 
 //Update cart
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", ensureLoggedIn, async (req, res) => {
+	const user = req.user;
 	try {
 		const { id } = req.params;
-		const { userId, productId, quantity } = req.body;
+		const { productId, quantity } = req.body;
 		const [updated] = await Cart.update(
 			{
-				userId: userId,
+				userId: user.id,
 				productId: productId,
 				quantity: quantity,
 			},
@@ -48,7 +52,7 @@ router.put("/update/:id", async (req, res) => {
 });
 
 //Delete cart
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", ensureLoggedIn ,async (req, res) => {
 	try {
 		const { id } = req.params;
 		const deleted = await Cart.destroy({
@@ -64,7 +68,8 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 //Get user cart
-router.get("/user/:id", async (req, res) => {
+router.get("/user/:id", ensureLoggedIn,async (req, res) => {
+    
 	try {
 		const { id } = req.params;
 		const cart = await Cart.findAll({

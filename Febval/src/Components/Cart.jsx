@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import "../Scss/Cart.scss";
-import Modal from "react-bootstrap/Modal";
-import Cross from "../Assets/cross.svg";
-import Delete from "../Assets/delete.svg";
-import Checkout from "../Assets/Checkout.svg";
-import Shop from "../Assets/Shopp.svg";
+import React from "react";
 import { Offcanvas } from "react-bootstrap";
+import Checkout from "../Assets/Checkout.svg";
+import Delete from "../Assets/delete.svg";
+import Shop from "../Assets/Shopp.svg";
+import "../Scss/Cart.scss";
 
 const Cart = (props) => {
 	return (
@@ -32,7 +30,9 @@ const Cart = (props) => {
 										</div>
 										<div className="second-row">
 											<p>Total:</p>
-											<p>Rs. 7700 /-</p>
+											<p>
+												<s> Rs. 7700 /- </s>
+											</p>
 											<p>Rs. 7100 /-</p>
 										</div>
 									</div>
@@ -56,7 +56,7 @@ const Cart = (props) => {
 										</div>
 										<div className="second-row">
 											<p>Total:</p>
-											<p>Rs. 7700 /-</p>
+											<p><s> Rs. 7700 /- </s></p>
 											<p>Rs. 7100 /-</p>
 										</div>
 									</div>
