@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Container, Form } from "react-bootstrap";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import "../Scss/Foryou.scss";
-import AutoButton from "./AutoButton";
 import Cardsgroup from "./Cardsgroup";
-import da from "./data file/datafiles.json";
 
 const Foryou = () => {
 	const { cat } = useParams();
@@ -29,8 +27,7 @@ const Foryou = () => {
 						<option value="low">Price: Low to High</option>
 					</Form.Select>
 				</div>
-				<Cardsgroup sort={sort} cat= {cat} />
-				<div className="seemore-btn">{AutoButton(da["see more"])}</div>
+				<Cardsgroup sort={sort} cat={cat} />
 			</Container>
 		</>
 	);

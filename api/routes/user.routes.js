@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const passort = require("passport");
-const ensureLoggedIn = require("../middlewares/Auth");
+const {ensureLoggedIn} = require("../middlewares/Auth");
 const { User } = require("../models/index.js");
 
+
+// get user info
 router.get("/info", ensureLoggedIn, async (req, res) => {
 	let user = req.user;
-
 	try {
 		const userInfo = await User.findOne({
 			where: { id: user.id },
@@ -13,9 +14,11 @@ router.get("/info", ensureLoggedIn, async (req, res) => {
 		return res.sendStatus(200).json(userInfo);
 	} catch (error) {
 		console.error(error);
-		return res.sendStatus(400).send("Something went wrong!");
+		return res.sendStatus(500).json({ error: error.message });
 	}
 });
+
+
 
 router.post("/info", ensureLoggedIn, async (req, res) => {
 	let user = req.user;
@@ -39,7 +42,5 @@ router.post("/info", ensureLoggedIn, async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 });
-
-
 
 module.exports = router;

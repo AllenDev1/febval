@@ -10,6 +10,7 @@ require("./passport");
 const ProductRoutes = require("./routes/products.routes");
 const CartRoutes = require("./routes/cart.routes");
 const OrderRoutes = require("./routes/order.routes");
+const UserRoutes = require("./routes/user.routes")
 const {sequelize} = require("./models/index");
 const CarouselRoutes = require("./routes/carousel.routes");
 const salesBanner = require("./routes/salesBanner.routes")
@@ -53,6 +54,8 @@ app.use("/api/order", OrderRoutes);
 app.use("/api/carousel", CarouselRoutes);
 app.use("/api/newsletter", NewsLetterRoutes);
 app.use("/api/salesbanner", salesBanner)
+
+app.use("/api/user", UserRoutes);
 
 app.listen(PORT, (err) => {
     if (err) throw err;
