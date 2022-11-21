@@ -1,9 +1,9 @@
 //cart Routes
 const express = require("express");
 const router = express.Router();
-const {User, Product, Cart} = require ("../models/index")
+const { User, Product, Cart } = require("../models/index");
 const { Op } = require("sequelize");
-const { ensureLoggedIn } = require("../middlewares/Auth.js");
+const { ensureLoggedIn, ensureAdmin } = require("../middlewares/Auth.js");
 
 // create cart
 
@@ -12,11 +12,17 @@ router.post("/create", ensureLoggedIn, async (req, res) => {
 	const user = req.user;
 	try {
 		const { productId, quantity } = req.body;
-		const cart = await Cart.create({
-			userId: user.id,
-			productId: productId,
-			quantity: quantity,
-		});
+		const cart = await Cart.create(
+			{
+				userId: user.id,
+				productId: productId,
+				quantity: quantity,
+			},
+			{
+				include: Product.Cart,
+				as:"cart"
+			}
+		);
 		res.status(201).json({ cart });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
@@ -37,6 +43,7 @@ router.put("/update/:id", ensureLoggedIn, async (req, res) => {
 			},
 			{
 				where: { id: id },
+				include: { module: Product, as: "product" },
 			}
 		);
 		if (updated) {
@@ -50,11 +57,12 @@ router.put("/update/:id", ensureLoggedIn, async (req, res) => {
 });
 
 //Delete cart
-router.delete("/delete/:id", ensureLoggedIn ,async (req, res) => {
+router.delete("/delete/:id", ensureLoggedIn, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const deleted = await Cart.destroy({
 			where: { id: id },
+			include: { module: Product, as: "product" },
 		});
 		if (deleted) {
 			return res.status(204).send("Cart deleted");
@@ -66,8 +74,7 @@ router.delete("/delete/:id", ensureLoggedIn ,async (req, res) => {
 });
 
 //Get user cart
-router.get("/user/:id", ensureLoggedIn,async (req, res) => {
-    
+router.get("/user/:id", ensureLoggedIn, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const cart = await Cart.findAll({
@@ -91,7 +98,7 @@ router.get("/user/:id", ensureLoggedIn,async (req, res) => {
 });
 
 //Get all carts
-router.get("/", async (req, res) => {
+router.get("/", ensureAdmin, async (req, res) => {
 	try {
 		const carts = await Cart.findAll({
 			include: [

@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import "../Scss/personalinfo.scss";
-import { Container, Button, Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Order from "../Assets/order.svg";
-import Updatedetails from "./Updatedetails";
-import { Navigate, useNavigate } from "react-router-dom";
 import { getUser } from "../Auth/auth";
+import "../Scss/personalinfo.scss";
+import Updatedetails from "./Updatedetails";
 
 const Personalinfo = () => {
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -39,8 +38,6 @@ const Personalinfo = () => {
 									<div className="personal-email">
 										{user ? user.email : "Loading..."}
 									</div>
-
-								
 								</div>
 							</div>
 							<div className="address-book">
@@ -95,6 +92,7 @@ const Personalinfo = () => {
 			</Container>
 			<Updatedetails
 				show={modalShow}
+				user = {user}
 				onHide={() => setModalShow(false)}
 			/>
 		</>

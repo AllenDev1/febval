@@ -2,7 +2,7 @@
 const express = require("express");
 const { ensureAdmin } = require("../middlewares/Auth.js");
 const router = express.Router();
-const { Product, ProductImages } = require("../models");
+const { Product, ProductImages, Cart } = require("../models");
 
 // create product
 router.post("/create", ensureAdmin, async (req, res) => {
@@ -119,6 +119,7 @@ router.get("/", async (req, res) => {
 		} else {
 			products = await Product.findAll({
 				include: { model: ProductImages, as: "productImages" },
+				
 			});
 		}
 

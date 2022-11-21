@@ -9,19 +9,17 @@ const ProductsByCategory = () => {
 	const whereAt = location.pathname.split("/")[2];
 	const { cat } = useParams();
 	const [sort, SetSort] = useState("new");
-	
-
 
 	return (
 		<>
 			<Container className="products-list-cat">
+				<Col>
+					<Breadcrumb>
+						<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+						<Breadcrumb.Item active>{whereAt}</Breadcrumb.Item>
+					</Breadcrumb>
+				</Col>
 				<Row className="mb-5">
-					<Col>	
-						<Breadcrumb>
-							<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-							<Breadcrumb.Item active>{whereAt}</Breadcrumb.Item>
-						</Breadcrumb>
-					</Col>
 					<Col>
 						<Form.Select
 							aria-label="Default select example"
@@ -38,8 +36,6 @@ const ProductsByCategory = () => {
 				</Row>
 
 				<Cardsgroup cat={cat} sort={sort} />
-
-			
 			</Container>
 		</>
 	);

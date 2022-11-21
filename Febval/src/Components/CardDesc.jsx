@@ -7,17 +7,18 @@ import {
 	Container,
 	Row,
 	Stack,
-	Tabs,
 	Tab,
+	Tabs,
 } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "../Scss/description.scss";
 import loc from "../Assets/location.svg";
+import "../Scss/description.scss";
+import { getUser } from "../Auth/auth";
 
 const CardDesc = ({ id, name }) => {
 	const [products, setProducts] = useState();
-
+	const [cart, setCart] = useState([]);
 	const [counter, setCounter] = useState(1);
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
@@ -43,6 +44,36 @@ const CardDesc = ({ id, name }) => {
 			console.error(error);
 		}
 	}, []);
+
+	const addToCart = (e) => {
+		e.preventDefault();
+		const user = getUser();
+		const userID = user?.id;
+
+		const options = {
+			method: "POST",
+			url: "/api/cart/create",
+			withCredentials: true,
+			headers: {
+				"Content-Type": "application/json",
+			},
+			data: {
+				userID: { userID },
+				productId: {id},
+				quantity: { counter },
+			},
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setCart(response.data);
+				console.log(response.data);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	};
 
 	return (
 		<>
@@ -99,7 +130,7 @@ const CardDesc = ({ id, name }) => {
 										<div className="small-desc text-muted">
 											<span
 												className="d-inline-block text-truncate"
-												style={{ maxWidth: 350 }}
+												style={{ maxWidth: 300 }}
 											>
 												{products.description}
 											</span>
@@ -116,7 +147,8 @@ const CardDesc = ({ id, name }) => {
 										<div className="addtocart-buynow mt-5 d-flex justify-content-center align-items-center flex-wrap gap-4">
 											<Button
 												variant="dark"
-												className="px-5 py-2  "
+												className="px-5 py-2"
+												onClick={addToCart}
 											>
 												Add to Bag
 											</Button>
@@ -139,9 +171,7 @@ const CardDesc = ({ id, name }) => {
 													eventKey="Description"
 													title="Description"
 												>
-													{
-														products.description
-													}
+													{products.description}
 												</Tab>
 												<Tab
 													eventKey="Shipping"

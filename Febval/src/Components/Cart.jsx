@@ -56,7 +56,9 @@ const Cart = (props) => {
 										</div>
 										<div className="second-row">
 											<p>Total:</p>
-											<p><s> Rs. 7700 /- </s></p>
+											<p>
+												<s> Rs. 7700 /- </s>
+											</p>
 											<p>Rs. 7100 /-</p>
 										</div>
 									</div>

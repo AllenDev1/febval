@@ -9,58 +9,96 @@ const SalesCarousel = require("./salesCarousel.model");
 const { Sequelize, DataTypes } = require("sequelize");
 
 const ProductOrder = sequelize.define(
-    "ProductOrder",
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        price: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        quantity: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-    },
-    {
-        timestamps: true,
-    }
+	"ProductOrder",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		price: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
+		quantity: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
+	},
+	{
+		timestamps: true,
+	}
 );
 
+const ProductCart = sequelize.define(
+	"ProductCart",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		quantity: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
+	},
+	{
+		timestamps: true,
+	}
+);
+
+
+
+
 Product.ProductImages = Product.hasMany(ProductImages, {
-    foreignKey: "productId",
-    sourceKey: "id",
-    as: "productImages"
+	foreignKey: "productId",
+	sourceKey: "id",
+	as: "productImages",
 });
 
 User.Order = User.hasMany(Order, {
-    foreignKey: "userId",
-    sourceKey: "id",
+	foreignKey: "userId",
+	sourceKey: "id",
 });
 
 Product.Order = Product.belongsToMany(Order, {
-    through: ProductOrder,
-    foreignKey: "productId",
-    otherKey: "orderId",
+	through: ProductOrder,
+	foreignKey: "productId",
+	otherKey: "orderId",
 });
 
 Order.Product = Order.belongsToMany(Product, {
-    through: ProductOrder,
-    foreignKey: "orderId",
-    otherKey: "productId",
+	through: ProductOrder,
+	foreignKey: "orderId",
+	otherKey: "productId",
 });
 
+
+Cart.Product = Cart.belongsToMany(Product, {
+    through: ProductCart,
+    foreignKey: "cartId",
+    otherKey: "productId",
+    as: "product",
+});
+
+Product.Cart = Product.belongsToMany(Cart, {
+    through: ProductCart,
+    foreignKey: "productId",
+    otherKey: "cartId",
+    as: "cart",
+});
+
+
+
 module.exports = {
-    User,
-    Product,
-    Order,
-    ProductImages,
-    ProductOrder,
-    Cart,
-    SalesBanner,
-    SalesCarousel,
-    sequelize
+	User,
+	Product,
+	Order,
+	ProductImages,
+	ProductOrder,
+	Cart,
+	SalesBanner,
+	SalesCarousel,
+	sequelize,
 };
