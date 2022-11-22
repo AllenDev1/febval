@@ -8,7 +8,7 @@ const passport = require("passport");
 const authRoutes = require("./routes/auth");
 require("./passport");
 const ProductRoutes = require("./routes/products.routes");
-const CartRoutes = require("./routes/cart.routes");
+
 const OrderRoutes = require("./routes/order.routes");
 const UserRoutes = require("./routes/user.routes");
 const SearchRoute = require("./routes/search.routes");
@@ -49,7 +49,7 @@ app.use("/auth", authRoutes);
 app.use(express.json());
 app.use("/api/products", ProductRoutes);
 
-app.use("/api/cart", CartRoutes);
+
 app.use("/api/order", OrderRoutes);
 
 app.use("/api/carousel", CarouselRoutes);

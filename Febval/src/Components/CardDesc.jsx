@@ -10,16 +10,18 @@ import {
 	Tab,
 	Tabs,
 } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import loc from "../Assets/location.svg";
 import "../Scss/description.scss";
-import { getUser } from "../Auth/auth";
+import { addProduct } from "../redux/cartRedux";
 
 const CardDesc = ({ id, name }) => {
-	const [products, setProducts] = useState();
-	const [cart, setCart] = useState([]);
+	const [product, setProduct] = useState();
+	const dispatch = useDispatch();
 	const [counter, setCounter] = useState(1);
+	
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
 	if (counter <= 1) {
@@ -35,7 +37,7 @@ const CardDesc = ({ id, name }) => {
 			axios
 				.request(options)
 				.then(function (response) {
-					setProducts(response.data.product);
+					setProduct(response.data.product);
 				})
 				.catch(function (error) {
 					console.error(error);
@@ -45,34 +47,13 @@ const CardDesc = ({ id, name }) => {
 		}
 	}, []);
 
-	const addToCart = (e) => {
-		e.preventDefault();
-		const user = getUser();
-		const userID = user?.id;
-
-		const options = {
-			method: "POST",
-			url: "/api/cart/create",
-			withCredentials: true,
-			headers: {
-				"Content-Type": "application/json",
-			},
-			data: {
-				userID: { userID },
-				productId: {id},
-				quantity: { counter },
-			},
-		};
-
-		axios
-			.request(options)
-			.then(function (response) {
-				setCart(response.data);
-				console.log(response.data);
+	const addtoCartClick = () => {
+		dispatch(
+			addProduct({
+				product: product,
+				quantity: counter,
 			})
-			.catch(function (error) {
-				console.error(error);
-			});
+		);
 	};
 
 	return (
@@ -84,7 +65,7 @@ const CardDesc = ({ id, name }) => {
 					<Breadcrumb.Item active>{name}</Breadcrumb.Item>
 				</Breadcrumb>
 				<Row className="cardDecRow">
-					{products ? (
+					{product ? (
 						<>
 							<>
 								<Col className="CDCol-Carousel" xl={5}>
@@ -93,16 +74,11 @@ const CardDesc = ({ id, name }) => {
 										showArrows={false}
 										showIndicators={false}
 									>
-										{products.productImages.map(
-											(_, idx) => (
-												<div>
-													<img
-														src={_.image}
-														alt="..."
-													/>
-												</div>
-											)
-										)}
+										{product.productImages.map((_, idx) => (
+											<div>
+												<img src={_.image} alt="..." />
+											</div>
+										))}
 									</Carousel>
 								</Col>
 								<Col
@@ -110,7 +86,7 @@ const CardDesc = ({ id, name }) => {
 									xl={{ span: 5, offset: 2 }}
 								>
 									<h1 className="text-uppercase">
-										{products.name}
+										{product.name}
 									</h1>
 									<Stack gap={3}>
 										<div className="locaiton-text mt-3 ">
@@ -124,7 +100,7 @@ const CardDesc = ({ id, name }) => {
 											</div>
 										</div>
 										<div className="price text-secondary d-flex gap-3">
-											<h5>Rs. {products.price}</h5> +
+											<h5>Rs. {product.price}</h5> +
 											<h5>Rs. 150 shipping charge</h5>
 										</div>
 										<div className="small-desc text-muted">
@@ -132,7 +108,7 @@ const CardDesc = ({ id, name }) => {
 												className="d-inline-block text-truncate"
 												style={{ maxWidth: 300 }}
 											>
-												{products.description}
+												{product.description}
 											</span>
 										</div>
 										<div className="qty-change d-flex justify-content-center align-items-center">
@@ -148,7 +124,7 @@ const CardDesc = ({ id, name }) => {
 											<Button
 												variant="dark"
 												className="px-5 py-2"
-												onClick={addToCart}
+												onClick={addtoCartClick}
 											>
 												Add to Bag
 											</Button>
@@ -157,7 +133,7 @@ const CardDesc = ({ id, name }) => {
 												variant="light"
 												className="px-5 py-2 "
 											>
-												Rs. {products.price + 150} Buy
+												Rs. {product.price + 150} Buy
 												Now
 											</Button>
 										</div>
@@ -171,7 +147,7 @@ const CardDesc = ({ id, name }) => {
 													eventKey="Description"
 													title="Description"
 												>
-													{products.description}
+													{product.description}
 												</Tab>
 												<Tab
 													eventKey="Shipping"

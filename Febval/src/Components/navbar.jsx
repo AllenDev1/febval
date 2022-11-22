@@ -5,7 +5,7 @@ import {
 	Form,
 	Nav,
 	Navbar,
-	Offcanvas
+	Offcanvas,
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
@@ -21,12 +21,13 @@ import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
-
+import { useSelector } from "react-redux";
 
 const Navbars = () => {
-	
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
+
+	const cartProductsNumber = useSelector((state) => state.cart.products);
 
 	const [show, setShow] = useState(false);
 
@@ -44,11 +45,13 @@ const Navbars = () => {
 	}, []);
 
 	useEffect(() => {
-		getUser().then((user) => {
-			setUser(user);
-		}).catch((err) => {
-			setUser(null);
-		});
+		getUser()
+			.then((user) => {
+				setUser(user);
+			})
+			.catch((err) => {
+				setUser(null);
+			});
 	}, []);
 
 	return (
@@ -87,7 +90,12 @@ const Navbars = () => {
 
 											<Dropdown.Menu>
 												<Dropdown.Item href="/userdetails">
-													<Link to={`/userdetails/${user.googleId}`}> Profile</Link>
+													<Link
+														to={`/userdetails/${user.googleId}`}
+													>
+														{" "}
+														Profile
+													</Link>
 												</Dropdown.Item>
 												<Dropdown.Item href="/userdetails">
 													Orders
@@ -117,7 +125,9 @@ const Navbars = () => {
 												className="cartimg"
 											/>
 											<div className="num-0f-items-cart">
-												<span>2</span>{" "}
+												<span>
+													{cartProductsNumber.length}
+												</span>{" "}
 											</div>
 										</NavLink>
 									</>
