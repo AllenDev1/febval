@@ -7,7 +7,7 @@ import Description from "./Pages/Description";
 import Home from "./Pages/home";
 import ProductsByCategory from "./Pages/ProductsByCategory";
 import Events from "./Pages/Events";
-
+import Terms from "./Pages/Terms";
 const App = () => {
 	return (
 		<>
@@ -27,6 +27,7 @@ const App = () => {
 						path="/description/:id/:name"
 						element={<Description />}
 					/>
+					<Route path= "terms" element={<Terms />} />
 
 					<Route path="*" element={<p>Page not found</p>} />
 				</Routes>

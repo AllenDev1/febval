@@ -10,10 +10,11 @@ require("./passport");
 const ProductRoutes = require("./routes/products.routes");
 const CartRoutes = require("./routes/cart.routes");
 const OrderRoutes = require("./routes/order.routes");
-const UserRoutes = require("./routes/user.routes")
-const {sequelize} = require("./models/index");
+const UserRoutes = require("./routes/user.routes");
+const SearchRoute = require("./routes/search.routes");
+const { sequelize } = require("./models/index");
 const CarouselRoutes = require("./routes/carousel.routes");
-const salesBanner = require("./routes/salesBanner.routes")
+const salesBanner = require("./routes/salesBanner.routes");
 const NewsLetterRoutes = require("./routes/newsLetter.routes");
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
@@ -29,11 +30,11 @@ morganBody(app);
 sequelize.sync({});
 
 app.use(
-    cookieSession({
-        name: "session",
-        keys: [process.env.KEY],
-        maxAge: 24 * 60 * 60 * 1000,
-    })
+	cookieSession({
+		name: "session",
+		keys: [process.env.KEY],
+		maxAge: 24 * 60 * 60 * 1000,
+	})
 );
 
 app.use(passport.initialize());
@@ -53,13 +54,15 @@ app.use("/api/order", OrderRoutes);
 
 app.use("/api/carousel", CarouselRoutes);
 app.use("/api/newsletter", NewsLetterRoutes);
-app.use("/api/salesbanner", salesBanner)
+app.use("/api/salesbanner", salesBanner);
 
 app.use("/api/user", UserRoutes);
 
+app.use("/api/search", SearchRoute);
+
 app.listen(PORT, (err) => {
-    if (err) throw err;
-    console.log(`Listening to port ${PORT}`);
+	if (err) throw err;
+	console.log(`Listening to port ${PORT}`);
 });
 
 // 3 Routes
