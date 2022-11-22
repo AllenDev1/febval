@@ -36,10 +36,10 @@ const Footer = () => {
 						<div className="footer-sites">
 							<p>Find us on</p>
 							<div className="social-media">
-								<a href="https://www.facebook.com/profile.php?id=100085282614251" target="_blank">
+								<a href="https://www.facebook.com/profile.php?id=100085282614251/" target="_blank">
 									<img src={Facebook} alt=".." />
 								</a>
-								<a href="https://www.instagram.com/invites/contact/?i=1drk72b2e029d&utm_content=pbnjodb" target="_blank">
+								<a href="https://www.instagram.com/febvalgifts/" target="_blank">
 									<img src={Insta} alt=".." />
 								</a>
 								<a href="https://twitter.com/Febvalgifts?t=k97eoefKw4BQRMUHjRp_Jg&s=08" target="_blank">
@@ -56,10 +56,10 @@ const Footer = () => {
 								Copyright @2022 FEBVAL
 							</div>
 							<div className="footer-copyright-r">
-								<a href="/terms">
+								<a href="/terms" className="text-decoration-none">
 									<p>Terms of Use</p>
 								</a>
-								<a href="/terms">
+								<a href="/terms" className="text-decoration-none">
 									<p>Privacy Policy</p>
 								</a>
 							</div>

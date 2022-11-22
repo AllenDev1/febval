@@ -27,7 +27,7 @@ const App = () => {
 						path="/description/:id/:name"
 						element={<Description />}
 					/>
-					<Route path= "terms" element={<Terms />} />
+					<Route path="terms" element={<Terms />} />
 
 					<Route path="*" element={<p>Page not found</p>} />
 				</Routes>

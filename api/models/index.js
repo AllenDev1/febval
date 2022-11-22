@@ -78,14 +78,14 @@ Order.Product = Order.belongsToMany(Product, {
 Cart.Product = Cart.belongsToMany(Product, {
     through: ProductCart,
     foreignKey: "cartId",
-    otherKey: "productId",
+    sourceKey: "id",
     as: "product",
 });
 
 Product.Cart = Product.belongsToMany(Cart, {
     through: ProductCart,
     foreignKey: "productId",
-    otherKey: "cartId",
+    sourceKey: "id",
     as: "cart",
 });
 
