@@ -39,8 +39,8 @@ const Loginform = (props) => {
 
 					<p className="footer-text">
 						If you continue, you are accepting FEBVAL{" "}
-						<a href=""> Terms and Conditions </a>and{" "}
-						<a href=""> Privacy Policy.</a>
+						<a href="/terms"> Terms and Conditions </a>and{" "}
+						<a href="/terms"> Privacy Policy.</a>
 					</p>
 				</Modal.Footer>
 			</Modal>
