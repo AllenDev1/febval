@@ -22,6 +22,7 @@ import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Navbars = () => {
 	const [user, setUser] = useState(null);
@@ -54,6 +55,31 @@ const Navbars = () => {
 			});
 	}, []);
 
+	//search products by name
+	const [search, setSearch] = useState("");
+	const [searchResult, setSearchResult] = useState([]);
+
+	const handleSearch = (e) => {
+		e.preventDefault();
+		setSearch(e.target.value);
+	};
+
+	useEffect(() => {
+		const options = {
+			method: "GET",
+			url: "/api/search/products/" + search,
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setSearchResult(response.data.products);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	}, []);
+
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
@@ -83,7 +109,7 @@ const Navbars = () => {
 												id="dropdown-basic"
 											>
 												<img
-													src={user.image}
+													src={user?.image}
 													alt="..."
 												/>
 											</Dropdown.Toggle>
@@ -91,9 +117,8 @@ const Navbars = () => {
 											<Dropdown.Menu>
 												<Dropdown.Item href="/userdetails">
 													<Link
-														to={`/userdetails/${user.googleId}`}
+														to={`/userdetails/${user?.googleId}`}
 													>
-														{" "}
 														Profile
 													</Link>
 												</Dropdown.Item>
@@ -102,6 +127,8 @@ const Navbars = () => {
 												</Dropdown.Item>
 												<Dropdown.Item
 													onClick={() => {
+														localStorage.clear();
+														window.location.reload();
 														window.open(
 															"http://localhost:3001/auth/logout",
 															"_self"
@@ -127,7 +154,7 @@ const Navbars = () => {
 											<div className="num-0f-items-cart">
 												<span>
 													{cartProductsNumber.length}
-												</span>{" "}
+												</span>
 											</div>
 										</NavLink>
 									</>
