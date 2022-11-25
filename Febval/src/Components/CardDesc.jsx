@@ -16,17 +16,27 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import loc from "../Assets/location.svg";
 import "../Scss/description.scss";
 import { addProduct } from "../redux/cartRedux";
+import { getUser } from "../Auth/auth";
 
 const CardDesc = ({ id, name }) => {
 	const [product, setProduct] = useState();
 	const dispatch = useDispatch();
 	const [counter, setCounter] = useState(1);
-	
+	const [user, setUser] = useState(null);
+
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
 	if (counter <= 1) {
 		decrementCounter = () => setCounter(1);
 	}
+	const addtoCartClick = () => {
+		dispatch(
+			addProduct({
+				product: product,
+				quantity: counter,
+			})
+		);
+	};
 
 	useEffect(() => {
 		try {
@@ -47,14 +57,15 @@ const CardDesc = ({ id, name }) => {
 		}
 	}, []);
 
-	const addtoCartClick = () => {
-		dispatch(
-			addProduct({
-				product: product,
-				quantity: counter,
+	useEffect(() => {
+		getUser()
+			.then((user) => {
+				setUser(user);
 			})
-		);
-	};
+			.catch((err) => {
+				setUser(null);
+			});
+	}, []);
 
 	return (
 		<>
@@ -90,13 +101,13 @@ const CardDesc = ({ id, name }) => {
 									</h1>
 									<Stack gap={3}>
 										<div className="locaiton-text mt-3 ">
-											<div className="img-loc d-flex justify-content-between align-items-center align-self-center">
+											<div className="img-loc d-flex gap-3 align-items-center align-self-center">
 												<img src={loc} alt="..." />
 												<p className="m-0 p-0">
-													Bagmati, Kathmandu Metro 22
-													- Newroad Area, Newroad
+													{user
+														? user.address
+														: "Address"}
 												</p>
-												<a href="#">CHANGE</a>
 											</div>
 										</div>
 										<div className="price text-secondary d-flex gap-3">

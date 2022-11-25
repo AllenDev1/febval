@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Offcanvas } from "react-bootstrap";
+import { Offcanvas, Button } from "react-bootstrap";
 import Checkout from "../Assets/Checkout.svg";
-import Delete from "../Assets/delete.svg";
+import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
 import "../Scss/Cart.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { removeProduct } from "../redux/cartRedux";
+
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	return (
 		<>
@@ -68,16 +71,28 @@ const Cart = (props) => {
 													</p>
 												</div>
 											</div>
-											<img
-												src={Delete}
-												alt=""
-												className="del"
-											/>
+											<div
+												className="d-flex align-middle  justify-content-end"
+												style={{ cursor: "pointer" }}
+												onClick={() => {
+													dispatch(
+														// removeProduct(
+
+													);
+												}}
+											>
+												<img
+													src={Delete}
+													alt="..."
+													className="del float-right"
+												/>
+											</div>
+
 											<div className="cart-buttons">
 												<button>
 													<img
 														src={Checkout}
-														alt=""
+														alt="..."
 													/>
 													<p>Checkout</p>
 												</button>
@@ -115,6 +130,7 @@ const Cart = (props) => {
 						onClick={() => {
 							let path = `/`;
 							navigate(path);
+							window.location.reload(false);
 						}}
 					>
 						<img src={Shop} alt="" />
