@@ -3,6 +3,7 @@ const AdminJSExpress = require("@adminjs/express");
 const express = require("express");
 const session = require("express-session");
 const sqlite = require("better-sqlite3");
+
 const {
     sequelize,
     User,
@@ -35,19 +36,17 @@ AdminJS.registerAdapter({
     Database: AdminJSSequelize.Database,
 });
 
-const start = async () => {
-    const app = express();
-
+const start = async (app) => {
     const admin = new AdminJS({
-        resources: [
-            User,
-            Product,
-            Order,
-            ProductImages,
-            ProductOrder,
-            SalesBanner,
-            SalesCarousel,
-        ],
+        rootPath: "/api/admin",
+        logoutPath: "/api/admin/logout",
+        loginPath: "/api/admin/login",
+        databases: [sequelize],
+        branding: {
+            companyName: "Fevbal",
+            logo: "https://around.to/_next/image?url=%2Fassets%2Faround-logo.webp&w=128&q=75", // LOGO URL
+            withMadeWithLove: false,
+        },
     });
 
     const SqliteStore = require("better-sqlite3-session-store")(session);
@@ -75,19 +74,13 @@ const start = async () => {
             saveUninitialized: true,
             secret: "sessionsecret",
             cookie: {
-                httpOnly: process.env.NODE_ENV === "production",
-                secure: process.env.NODE_ENV === "production",
+                httpOnly: false, //process.env.NODE_ENV === "production", // Enable only if using SSL
+                secure: false, //process.env.NODE_ENV === "production", // Enable only if using SSL
             },
             name: "adminjs",
         }
     );
     app.use(admin.options.rootPath, adminRouter);
-
-    app.listen(PORT, () => {
-        console.log(
-            `AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`
-        );
-    });
 };
 
-start();
+module.exports = start;

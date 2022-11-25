@@ -16,6 +16,9 @@ const { sequelize } = require("./models/index");
 const CarouselRoutes = require("./routes/carousel.routes");
 const salesBanner = require("./routes/salesBanner.routes");
 const NewsLetterRoutes = require("./routes/newsLetter.routes");
+
+const startAdmin = require("./admin/app")
+
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
 
@@ -28,6 +31,9 @@ morganBody(app);
 
 // Sync models
 sequelize.sync({});
+
+// Admin
+startAdmin(app);
 
 app.use(
 	cookieSession({
