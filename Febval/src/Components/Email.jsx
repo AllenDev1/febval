@@ -30,6 +30,7 @@ const Email = () => {
 							<Form onSubmit={postEmail} className="email-fomr">
 								<input
 									type="email"
+									
 									placeholder="Your email address"
 									value={email}
 									onChange={(e) => {
