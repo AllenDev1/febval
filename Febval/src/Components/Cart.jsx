@@ -7,7 +7,7 @@ import Shop from "../Assets/Shopp.svg";
 import "../Scss/Cart.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { removeProduct } from "../redux/cartRedux";
-
+import GooglePayButton from "@google-pay/button-react";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
@@ -71,31 +71,19 @@ const Cart = (props) => {
 													</p>
 												</div>
 											</div>
-											<div
-												className="d-flex align-middle  justify-content-end"
-												style={{ cursor: "pointer" }}
-												onClick={() => {
-													dispatch(
-														// removeProduct(
-
-													);
-												}}
-											>
+											<div className="d-flex align-middle  justify-content-end">
 												<img
+													style={{
+														cursor: "pointer",
+													}}
+													onClick={() => {
+														dispatch();
+														// removeProduct(
+													}}
 													src={Delete}
 													alt="..."
 													className="del float-right"
 												/>
-											</div>
-
-											<div className="cart-buttons">
-												<button>
-													<img
-														src={Checkout}
-														alt="..."
-													/>
-													<p>Checkout</p>
-												</button>
 											</div>
 										</div>
 									);
@@ -125,6 +113,58 @@ const Cart = (props) => {
 						<img src={Checkout} alt="" />
 						<p>Checkout</p>
 					</button>
+					<GooglePayButton
+						className="w-100"
+						environment="TEST"
+						paymentRequest={{
+							apiVersion: 2,
+							apiVersionMinor: 0,
+							allowedPaymentMethods: [
+								{
+									type: "CARD",
+									parameters: {
+										allowedAuthMethods: [
+											"PAN_ONLY",
+											"CRYPTOGRAM_3DS",
+										],
+										allowedCardNetworks: [
+											"MASTERCARD",
+											"VISA",
+										],
+									},
+									tokenizationSpecification: {
+										type: "PAYMENT_GATEWAY",
+										parameters: {
+											gateway: "example",
+											gatewayMerchantId:
+												"exampleGatewayMerchantId",
+										},
+									},
+								},
+							],
+							merchantInfo: {
+								merchantId: "12345678901234567890",
+								merchantName: "Demo Merchant",
+							},
+							transactionInfo: {
+								totalPriceStatus: "FINAL",
+								totalPriceLabel: "Total",
+								totalPrice: "100.00",
+								currencyCode: "USD",
+								countryCode: "US",
+							},
+							callbackIntents: ['PAYMENT_AUTHORIZATION'],
+						}}
+						onLoadPaymentData={(paymentRequest) => {
+							console.log("load payment data", paymentRequest);
+						}}
+						onPaymentAuthorized={(paymentData) => {
+							console.log("Payment Authorised Success", paymentData);
+							return { transactionState: 'SUCCESS' };
+						}}
+						
+						
+					/>
 					<button
 						className="shop"
 						onClick={() => {
