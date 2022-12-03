@@ -12,16 +12,14 @@ const Events = () => {
 			<Container className="events pb-5">
 				<Row>
 					<Col>
-						<h1>Events</h1>
-					</Col>
-					<Col>
-						<h2>Contact us</h2>
-						<p>Phone: 0000000</p>
-						<p>Email: @hahah</p>
+						<h1>
+							<ins>Events</ins>
+						</h1>
 					</Col>
 				</Row>
 				<Gallery photos={photos} />
 			</Container>
+
 			<WhatsAppWidget
 				phoneNo="9779814767895"
 				position="right"
@@ -37,7 +35,7 @@ const Events = () => {
 				headerIcon="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Circle-icons-chat.svg/1024px-Circle-icons-chat.svg.png"
 				headerIconColor="pink"
 				headerTxtColor="black"
-				headerBgColor="tomato"
+				headerBgColor="#25D366"
 				headerTitle="Rupesh Khadka"
 				headerCaption="Online"
 				bodyBgColor="#bbb"
@@ -49,8 +47,8 @@ const Events = () => {
 					</>
 				}
 				footerBgColor="#999"
-				btnBgColor="yellow"
-				btnTxtColor="black"
+				btnBgColor="#25D366"
+				btnTxtColor="white"
 				btnTxt="Start Chat"
 			/>
 		</>
