@@ -75,8 +75,12 @@ const Cart = (props) => {
 														cursor: "pointer",
 													}}
 													onClick={() => {
-														dispatch();
-														// removeProduct(
+														dispatch(
+															removeProduct({
+																product:
+																	_.product,
+															})
+														);
 													}}
 													src={Delete}
 													alt="..."
