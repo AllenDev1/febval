@@ -44,7 +44,7 @@ const start = async (app) => {
 		databases: [sequelize],
 		branding: {
 			companyName: "Fevbal",
-			logo: "https://around.to/_next/image?url=%2Fassets%2Faround-logo.webp&w=128&q=75", // LOGO URL
+			logo: "http://localhost:3000/static/media/Company%20Name.81c55ab80bd146d76d6209e6dd19ec9d.svg", 
 			withMadeWithLove: false,
 		},
 	});
