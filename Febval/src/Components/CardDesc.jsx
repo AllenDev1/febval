@@ -96,9 +96,9 @@ const CardDesc = ({ id, name }) => {
 									className="CDCol-dec"
 									xl={{ span: 5, offset: 2 }}
 								>
-									<h1 className="text-uppercase">
+									<h5 className="text-uppercase">
 										{product.name}
-									</h1>
+									</h5>
 									<Stack gap={3}>
 										<div className="locaiton-text mt-3 ">
 											<div className="img-loc d-flex gap-3 align-items-center align-self-center">

@@ -5,6 +5,7 @@ import "../Scss/email.scss";
 
 const Email = () => {
 	const [email, setEmail] = useState();
+	const [error, setError] = useState(null);
 
 	const postEmail = () => {
 		const options = {
@@ -14,6 +15,10 @@ const Email = () => {
 			data: { email: email },
 		};
 	};
+
+	function isValidEmail(email) {
+		return /\S+@\S+\.\S+/.test(email);
+	}
 	return (
 		<>
 			<div className="bg-email">
@@ -33,6 +38,12 @@ const Email = () => {
 									placeholder="Your email address"
 									value={email}
 									onChange={(e) => {
+										if (!isValidEmail(e.target.value)) {
+											setError("Email is invalid");
+										} else {
+											setError(null);
+										}
+
 										setEmail(e.target.value);
 									}}
 									required
@@ -40,7 +51,10 @@ const Email = () => {
 								<Button type="submit">
 									Subscribe <img src={sendicon} alt="..." />
 								</Button>
+
 							</Form>
+							{error && console.log(error)}
+
 						</Col>
 					</Row>
 				</Container>
