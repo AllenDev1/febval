@@ -1,17 +1,22 @@
-import React,{useState} from "react";
-import "../Scss/Cart.scss";
-import Modal from "react-bootstrap/Modal";
-import Cross from "../Assets/cross.svg";
-import Delete from "../Assets/delete.svg";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Offcanvas, Button } from "react-bootstrap";
 import Checkout from "../Assets/Checkout.svg";
+import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
-import { Offcanvas } from "react-bootstrap";
+import "../Scss/Cart.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { removeProduct } from "../redux/cartRedux";
+import GooglePayButton from "@google-pay/button-react";
 
-const Cart = (  props ) => {
-	
+const Cart = (props) => {
+	const cartProducts = useSelector((state) => state.cart.products);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	return (
 		<>
-			<Offcanvas  placement="end" backdrop="static" {...props}>
+			<Offcanvas placement="end" backdrop="static" {...props}>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>
 						<h1>Cart</h1>
@@ -21,78 +26,179 @@ const Cart = (  props ) => {
 					<div className="cart-container">
 						<div className="cart-contents">
 							<div className="cart-item-container">
-								<div className="cart-items">
-									<div className="item-details">
-										<h2>Morgan</h2>
-										<img src="" alt="" />
-									</div>
-									<div className="calculation">
-										<div className="first-row">
-											<text>14th aug, 2022</text>
-											<text>Rs. 7500 + 200</text>
+								{cartProducts?.map((_, idx) => {
+									return (
+										<div className="cart-items" key={idx}>
+											<div className="item-details">
+												<h2>{_.product?.name}</h2>
+												<img
+													src={
+														_.product
+															.productImages[0]
+															.image
+													}
+													alt="..."
+												/>
+											</div>
+											<div className="calculation">
+												<div className="first-row float-right d-flex justify-content-between">
+													<p>
+														Quantity: {_.quantity}
+													</p>
+													<p className="text-right">
+														Rs. {_.product.price} *{" "}
+														{_.quantity}
+													</p>
+												</div>
+												<div className="second-row">
+													<p>Total:</p>
+													<p>
+														<s>
+															{" "}
+															Rs.{" "}
+															{_.product.price *
+																_.quantity}
+															/-{" "}
+														</s>
+													</p>
+													<p>
+														Rs.
+														{_.product.discount *
+															_.quantity}
+														/-
+													</p>
+												</div>
+											</div>
+											<div className="d-flex align-middle  justify-content-end">
+												<img
+													style={{
+														cursor: "pointer",
+													}}
+													onClick={() => {
+														dispatch(
+															removeProduct({
+																product:
+																	_.product,
+															})
+														);
+													}}
+													src={Delete}
+													alt="..."
+													className="del float-right"
+												/>
+											</div>
 										</div>
-										<div className="second-row">
-											<text>Total:</text>
-											<text>Rs. 7700 /-</text>
-											<text>Rs. 7100 /-</text>
-										</div>
-									</div>
-									<img src={Delete} alt="" className="del" />
-									<div className="cart-buttons">
-										<button>
-											<img src={Checkout} alt="" />
-											<text>Checkout</text>
-										</button>
-									</div>
-								</div>
-								<div className="cart-items">
-									<div className="item-details">
-										<h2>Morgan</h2>
-										<img src="" alt="" />
-									</div>
-									<div className="calculation">
-										<div className="first-row">
-											<text>14th aug, 2022</text>
-											<text>Rs. 7500 + 200</text>
-										</div>
-										<div className="second-row">
-											<text>Total:</text>
-											<text>Rs. 7700 /-</text>
-											<text>Rs. 7100 /-</text>
-										</div>
-									</div>
-									<img src={Delete} alt="" className="del" />
-									<div className="cart-buttons">
-										<button>
-											<img src={Checkout} alt="" />
-											<text>Checkout</text>
-										</button>
-									</div>
-								</div>
+									);
+								})}
 							</div>
 						</div>
-						
 					</div>
 				</Offcanvas.Body>
 				<div className="cart-footer">
-							<div className="item-total">
-								<text>2 items</text>
-								<text>Subtotal : Rs 14200/-</text>
-							</div>
-						
+					<div className="item-total d-block">
+						<div className="shipping-qnty d-flex justify-content-between">
+							<p>{cartProducts.length} items</p>
+							<p>
+								(Shipping charge) 150 +
+								{cartProducts.reduce(
+									(acc, curr) =>
+										acc +
+										curr.product.discount * curr.quantity,
+									0
+								)}
+							</p>
 						</div>
+
+						<p className="my-1 d-flex justify-content-end">
+							Subtotal : Rs.
+							{cartProducts.reduce(
+								(acc, curr) =>
+									acc + curr.product.discount * curr.quantity,
+								0
+							) + 150}
+							/-
+						</p>
+					</div>
+				</div>
 				<div className="button-footer">
-								<button>
-									<img src={Checkout} alt="" />
-									<text>Checkout</text>
-								</button>
-								<button className="shop">
-									<img src={Shop} alt="" />
-									<text>Continue Shopping</text>
-								</button>
-							</div>
+					<button>
+						<img src={Checkout} alt="" />
+						<p>Checkout</p>
+					</button>
+					<GooglePayButton
+						className="w-100"
+						environment="TEST"
+						paymentRequest={{
+							apiVersion: 2,
+							apiVersionMinor: 0,
+							allowedPaymentMethods: [
+								{
+									type: "CARD",
+									parameters: {
+										allowedAuthMethods: [
+											"PAN_ONLY",
+											"CRYPTOGRAM_3DS",
+										],
+										allowedCardNetworks: [
+											"MASTERCARD",
+											"VISA",
+										],
+									},
+									tokenizationSpecification: {
+										type: "PAYMENT_GATEWAY",
+										parameters: {
+											gateway: "example",
+											gatewayMerchantId:
+												"exampleGatewayMerchantId",
+										},
+									},
+								},
+							],
+							merchantInfo: {
+								merchantId: "12345678901234567890",
+								merchantName: "Demo Merchant",
+							},
+							transactionInfo: {
+								totalPriceStatus: "FINAL",
+								totalPriceLabel: "Total",
+								totalPrice: "100.00",
+								currencyCode: "INR",
+								countryCode: "IN",
+							},
+							shippingAddressRequired: true,
+							callbackIntents: [
+								"PAYMENT_AUTHORIZATION",
+								"SHIPPING_ADDRESS",
+							],
+						}}
+						onLoadPaymentData={(paymentRequest) => {
+							console.log("load payment data", paymentRequest);
+						}}
+						onPaymentAuthorized={(paymentData) => {
+							console.log(
+								"Payment Authorised Success",
+								paymentData
+							);
+							return { transactionState: "SUCCESS" };
+						}}
+						onPaymentDataChanged={(paymentData) => {
+							console.log("On Payment Data Changed", paymentData);
+							return {};
+						}}
+					/>
+					<button
+						className="shop"
+						onClick={() => {
+							let path = `/`;
+							navigate(path);
+							window.location.reload(false);
+						}}
+					>
+						<img src={Shop} alt="..." />
+						<p>Continue Shopping</p>
+					</button>
+				</div>
 			</Offcanvas>
-			
 		</>
 	);
 };

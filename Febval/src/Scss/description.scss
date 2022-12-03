@@ -19,5 +19,18 @@
 				}
 			}
 		}
+
+		.CDCol-dec{
+			.vstack{
+				.addtocart-buynow{
+					button{
+						border-radius: 200px;
+					}
+					button:hover{
+						opacity: 0.8;
+					}
+				}
+			}
+		}
 	}
 }

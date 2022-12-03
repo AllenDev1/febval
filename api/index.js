@@ -1,38 +1,40 @@
-// Load Environment Variables
 require("dotenv").config({ path: "secrets/.env" });
-
-// Imports
 const express = require("express");
-// const bodyParser = require("body-parser");
+
 const cors = require("cors");
-// const helmet = require("helmet");
-// const morgan = require("morgan");
-// const { expressjwt: jwt } = require("express-jwt");
-// const jwks = require("jwks-rsa");
-// const ProtectedRoutes = require("./routes/ProtectedRoutes");
-// const axios = require("axios");
-// const auth_middleware = require("./middlewares/oauth.js");
+
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const authRoutes = require("./routes/auth");
 require("./passport");
-const { Sequelize } = require("sequelize");
-require("./database/index.js");
+const ProductRoutes = require("./routes/products.routes");
+
+const OrderRoutes = require("./routes/order.routes");
+const UserRoutes = require("./routes/user.routes");
+const SearchRoute = require("./routes/search.routes");
+const { sequelize } = require("./models/index");
+const CarouselRoutes = require("./routes/carousel.routes");
+const salesBanner = require("./routes/salesBanner.routes");
+const NewsLetterRoutes = require("./routes/newsLetter.routes");
+
+const startAdmin = require("./admin/app")
 
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
 
-const db = new Sequelize({
-	dialect: 'mysql',
-	storage: "./mysql/MyDB.sql"
-  });
+// Import morgan-body
+const morganBody = require("morgan-body");
+const { ensureLoggedIn } = require("./middlewares/Auth");
 
-  try {
-	 db.authenticate();
-	console.log('Connection has been established successfully.');
-  } catch (error) {
-	console.error('Unable to connect to the database:', error);
-  }
+// use morgan-body
+morganBody(app);
+
+// Sync models
+sequelize.sync({});
+
+// Admin
+startAdmin(app);
+
 app.use(
 	cookieSession({
 		name: "session",
@@ -46,9 +48,30 @@ app.use(passport.session());
 
 app.use(cors({ origin: true, credentials: true }));
 
+// Public
 app.use("/auth", authRoutes);
+
+//product routes
+app.use(express.json());
+app.use("/api/products", ProductRoutes);
+
+
+app.use("/api/order", OrderRoutes);
+
+app.use("/api/carousel", CarouselRoutes);
+app.use("/api/newsletter", NewsLetterRoutes);
+app.use("/api/salesbanner", salesBanner);
+
+app.use("/api/user", UserRoutes);
+
+app.use("/api/search", SearchRoute);
 
 app.listen(PORT, (err) => {
 	if (err) throw err;
 	console.log(`Listening to port ${PORT}`);
 });
+
+// 3 Routes
+// 1. Admin (Is protected)
+// 2. User (Is protected)
+// 3. Public (Is not protected)

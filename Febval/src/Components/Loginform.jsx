@@ -1,10 +1,9 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import "../Scss/loginform.scss";
 import logo from "../Assets/Company Name.svg";
-import img from "../Assets/image 6.svg";
 import google from "../Assets/google.svg";
-import fb from "../Assets/fb.svg";
+import img from "../Assets/image 6.svg";
+import "../Scss/loginform.scss";
 
 const Loginform = (props) => {
 	return (
@@ -37,11 +36,11 @@ const Loginform = (props) => {
 					>
 						<img src={google} alt=".." /> Login with Google
 					</a>
-					
+
 					<p className="footer-text">
 						If you continue, you are accepting FEBVAL{" "}
-						<a href=""> Terms and Conditions </a>and{" "}
-						<a href=""> Privacy Policy.</a>
+						<a href="/terms"> Terms and Conditions </a>and{" "}
+						<a href="/terms"> Privacy Policy.</a>
 					</p>
 				</Modal.Footer>
 			</Modal>

@@ -15,26 +15,36 @@ const Footer = () => {
 						<div className="footer-logo">
 							<img src={Logo} />
 							<div className="tagline">
-								<text>The joy of giving</text>
+								<p>The joy of giving</p>
 							</div>
 						</div>
 						<div className="footer-links">
-							<text>Quick Links</text>
+							<p>Quick Links</p>
 							<div className="Quick-links">
-								<a href="#">Product</a>
-								<a href="#">How does it work? </a>
-								<a href="#">Pricing</a>
-								<a href="#">Support</a>
-								<a href="#">Report an issue</a>
-								<a href="#">Wishlist</a>
+								<a href="/">Product</a>
+								<a href="terms">How does it work? </a>
+
+								<a href="mailto:someone@example.com">Support</a>
+								<a href="mailto:someone@example.com">
+									Report an issue
+								</a>
+								<a href="mailto:someone@example.com">
+									Wishlist
+								</a>
 							</div>
 						</div>
 						<div className="footer-sites">
-							<text>Find us on</text>
+							<p>Find us on</p>
 							<div className="social-media">
-								<img src={Facebook} alt="" />
-								<img src={Insta} alt="" />
-								<img src={Twitter} alt="" />
+								<a href="https://www.facebook.com/profile.php?id=100085282614251/" target="_blank">
+									<img src={Facebook} alt=".." />
+								</a>
+								<a href="https://www.instagram.com/febvalgifts/" target="_blank">
+									<img src={Insta} alt=".." />
+								</a>
+								<a href="https://twitter.com/Febvalgifts?t=k97eoefKw4BQRMUHjRp_Jg&s=08" target="_blank">
+									<img src={Twitter} alt=".." />
+								</a>
 							</div>
 						</div>
 					</div>
@@ -46,8 +56,12 @@ const Footer = () => {
 								Copyright @2022 FEBVAL
 							</div>
 							<div className="footer-copyright-r">
-								<text>Terms of Use</text>
-								<text>Privacy Policy</text>
+								<a href="/terms" className="text-decoration-none">
+									<p>Terms of Use</p>
+								</a>
+								<a href="/terms" className="text-decoration-none">
+									<p>Privacy Policy</p>
+								</a>
 							</div>
 						</div>
 					</Container>

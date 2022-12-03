@@ -1,11 +1,26 @@
-import React, { useState } from "react";
-import "../Scss/personalinfo.scss";
-import { Container, Button, Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Order from "../Assets/order.svg";
+import { getUser } from "../Auth/auth";
+import "../Scss/personalinfo.scss";
 import Updatedetails from "./Updatedetails";
 
-const Personalinfo = ({ user }) => {
+const Personalinfo = () => {
+	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		getUser()
+			.then((user) => {
+				setUser(user);
+			})
+			.catch((err) => {
+				setUser(null);
+				navigate("/");
+			});
+	}, []);
 
 	return (
 		<>
@@ -16,22 +31,12 @@ const Personalinfo = ({ user }) => {
 						<div className="detail-container">
 							<div className="personal-details">
 								<div className="details">
-									<text>Personal Details</text>
+									<p>Personal Details</p>
 									<div className="personal-name">
-										{user.displayName}
+										{user ? user.firstName : "Loading..."}
 									</div>
 									<div className="personal-email">
-										{user.email}
-									</div>
-									<div className="personal-number">
-										9800000000
-									</div>
-									<div className="edit-det">
-										<Button
-											onClick={() => setModalShow(true)}
-										>
-											EDIT
-										</Button>
+										{user ? user.email : "Loading..."}
 									</div>
 								</div>
 							</div>
@@ -39,9 +44,11 @@ const Personalinfo = ({ user }) => {
 								<div className="address">
 									<h1>Address Book</h1>
 									<h2>
-										Adderss Book new road, makhan galli -
-										30, kathmandu
+										{user ? user.address : "Loading..."}
 									</h2>
+									<div className="personal-number text-white">
+										{user ? user.phone : "Loading..."}
+									</div>
 									<div className="edit-det">
 										<Button
 											onClick={() => setModalShow(true)}
@@ -85,6 +92,7 @@ const Personalinfo = ({ user }) => {
 			</Container>
 			<Updatedetails
 				show={modalShow}
+				user = {user}
 				onHide={() => setModalShow(false)}
 			/>
 		</>

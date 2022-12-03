@@ -7,21 +7,28 @@ import {
 	Navbar,
 	Offcanvas,
 } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
+import events from "../Assets/events.svg";
 import cake from "../Assets/gift shop/cakes.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import wed from "../Assets/gift shop/wed.svg";
 import signin from "../Assets/signin.svg";
+import { getUser } from "../Auth/auth";
 import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-const Navbars = ({ user }) => {
+const Navbars = () => {
+	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
+
+	const cartProductsNumber = useSelector((state) => state.cart.products);
 
 	const [show, setShow] = useState(false);
 
@@ -36,6 +43,41 @@ const Navbars = ({ user }) => {
 	useEffect(() => {
 		window.addEventListener("scroll", listenScrollEvent);
 		return () => window.removeEventListener("scroll", listenScrollEvent);
+	}, []);
+
+	useEffect(() => {
+		getUser()
+			.then((user) => {
+				setUser(user);
+			})
+			.catch((err) => {
+				setUser(null);
+			});
+	}, []);
+
+	//search products by name
+	const [search, setSearch] = useState("");
+	const [searchResult, setSearchResult] = useState([]);
+
+	const handleSearch = (e) => {
+		e.preventDefault();
+		setSearch(e.target.value);
+	};
+
+	useEffect(() => {
+		const options = {
+			method: "GET",
+			url: "/api/search/products/" + search,
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setSearchResult(response.data.products);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 	}, []);
 
 	return (
@@ -67,20 +109,26 @@ const Navbars = ({ user }) => {
 												id="dropdown-basic"
 											>
 												<img
-													src={user.photos[0].value}
+													src={user?.image}
 													alt="..."
 												/>
 											</Dropdown.Toggle>
 
 											<Dropdown.Menu>
 												<Dropdown.Item href="/userdetails">
-													Profile
+													<Link
+														to={`/userdetails/${user?.googleId}`}
+													>
+														Profile
+													</Link>
 												</Dropdown.Item>
 												<Dropdown.Item href="/userdetails">
 													Orders
 												</Dropdown.Item>
 												<Dropdown.Item
 													onClick={() => {
+														localStorage.clear();
+														window.location.reload();
 														window.open(
 															"http://localhost:3001/auth/logout",
 															"_self"
@@ -104,7 +152,9 @@ const Navbars = ({ user }) => {
 												className="cartimg"
 											/>
 											<div className="num-0f-items-cart">
-												<span>2</span>{" "}
+												<span>
+													{cartProductsNumber.length}
+												</span>
 											</div>
 										</NavLink>
 									</>
@@ -142,7 +192,7 @@ const Navbars = ({ user }) => {
 						<Offcanvas.Body className="menu-body">
 							<Nav className="me-auto buttom-nav" id="buttom-nav">
 								<NavLink
-									to="/navcategory"
+									to="/products/cake"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -151,7 +201,7 @@ const Navbars = ({ user }) => {
 									Cakes
 								</NavLink>
 								<NavLink
-									to="/wedding"
+									to="/products/wedding"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -160,7 +210,7 @@ const Navbars = ({ user }) => {
 									Wedding
 								</NavLink>
 								<NavLink
-									to="/him"
+									to="/products/him"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -169,7 +219,7 @@ const Navbars = ({ user }) => {
 									Him
 								</NavLink>
 								<NavLink
-									to="/her"
+									to="/products/her"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -178,7 +228,7 @@ const Navbars = ({ user }) => {
 									Her
 								</NavLink>
 								<NavLink
-									to="/kids"
+									to="/products/kids"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -187,7 +237,7 @@ const Navbars = ({ user }) => {
 									Kids
 								</NavLink>
 								<NavLink
-									to="/birthday"
+									to="/products/birthday"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
@@ -196,7 +246,16 @@ const Navbars = ({ user }) => {
 									Birthday
 								</NavLink>
 								<NavLink
-									to="/other"
+									to="/events"
+									className={({ isActive }) =>
+										isActive ? "active" : ""
+									}
+								>
+									<img src={events} alt="..." />
+									Events
+								</NavLink>
+								<NavLink
+									to="/products/other"
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}

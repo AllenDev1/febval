@@ -1,19 +1,42 @@
-import React from 'react'
-import Banner from "../Assets/Offer.svg"
-import { Container } from 'react-bootstrap'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import "../Scss/Sale.scss";
 
 const Sale = () => {
-  return (
-    <>
-    <Container>
+	const [sale, setSale] = useState([]);
 
-    <div className="banner-container">
-        <img src={Banner} alt="..."/>
-    </div>
-    </Container>
-    </>
-  )
-}
+	const fetchSale = () => {
+		const options = {
+			method: "GET",
+			url: "/api/salesbanner/",
+		};
 
-export default Sale
+		axios
+			.request(options)
+			.then(function (response) {
+				setSale(response.data.image);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	};
+
+	useEffect(() => {
+		fetchSale();
+	}, []);
+
+	return (
+		<>
+			<Container>
+				<div className="banner-container">
+					{sale.slice(0, 1).map((_, idx) => (
+						<img src={_.image} alt="..." key={idx} />
+					))}
+				</div>
+			</Container>
+		</>
+	);
+};
+
+export default Sale;
