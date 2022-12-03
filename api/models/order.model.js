@@ -8,26 +8,26 @@ const User = require("./user.model");
 
 // Order model
 const Order = sequelize.define(
-    "Order",
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        total: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        status: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
-    },
-    {
-        timestamps: true,
-    }
+	"Order",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+	
+		total: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
+		status: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+		},
+	},
+	{
+		timestamps: true,
+	}
 );
-
 
 module.exports = Order;
