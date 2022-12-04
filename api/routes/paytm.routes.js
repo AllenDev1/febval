@@ -66,10 +66,10 @@ route.post("/callback", (req, res) => {
 			/* body parameters */
 			paytmParams.body = {
 				/* Find your MID in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
-				mid: "YOUR_MID_HERE",
+				mid: fields.MID,
 
 				/* Enter your order id which needs to be check status for */
-				orderId: "YOUR_ORDER_ID",
+				orderId: fields.ORDERID,
 			};
 
 			/**
@@ -78,7 +78,7 @@ route.post("/callback", (req, res) => {
 			 */
 			PaytmChecksum.generateSignature(
 				JSON.stringify(paytmParams.body),
-				"YOUR_MERCHANT_KEY"
+				process.env.MERCHANT_KEY
 			).then(function (checksum) {
 				/* head parameters */
 				paytmParams.head = {
@@ -113,7 +113,7 @@ route.post("/callback", (req, res) => {
 					});
 
 					post_res.on("end", function () {
-						console.log("Response: ", response);
+						res.json(JSON.parse(response));
 					});
 				});
 
