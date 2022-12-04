@@ -21,7 +21,7 @@ const Events = () => {
 			</Container>
 
 			<WhatsAppWidget
-				phoneNo="9779814767895"
+				phoneNo="9779863684870"
 				position="right"
 				widgetWidth="300px"
 				widgetWidthMobile="260px"
@@ -32,7 +32,7 @@ const Events = () => {
 				iconSize="50"
 				iconColor="white"
 				iconBgColor="#25D366"
-				headerIcon="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Circle-icons-chat.svg/1024px-Circle-icons-chat.svg.png"
+				headerIcon="https://cdn-icons-png.flaticon.com/512/8377/8377198.png"
 				headerIconColor="#25D366"
 				headerTxtColor="black"
 				headerBgColor="#25D366"

@@ -1,0 +1,8 @@
+.pagenotfoundContainer {
+	height: 100vh;
+	background-image: url(https://freefrontend.com/assets/img/html-css-404-page-templates/HTML-404-Page-with-SVG.gif);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+    background-size: cover;
+}

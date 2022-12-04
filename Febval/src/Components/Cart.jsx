@@ -46,8 +46,8 @@ const Cart = (props) => {
 														Quantity: {_.quantity}
 													</p>
 													<p className="text-right">
-														Rs. {_.product.price} +
-														150(shipping)
+														Rs. {_.product.price} *{" "}
+														{_.quantity}
 													</p>
 												</div>
 												<div className="second-row">
@@ -56,17 +56,15 @@ const Cart = (props) => {
 														<s>
 															{" "}
 															Rs.{" "}
-															{(_.product.price +
-																150) *
-																_.quantity}{" "}
+															{_.product.price *
+																_.quantity}
 															/-{" "}
 														</s>
 													</p>
 													<p>
-														Rs.{" "}
-														{(_.product.discount +
-															150) *
-															_.quantity}{" "}
+														Rs.
+														{_.product.discount *
+															_.quantity}
 														/-
 													</p>
 												</div>
@@ -77,8 +75,12 @@ const Cart = (props) => {
 														cursor: "pointer",
 													}}
 													onClick={() => {
-														dispatch();
-														// removeProduct(
+														dispatch(
+															removeProduct({
+																product:
+																	_.product,
+															})
+														);
 													}}
 													src={Delete}
 													alt="..."
@@ -93,17 +95,27 @@ const Cart = (props) => {
 					</div>
 				</Offcanvas.Body>
 				<div className="cart-footer">
-					<div className="item-total">
-						<p>{cartProducts.length} items</p>
-						<p>
+					<div className="item-total d-block">
+						<div className="shipping-qnty d-flex justify-content-between">
+							<p>{cartProducts.length} items</p>
+							<p>
+								(Shipping charge) 150 +
+								{cartProducts.reduce(
+									(acc, curr) =>
+										acc +
+										curr.product.discount * curr.quantity,
+									0
+								)}
+							</p>
+						</div>
+
+						<p className="my-1 d-flex justify-content-end">
 							Subtotal : Rs.
 							{cartProducts.reduce(
 								(acc, curr) =>
-									acc +
-									(curr.product.discount + 150) *
-										curr.quantity,
+									acc + curr.product.discount * curr.quantity,
 								0
-							)}
+							) + 150}
 							/-
 						</p>
 					</div>
@@ -150,20 +162,29 @@ const Cart = (props) => {
 								totalPriceStatus: "FINAL",
 								totalPriceLabel: "Total",
 								totalPrice: "100.00",
-								currencyCode: "USD",
-								countryCode: "US",
+								currencyCode: "INR",
+								countryCode: "IN",
 							},
-							callbackIntents: ['PAYMENT_AUTHORIZATION'],
+							shippingAddressRequired: true,
+							callbackIntents: [
+								"PAYMENT_AUTHORIZATION",
+								"SHIPPING_ADDRESS",
+							],
 						}}
 						onLoadPaymentData={(paymentRequest) => {
 							console.log("load payment data", paymentRequest);
 						}}
 						onPaymentAuthorized={(paymentData) => {
-							console.log("Payment Authorised Success", paymentData);
-							return { transactionState: 'SUCCESS' };
+							console.log(
+								"Payment Authorised Success",
+								paymentData
+							);
+							return { transactionState: "SUCCESS" };
 						}}
-						
-						
+						onPaymentDataChanged={(paymentData) => {
+							console.log("On Payment Data Changed", paymentData);
+							return {};
+						}}
 					/>
 					<button
 						className="shop"
@@ -173,7 +194,7 @@ const Cart = (props) => {
 							window.location.reload(false);
 						}}
 					>
-						<img src={Shop} alt="" />
+						<img src={Shop} alt="..." />
 						<p>Continue Shopping</p>
 					</button>
 				</div>
