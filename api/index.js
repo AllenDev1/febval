@@ -16,8 +16,9 @@ const { sequelize } = require("./models/index");
 const CarouselRoutes = require("./routes/carousel.routes");
 const salesBanner = require("./routes/salesBanner.routes");
 const NewsLetterRoutes = require("./routes/newsLetter.routes");
-
-const startAdmin = require("./admin/app")
+const CashOnDeliveryRoutes = require("./routes/cashondelivery.routes");
+const StripeChekcout = require("./routes/stripe.routes");
+const startAdmin = require("./admin/app");
 
 const app = express();
 const PORT = process.env.EXPRESS_PORT | 3001;
@@ -55,7 +56,6 @@ app.use("/auth", authRoutes);
 app.use(express.json());
 app.use("/api/products", ProductRoutes);
 
-
 app.use("/api/order", OrderRoutes);
 
 app.use("/api/carousel", CarouselRoutes);
@@ -65,6 +65,9 @@ app.use("/api/salesbanner", salesBanner);
 app.use("/api/user", UserRoutes);
 
 app.use("/api/search", SearchRoute);
+
+app.use("/api/checkout", StripeChekcout);
+app.use("/api/checkout", CashOnDeliveryRoutes);
 
 app.listen(PORT, (err) => {
 	if (err) throw err;

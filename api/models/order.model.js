@@ -15,7 +15,11 @@ const Order = sequelize.define(
 			autoIncrement: true,
 			primaryKey: true,
 		},
-	
+		address: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+
 		total: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
