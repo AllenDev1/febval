@@ -118,12 +118,18 @@ const Navbars = () => {
 												<Dropdown.Item href="/userdetails">
 													<Link
 														to={`/userdetails/${user?.googleId}`}
+														className="text-decoration-none"
 													>
 														Profile
 													</Link>
 												</Dropdown.Item>
 												<Dropdown.Item href="/userdetails">
-													Orders
+													<Link
+														to={`/userdetails/${user?.googleId}`}
+														className="text-decoration-none"
+													>
+														Orders
+													</Link>
 												</Dropdown.Item>
 												<Dropdown.Item
 													onClick={() => {
