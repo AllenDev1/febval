@@ -131,7 +131,7 @@ const CardDesc = ({ id, name }) => {
 												onClickFunc={decrementCounter}
 											/>
 										</div>
-										<div className="addtocart-buynow mt-5 d-flex justify-content-center align-items-center flex-wrap gap-4">
+										<div className="addtocart-buynow mt-2 d-flex justify-content-center align-items-center flex-wrap gap-4">
 											<Button
 												variant="dark"
 												className="px-5 py-2"
@@ -140,13 +140,14 @@ const CardDesc = ({ id, name }) => {
 												Add to Bag
 											</Button>
 
-											<Button
+											{/* <Button
+
 												variant="light"
 												className="px-5 py-2 "
 											>
 												Rs. {product.price + 150} Buy
 												Now
-											</Button>
+											</Button> */}
 										</div>
 										<div className="fulldesc-shipping mt-5">
 											<Tabs

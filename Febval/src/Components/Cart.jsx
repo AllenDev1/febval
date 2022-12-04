@@ -1,18 +1,100 @@
-import React, { useEffect } from "react";
+import GooglePayButton from "@google-pay/button-react";
+import axios from "axios";
+import React from "react";
+import { Offcanvas } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Offcanvas, Button } from "react-bootstrap";
+import StripeCheckout from "react-stripe-checkout";
 import Checkout from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
-import "../Scss/Cart.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { removeProduct } from "../redux/cartRedux";
-import GooglePayButton from "@google-pay/button-react";
+import "../Scss/Cart.scss";
+
+const STRIPE_KEY =
+	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const handleToken = (token, address) => {
+		axios
+
+			.post("/api/stripe/checkout", { token, cartProducts })
+			.then((res) => {
+				console.log(res);
+				alert("Payment Successful");
+			})
+			.catch((err) => {
+				console.log(err);
+				alert("Payment Failed");
+			});
+	};
+
+	function isDate(val) {
+		// Cross realm comptatible
+		return Object.prototype.toString.call(val) === "[object Date]";
+	}
+
+	function isObj(val) {
+		return typeof val === "object";
+	}
+
+	function stringifyValue(val) {
+		if (isObj(val) && !isDate(val)) {
+			return JSON.stringify(val);
+		} else {
+			return val;
+		}
+	}
+
+	function buildForm({ action, params }) {
+		const form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", action);
+
+		Object.keys(params).forEach((key) => {
+			const input = document.createElement("input");
+			input.setAttribute("type", "hidden");
+			input.setAttribute("name", key);
+			input.setAttribute("value", stringifyValue(params[key]));
+			form.appendChild(input);
+		});
+
+		return form;
+	}
+
+	function post(details) {
+		const form = buildForm(details);
+		document.body.appendChild(form);
+		form.submit();
+		form.remove();
+	}
+
+	const getPaytmInfo = () => {
+		return fetch("/api/paytm/payment", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({ cartProducts }),
+		})
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+	};
+
+	const makePayment = () => {
+		getPaytmInfo().then((response) => {
+			let information = {
+				action: "https://securegw-stage.paytm.in/order/process",
+				params: response,
+			};
+			post(information);
+		});
+	};
 
 	return (
 		<>
@@ -123,8 +205,28 @@ const Cart = (props) => {
 				<div className="button-footer">
 					<button>
 						<img src={Checkout} alt="" />
-						<p>Checkout</p>
+						<p>Cash on Delivery</p>
 					</button>
+					<button onClick={makePayment}>
+						<img src={Checkout} alt="" />
+						<p>Buy with Paytm</p>
+					</button>
+					<StripeCheckout
+						stripeKey={STRIPE_KEY}
+						token={handleToken}
+						currency="INR"
+						billingAddress
+						shippingAddress
+						amount={
+							(cartProducts.reduce(
+								(acc, curr) =>
+									acc + curr.product.discount * curr.quantity,
+								0
+							) +
+								150) *
+							100
+						}
+					/>
 					<GooglePayButton
 						className="w-100"
 						environment="TEST"
