@@ -27,17 +27,19 @@
     "express-oauth2-jwt-bearer": "^1.1.0",
     "express-openid-connect": "^2.9.0",
     "express-session": "^1.17.3",
+    "formidable": "^2.1.1",
     "helmet": "^6.0.0",
     "jwks-rsa": "^2.1.5",
     "morgan": "^1.10.0",
     "morgan-body": "^2.6.8",
     "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20",
     "passport": "^0.5.3",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "sequelize": "^6.25.5",
     "sqlite3": "^5.1.2",
-    "tslib": "^2.4.1"
+    "stripe": "^11.1.0",
+    "tslib": "^2.4.1",
+    "uuid": "^9.0.0"
   }
 }
