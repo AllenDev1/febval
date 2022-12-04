@@ -56,29 +56,29 @@ const Navbars = () => {
 	}, []);
 
 	//search products by name
-	// const [search, setSearch] = useState("");
-	// const [searchResult, setSearchResult] = useState([]);
+	const [search, setSearch] = useState("");
+	const [searchResult, setSearchResult] = useState([]);
 
-	// const handleSearch = (e) => {
-	// 	e.preventDefault();
-	// 	setSearch(e.target.value);
-	// };
+	const handleSearch = (e) => {
+		e.preventDefault();
+		setSearch(e.target.value);
+	};
 
-	// useEffect(() => {
-	// 	const options = {
-	// 		method: "GET",
-	// 		url: "/api/search/products/" + search,
-	// 	};
+	useEffect(() => {
+		const options = {
+			method: "GET",
+			url: "/api/search/products/" + search,
+		};
 
-	// 	axios
-	// 		.request(options)
-	// 		.then(function (response) {
-	// 			setSearchResult(response.data.products);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// }, []);
+		axios
+			.request(options)
+			.then(function (response) {
+				setSearchResult(response.data.products);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	}, []);
 
 	return (
 		<>

@@ -8,14 +8,10 @@ const Updatedetails = (props) => {
 	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
 	const user = props.user;
-	const [show, setShow] = useState(false);
-
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
 
 	const updateInfo = (e) => {
 		e.preventDefault();
-
+		
 		const options = {
 			method: "POST",
 			url: "/api/user/info",
@@ -101,7 +97,6 @@ const Updatedetails = (props) => {
 									variant="light"
 									type="submit"
 									onClick={() => {
-										handleShow();
 										window.location.reload();
 									}}
 								>
@@ -111,11 +106,6 @@ const Updatedetails = (props) => {
 						</div>
 					</div>
 				</div>
-			</Modal>
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Your informations have updated. </Modal.Title>
-				</Modal.Header>
 			</Modal>
 		</>
 	);
