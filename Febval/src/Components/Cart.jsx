@@ -214,7 +214,7 @@ const Cart = (props) => {
 					>
 						<img
 							src="https://cdn.icon-icons.com/icons2/730/PNG/512/paytm_icon-icons.com_62778.png"
-							alt=""
+							alt="..."
 						/>
 						<p className="text-dark">
 							Buy with Paytm (comming soon)
