@@ -11,6 +11,7 @@ import Shop from "../Assets/Shopp.svg";
 import { removeProduct } from "../redux/cartRedux";
 import "../Scss/Cart.scss";
 
+
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
@@ -207,11 +208,20 @@ const Cart = (props) => {
 						<img src={Checkout} alt="" />
 						<p>Cash on Delivery</p>
 					</button>
-					<button onClick={makePayment}>
-						<img src={Checkout} alt="" />
-						<p>Buy with Paytm</p>
+					<button
+						onClick={makePayment}
+						className="comming soon bg-white "
+					>
+						<img
+							src="https://cdn.icon-icons.com/icons2/730/PNG/512/paytm_icon-icons.com_62778.png"
+							alt=""
+						/>
+						<p className="text-dark">
+							Buy with Paytm (comming soon)
+						</p>
 					</button>
-					<StripeCheckout
+					{/* <StripeCheckout
+						className="comming soon"
 						stripeKey={STRIPE_KEY}
 						token={handleToken}
 						currency="INR"
@@ -226,9 +236,9 @@ const Cart = (props) => {
 								150) *
 							100
 						}
-					/>
-					<GooglePayButton
-						className="w-100"
+					/> */}
+					{/* <GooglePayButton
+						className="w-100 comming soon"
 						environment="TEST"
 						paymentRequest={{
 							apiVersion: 2,
@@ -287,7 +297,7 @@ const Cart = (props) => {
 							console.log("On Payment Data Changed", paymentData);
 							return {};
 						}}
-					/>
+					/> */}
 					<button
 						className="shop"
 						onClick={() => {
