@@ -9,6 +9,9 @@ import ProductsByCategory from "./Pages/ProductsByCategory";
 import Events from "./Pages/Events";
 import Terms from "./Pages/Terms";
 import Pagenotfound from "./Pages/Pagenotfound";
+import SearchedProducts from "./Pages/SearchedProducts";
+
+
 const App = () => {
 	return (
 		<>
@@ -28,6 +31,8 @@ const App = () => {
 						path="/description/:id/:name"
 						element={<Description />}
 					/>
+					<Route path="search/:name" element={<SearchedProducts />} />
+
 					<Route path="terms" element={<Terms />} />
 
 					<Route path="*" element={<Pagenotfound />} />

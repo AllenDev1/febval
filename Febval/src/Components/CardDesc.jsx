@@ -23,7 +23,7 @@ const CardDesc = ({ id, name }) => {
 	const dispatch = useDispatch();
 	const [counter, setCounter] = useState(1);
 	const [user, setUser] = useState(null);
-	console.log(counter)
+	
 
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
@@ -87,8 +87,8 @@ const CardDesc = ({ id, name }) => {
 										showIndicators={false}
 									>
 										{product.productImages.map((_, idx) => (
-											<div>
-												<img src={_.image} alt="..." />
+											<div className="product-image-div">
+												<img src={_.image} alt="..." className="product-image" />
 											</div>
 										))}
 									</Carousel>
