@@ -18,7 +18,6 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 		setNext(next + productsPerRow);
 	};
 
-
 	useEffect(() => {
 		let url = "/api/products";
 
@@ -62,10 +61,12 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 		}
 	}, [sort, products]);
 
+	const apple = true;
+
 	return (
 		<>
 			<Container className="card-container">
-				<Row xs={1} md={4}  className="g-4 cards-row">
+				<Row xs={1} md={4} className="g-4 cards-row">
 					{feature ? (
 						<>
 							{products.slice(0, 8).map((_, idx) => (

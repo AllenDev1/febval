@@ -113,14 +113,14 @@ const Cart = (props) => {
 										<div className="cart-items" key={idx}>
 											<div className="item-details">
 												<h2>{_.product?.name}</h2>
-												<img
+												{/* <img
 													src={
 														_.product
 															.productImages[0]
 															.image
 													}
 													alt="..."
-												/>
+												/> */}
 											</div>
 											<div className="calculation">
 												<div className="first-row float-right d-flex justify-content-between">
