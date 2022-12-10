@@ -36,7 +36,6 @@
     "passport": "^0.5.3",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
-    "react-stripe-checkout": "^2.6.3",
     "sequelize": "^6.25.5",
     "sqlite3": "^5.1.2",
     "stripe": "^11.1.0",

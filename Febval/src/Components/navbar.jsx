@@ -23,6 +23,8 @@ import Cart from "./Cart";
 import Loginform from "./Loginform";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
+import profileLogo from "../Assets/gift shop 2/Vector.svg";
 
 const Navbars = () => {
 	const [user, setUser] = useState(null);
@@ -114,16 +116,18 @@ const Navbars = () => {
 												/>
 											</Dropdown.Toggle>
 
-											<Dropdown.Menu>
+											<Dropdown.Menu className="dropdown">
 												<Dropdown.Item href="/userdetails">
 													<Link
 														to={`/userdetails/${user?.googleId}`}
+														className="text-decoration-none text-dark"
 													>
+														<img
+															src={profileLogo}
+															alt=""
+														/>
 														Profile
 													</Link>
-												</Dropdown.Item>
-												<Dropdown.Item href="/userdetails">
-													Orders
 												</Dropdown.Item>
 												<Dropdown.Item
 													onClick={() => {
@@ -135,6 +139,10 @@ const Navbars = () => {
 														);
 													}}
 												>
+													<img
+														src={logoutlogo}
+														alt=""
+													/>
 													Logout
 												</Dropdown.Item>
 											</Dropdown.Menu>

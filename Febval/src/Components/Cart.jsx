@@ -11,6 +11,7 @@ import Shop from "../Assets/Shopp.svg";
 import { removeProduct } from "../redux/cartRedux";
 import "../Scss/Cart.scss";
 
+
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
