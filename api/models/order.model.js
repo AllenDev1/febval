@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database/sequelize");
-
+const Product = require("./product.model");
+const User = require("./user.model");
 
 // Order ==> Product (One to Many)
 // Product ==> Order (One to Many)
@@ -14,14 +15,15 @@ const Order = sequelize.define(
 			autoIncrement: true,
 			primaryKey: true,
 		},
-		orderComplete: {
+	
+		total: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
+		status: {
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 		},
-		deliveryType: {
-			type: DataTypes.STRING,
-			allowNull: false
-		}
 	},
 	{
 		timestamps: true,
