@@ -7,7 +7,7 @@ import {
 	Navbar,
 	Offcanvas,
 } from "react-bootstrap";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
 import events from "../Assets/events.svg";
@@ -23,9 +23,6 @@ import Cart from "./Cart";
 import Loginform from "./Loginform";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
-import profileLogo from "../Assets/gift shop 2/Vector.svg";
-import SearchedProducts from "../Pages/SearchedProducts";
 
 const Navbars = () => {
 	const [user, setUser] = useState(null);
@@ -59,27 +56,29 @@ const Navbars = () => {
 	}, []);
 
 	//search products by name
-	const [searchprams, setSearchprams] = useState("");
-	const [searchedProducts, setSearchedProducts] = useState([]);
-	const navigate = useNavigate();
+	// const [search, setSearch] = useState("");
+	// const [searchResult, setSearchResult] = useState([]);
 
-	const handleSearch = (e) => {
-		e.preventDefault();
-		const options = {
-			method: "GET",
-			url: "/api/search/products/" + searchprams,
-		};
+	// const handleSearch = (e) => {
+	// 	e.preventDefault();
+	// 	setSearch(e.target.value);
+	// };
 
-		axios
-			.request(options)
-			.then(function (response) {
-				setSearchedProducts(response.data);
-				navigate("/search/" + searchprams);
-			})
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
+	// useEffect(() => {
+	// 	const options = {
+	// 		method: "GET",
+	// 		url: "/api/search/products/" + search,
+	// 	};
+
+	// 	axios
+	// 		.request(options)
+	// 		.then(function (response) {
+	// 			setSearchResult(response.data.products);
+	// 		})
+	// 		.catch(function (error) {
+	// 			console.error(error);
+	// 		});
+	// }, []);
 
 	return (
 		<>
@@ -90,19 +89,8 @@ const Navbars = () => {
 							<img src={logo} alt=".." />
 						</Navbar.Brand>
 						<div className="search-bar">
-							<Form
-								className="search-from"
-								onSubmit={handleSearch}
-							>
-								{/* //set searchprams  */}
-								<input
-									type="text"
-									placeholder="Search"
-									onChange={(e) => {
-										setSearchprams(e.target.value);
-									}}
-									value={searchprams}
-								/>
+							<Form className="search-from">
+								<input placeholder="Search Gifts..."></input>
 							</Form>
 						</div>
 						<div className="searchbarAndLogo">
@@ -126,18 +114,16 @@ const Navbars = () => {
 												/>
 											</Dropdown.Toggle>
 
-											<Dropdown.Menu className="dropdown">
+											<Dropdown.Menu>
 												<Dropdown.Item href="/userdetails">
 													<Link
 														to={`/userdetails/${user?.googleId}`}
-														className="text-decoration-none text-dark"
 													>
-														<img
-															src={profileLogo}
-															alt=""
-														/>
 														Profile
 													</Link>
+												</Dropdown.Item>
+												<Dropdown.Item href="/userdetails">
+													Orders
 												</Dropdown.Item>
 												<Dropdown.Item
 													onClick={() => {
@@ -149,10 +135,6 @@ const Navbars = () => {
 														);
 													}}
 												>
-													<img
-														src={logoutlogo}
-														alt=""
-													/>
 													Logout
 												</Dropdown.Item>
 											</Dropdown.Menu>
