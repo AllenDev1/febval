@@ -11,12 +11,12 @@ import Shop from "../Assets/Shopp.svg";
 import { removeProduct } from "../redux/cartRedux";
 import "../Scss/Cart.scss";
 
+
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
-	
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -34,65 +34,66 @@ const Cart = (props) => {
 			});
 	};
 
-	// function isDate(val) {
-	// 	// Cross realm comptatible
-	// 	return Object.prototype.toString.call(val) === "[object Date]";
-	// }
+	function isDate(val) {
+		// Cross realm comptatible
+		return Object.prototype.toString.call(val) === "[object Date]";
+	}
 
-	// function isObj(val) {
-	// 	return typeof val === "object";
-	// }
+	function isObj(val) {
+		return typeof val === "object";
+	}
 
-	// function stringifyValue(val) {
-	// 	if (isObj(val) && !isDate(val)) {
-	// 		return JSON.stringify(val);
-	// 	} else {
-	// 		return val;
-	// 	}
-	// }
-
-	// function buildForm({ action, params }) {
-	// 	const form = document.createElement("form");
-	// 	form.setAttribute("method", "post");
-	// 	form.setAttribute("action", action);
-
-	// 	Object.keys(params).forEach((key) => {
-	// 		const input = document.createElement("input");
-	// 		input.setAttribute("type", "hidden");
-	// 		input.setAttribute("name", key);
-	// 		input.setAttribute("value", stringifyValue(params[key]));
-	// 		form.appendChild(input);
-	// 	});
-
-	// 	return form;
-	// }
-
-	// function post(details) {
-	// 	const form = buildForm(details);
-	// 	document.body.appendChild(form);
-	// 	form.submit();
-	// 	form.remove();
-	// }
-
-	const getPaytmInfo = async () => {
-		try {
-			const res = await fetch("/api/paytm/payment", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: { cartProducts },
-			});
-			return await res.json();
-		} catch (err) {
-			return console.log(err);
+	function stringifyValue(val) {
+		if (isObj(val) && !isDate(val)) {
+			return JSON.stringify(val);
+		} else {
+			return val;
 		}
+	}
+
+	function buildForm({ action, params }) {
+		const form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", action);
+
+		Object.keys(params).forEach((key) => {
+			const input = document.createElement("input");
+			input.setAttribute("type", "hidden");
+			input.setAttribute("name", key);
+			input.setAttribute("value", stringifyValue(params[key]));
+			form.appendChild(input);
+		});
+
+		return form;
+	}
+
+	function post(details) {
+		const form = buildForm(details);
+		document.body.appendChild(form);
+		form.submit();
+		form.remove();
+	}
+
+	const getPaytmInfo = () => {
+		return fetch("/api/paytm/payment", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({ cartProducts }),
+		})
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
 	};
 
 	const makePayment = () => {
-		getPaytmInfo({ cartProducts }).then((response) => {
-			console.log(response);
+		getPaytmInfo().then((response) => {
+			let information = {
+				action: "https://securegw-stage.paytm.in/order/process",
+				params: response,
+			};
+			post(information);
 		});
 	};
 
