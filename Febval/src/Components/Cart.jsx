@@ -16,6 +16,7 @@ const STRIPE_KEY =
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
+	
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -33,66 +34,65 @@ const Cart = (props) => {
 			});
 	};
 
-	function isDate(val) {
-		// Cross realm comptatible
-		return Object.prototype.toString.call(val) === "[object Date]";
-	}
+	// function isDate(val) {
+	// 	// Cross realm comptatible
+	// 	return Object.prototype.toString.call(val) === "[object Date]";
+	// }
 
-	function isObj(val) {
-		return typeof val === "object";
-	}
+	// function isObj(val) {
+	// 	return typeof val === "object";
+	// }
 
-	function stringifyValue(val) {
-		if (isObj(val) && !isDate(val)) {
-			return JSON.stringify(val);
-		} else {
-			return val;
+	// function stringifyValue(val) {
+	// 	if (isObj(val) && !isDate(val)) {
+	// 		return JSON.stringify(val);
+	// 	} else {
+	// 		return val;
+	// 	}
+	// }
+
+	// function buildForm({ action, params }) {
+	// 	const form = document.createElement("form");
+	// 	form.setAttribute("method", "post");
+	// 	form.setAttribute("action", action);
+
+	// 	Object.keys(params).forEach((key) => {
+	// 		const input = document.createElement("input");
+	// 		input.setAttribute("type", "hidden");
+	// 		input.setAttribute("name", key);
+	// 		input.setAttribute("value", stringifyValue(params[key]));
+	// 		form.appendChild(input);
+	// 	});
+
+	// 	return form;
+	// }
+
+	// function post(details) {
+	// 	const form = buildForm(details);
+	// 	document.body.appendChild(form);
+	// 	form.submit();
+	// 	form.remove();
+	// }
+
+	const getPaytmInfo = async () => {
+		try {
+			const res = await fetch("/api/paytm/payment", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: { cartProducts },
+			});
+			return await res.json();
+		} catch (err) {
+			return console.log(err);
 		}
-	}
-
-	function buildForm({ action, params }) {
-		const form = document.createElement("form");
-		form.setAttribute("method", "post");
-		form.setAttribute("action", action);
-
-		Object.keys(params).forEach((key) => {
-			const input = document.createElement("input");
-			input.setAttribute("type", "hidden");
-			input.setAttribute("name", key);
-			input.setAttribute("value", stringifyValue(params[key]));
-			form.appendChild(input);
-		});
-
-		return form;
-	}
-
-	function post(details) {
-		const form = buildForm(details);
-		document.body.appendChild(form);
-		form.submit();
-		form.remove();
-	}
-
-	const getPaytmInfo = () => {
-		return fetch("/api/paytm/payment", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify({ cartProducts }),
-		})
-			.then((res) => res.json())
-			.catch((err) => console.log(err));
 	};
 
 	const makePayment = () => {
-		getPaytmInfo().then((response) => {
-			let information = {
-				action: "https://securegw-stage.paytm.in/order/process",
-				params: response,
-			};
-			post(information);
+		getPaytmInfo({ cartProducts }).then((response) => {
+			console.log(response);
 		});
 	};
 
@@ -113,14 +113,14 @@ const Cart = (props) => {
 										<div className="cart-items" key={idx}>
 											<div className="item-details">
 												<h2>{_.product?.name}</h2>
-												<img
+												{/* <img
 													src={
 														_.product
 															.productImages[0]
 															.image
 													}
 													alt="..."
-												/>
+												/> */}
 											</div>
 											<div className="calculation">
 												<div className="first-row float-right d-flex justify-content-between">
@@ -207,11 +207,20 @@ const Cart = (props) => {
 						<img src={Checkout} alt="" />
 						<p>Cash on Delivery</p>
 					</button>
-					<button onClick={makePayment}>
-						<img src={Checkout} alt="" />
-						<p>Buy with Paytm</p>
+					<button
+						onClick={makePayment}
+						className="comming soon bg-white "
+					>
+						<img
+							src="https://cdn.icon-icons.com/icons2/730/PNG/512/paytm_icon-icons.com_62778.png"
+							alt="..."
+						/>
+						<p className="text-dark">
+							Buy with Paytm (comming soon)
+						</p>
 					</button>
-					<StripeCheckout
+					{/* <StripeCheckout
+						className="comming soon"
 						stripeKey={STRIPE_KEY}
 						token={handleToken}
 						currency="INR"
@@ -226,9 +235,9 @@ const Cart = (props) => {
 								150) *
 							100
 						}
-					/>
-					<GooglePayButton
-						className="w-100"
+					/> */}
+					{/* <GooglePayButton
+						className="w-100 comming soon"
 						environment="TEST"
 						paymentRequest={{
 							apiVersion: 2,
@@ -287,7 +296,7 @@ const Cart = (props) => {
 							console.log("On Payment Data Changed", paymentData);
 							return {};
 						}}
-					/>
+					/> */}
 					<button
 						className="shop"
 						onClick={() => {
