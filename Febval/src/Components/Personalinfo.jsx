@@ -7,6 +7,7 @@ import "../Scss/personalinfo.scss";
 import Updatedetails from "./Updatedetails";
 import axios from "axios";
 
+
 const Personalinfo = () => {
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
