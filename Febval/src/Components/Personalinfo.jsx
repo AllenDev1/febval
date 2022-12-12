@@ -5,11 +5,13 @@ import Order from "../Assets/order.svg";
 import { getUser } from "../Auth/auth";
 import "../Scss/personalinfo.scss";
 import Updatedetails from "./Updatedetails";
+import axios from "axios";
 
 const Personalinfo = () => {
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 	const navigate = useNavigate();
+	const [orders, setOrders] = useState([]);
 
 	useEffect(() => {
 		getUser()
@@ -19,6 +21,22 @@ const Personalinfo = () => {
 			.catch((err) => {
 				setUser(null);
 				navigate("/");
+			});
+	}, []);
+
+	useEffect(() => {
+		const options = {
+			method: "GET",
+			url: "/api/order/orders",
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setOrders(response.data.orders);
+			})
+			.catch(function (error) {
+				console.error(error);
 			});
 	}, []);
 
@@ -70,29 +88,40 @@ const Personalinfo = () => {
 									<th>Total</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>01065554</td>
-									<td>11/12/1900</td>
-									<td>
-										<img src={Order} alt="..." />
-									</td>
-									<td>Rs. 900</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-							</tbody>
+							{orders ? (
+								orders?.map((order) => {
+									return (
+										<>
+											<tbody>
+												<tr>
+													<td>{order.id}</td>
+													<td>{order.createdAt}</td>
+													<td>
+														{order.Products[0].name}
+													</td>
+
+													<td>
+														Rs.
+														{
+															order.Products[0]
+																.price
+														}
+													</td>
+												</tr>
+											</tbody>
+										</>
+									);
+								})
+							) : (
+								<h1>Loading...</h1>
+							)}
 						</Table>
 					</div>
 				</div>
 			</Container>
 			<Updatedetails
 				show={modalShow}
-				user = {user}
+				user={user}
 				onHide={() => setModalShow(false)}
 			/>
 		</>

@@ -8,15 +8,19 @@ import StripeCheckout from "react-stripe-checkout";
 import Checkout from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
-import { removeProduct } from "../redux/cartRedux";
+import { removeProduct, clearCart } from "../redux/cartRedux";
+import paytm from "../Assets/paytm.png";
 import "../Scss/Cart.scss";
-
+import Updatedetails from "./Updatedetails";
+import { useState } from "react";
 
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
+	const [modalShow, setModalShow] = useState(false);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -34,66 +38,88 @@ const Cart = (props) => {
 			});
 	};
 
-	function isDate(val) {
-		// Cross realm comptatible
-		return Object.prototype.toString.call(val) === "[object Date]";
-	}
+	// function isDate(val) {
+	// 	// Cross realm comptatible
+	// 	return Object.prototype.toString.call(val) === "[object Date]";
+	// }
 
-	function isObj(val) {
-		return typeof val === "object";
-	}
+	// function isObj(val) {
+	// 	return typeof val === "object";
+	// }
 
-	function stringifyValue(val) {
-		if (isObj(val) && !isDate(val)) {
-			return JSON.stringify(val);
-		} else {
-			return val;
-		}
-	}
+	// function stringifyValue(val) {
+	// 	if (isObj(val) && !isDate(val)) {
+	// 		return JSON.stringify(val);
+	// 	} else {
+	// 		return val;
+	// 	}
+	// }
 
-	function buildForm({ action, params }) {
-		const form = document.createElement("form");
-		form.setAttribute("method", "post");
-		form.setAttribute("action", action);
+	// function buildForm({ action, params }) {
+	// 	const form = document.createElement("form");
+	// 	form.setAttribute("method", "post");
+	// 	form.setAttribute("action", action);
 
-		Object.keys(params).forEach((key) => {
-			const input = document.createElement("input");
-			input.setAttribute("type", "hidden");
-			input.setAttribute("name", key);
-			input.setAttribute("value", stringifyValue(params[key]));
-			form.appendChild(input);
-		});
+	// 	Object.keys(params).forEach((key) => {
+	// 		const input = document.createElement("input");
+	// 		input.setAttribute("type", "hidden");
+	// 		input.setAttribute("name", key);
+	// 		input.setAttribute("value", stringifyValue(params[key]));
+	// 		form.appendChild(input);
+	// 	});
 
-		return form;
-	}
+	// 	return form;
+	// }
 
-	function post(details) {
-		const form = buildForm(details);
-		document.body.appendChild(form);
-		form.submit();
-		form.remove();
-	}
+	// function post(details) {
+	// 	const form = buildForm(details);
+	// 	document.body.appendChild(form);
+	// 	form.submit();
+	// 	form.remove();
+	// }
 
-	const getPaytmInfo = () => {
-		return fetch("/api/paytm/payment", {
+	const makeOrder = (e) => {
+		e.preventDefault();
+		const options = {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
+			url: "/api/order/checkout",
+			data: {
+				productId: cartProducts[0].product.id,
+				quantity: cartProducts[0].quantity,
 			},
-			body: JSON.stringify({ cartProducts }),
-		})
-			.then((res) => res.json())
-			.catch((err) => console.log(err));
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {})
+			.catch(function (error) {
+				console.error(error);
+			});
+
+		setModalShow(true);
+
+		dispatch(clearCart());
+	};
+
+	const getPaytmInfo = async () => {
+		try {
+			const res = await fetch("/api/paytm/payment", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: { cartProducts },
+			});
+			return await res.json();
+		} catch (err) {
+			return console.log(err);
+		}
 	};
 
 	const makePayment = () => {
-		getPaytmInfo().then((response) => {
-			let information = {
-				action: "https://securegw-stage.paytm.in/order/process",
-				params: response,
-			};
-			post(information);
+		getPaytmInfo({ cartProducts }).then((response) => {
+			console.log(response);
 		});
 	};
 
@@ -135,18 +161,10 @@ const Cart = (props) => {
 												</div>
 												<div className="second-row">
 													<p>Total:</p>
-													<p>
-														<s>
-															{" "}
-															Rs.{" "}
-															{_.product.price *
-																_.quantity}
-															/-{" "}
-														</s>
-													</p>
+
 													<p>
 														Rs.
-														{_.product.discount *
+														{_.product.price *
 															_.quantity}
 														/-
 													</p>
@@ -186,7 +204,7 @@ const Cart = (props) => {
 								{cartProducts.reduce(
 									(acc, curr) =>
 										acc +
-										curr.product.discount * curr.quantity,
+										curr.product.price * curr.quantity,
 									0
 								)}
 							</p>
@@ -196,7 +214,7 @@ const Cart = (props) => {
 							Subtotal : Rs.
 							{cartProducts.reduce(
 								(acc, curr) =>
-									acc + curr.product.discount * curr.quantity,
+									acc + curr.product.price * curr.quantity,
 								0
 							) + 150}
 							/-
@@ -204,7 +222,7 @@ const Cart = (props) => {
 					</div>
 				</div>
 				<div className="button-footer">
-					<button>
+					<button onClick={makeOrder}>
 						<img src={Checkout} alt="" />
 						<p>Cash on Delivery</p>
 					</button>
@@ -212,10 +230,7 @@ const Cart = (props) => {
 						onClick={makePayment}
 						className="comming soon bg-white "
 					>
-						<img
-							src="https://cdn.icon-icons.com/icons2/730/PNG/512/paytm_icon-icons.com_62778.png"
-							alt="..."
-						/>
+						<img src={paytm} alt="..." />
 						<p className="text-dark">
 							Buy with Paytm (comming soon)
 						</p>
@@ -311,6 +326,10 @@ const Cart = (props) => {
 					</button>
 				</div>
 			</Offcanvas>
+			<Updatedetails
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+			/>
 		</>
 	);
 };
