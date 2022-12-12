@@ -32,12 +32,19 @@ Product.ProductImages = Product.hasMany(ProductImages, {
 	as: "productImages",
 });
 
-// User.Order = User.hasMany(Order, {
-// 	foreignKey: "userId",
-// 	sourceKey: "id",
-// });
+User.Order = User.hasMany(Order, {
+	foreignKey: "userId",
+	sourceKey: "id",
+});
 
-Order.User = Order.hasOne(User)
+// Order.User = Order.hasOne(User)
+
+// order user relation
+
+Order.belongsTo(User, {
+	foreignKey: "userId",
+	targetKey: "id",
+});
 
 Product.belongsToMany(Order, {
 	through: ProductOrder,

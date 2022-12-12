@@ -4,29 +4,31 @@ const router = express.Router();
 const { Order, User, Product, ProductOrder } = require("../models/index");
 const { ensureLoggedIn } = require("../middlewares/Auth.js");
 
-router.post("/check", ensureLoggedIn, async (req, res) => {
+router.post("/checkout", ensureLoggedIn, async (req, res) => {
 	const user = req.user;
-	console.log("hello")
 	try {
 		const { productId, quantity } = req.body;
 
-		const product = await Product.findOne({
-			id: productId,
+		const product = await Product.findAll({
+			where: {
+				id: productId,
+			},
 		});
 
 		if (!product) throw "Product doesn't exist";
-		console.log("HELLO WORLD");
-		console.log("user: ", user.id);
+
 		const order = await Order.create({
 			orderComplete: false,
 			deliveryType: "cod",
 			userId: user.id,
 		});
 
-		const productOrder = await ProductOrder.create({
-			quantity: quantity,
-			orderId: order.id,
-			productId: product.id,
+		product.forEach(async (product) => {
+			const productOrder = await ProductOrder.create({
+				quantity: quantity,
+				orderId: order.id,
+				productId: product.id,
+			});
 		});
 
 		const result = await Order.findOne({
@@ -34,6 +36,30 @@ router.post("/check", ensureLoggedIn, async (req, res) => {
 		});
 
 		res.status(201).json({ result });
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+});
+
+router.get("/orders", ensureLoggedIn, async (req, res) => {
+	const user = req.user;
+	try {
+		const orders = await Order.findAll({
+			where: {
+				userId: user.id,
+			},
+			include: [
+				{
+					model: Product,
+					attributes: ["price", "name"],
+					through: {
+						attributes: ["quantity"],
+					},
+				},
+			],
+		});
+
+		res.status(200).json({ orders });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}

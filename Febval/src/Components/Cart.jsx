@@ -8,15 +8,19 @@ import StripeCheckout from "react-stripe-checkout";
 import Checkout from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
-import { removeProduct } from "../redux/cartRedux";
+import { removeProduct, clearCart } from "../redux/cartRedux";
+import paytm from "../Assets/paytm.png";
 import "../Scss/Cart.scss";
+import Updatedetails from "./Updatedetails";
+import { useState } from "react";
 
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
-	
+	const [modalShow, setModalShow] = useState(false);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -74,6 +78,29 @@ const Cart = (props) => {
 	// 	form.remove();
 	// }
 
+	const makeOrder = (e) => {
+		e.preventDefault();
+		const options = {
+			method: "POST",
+			url: "/api/order/checkout",
+			data: {
+				productId: cartProducts[0].product.id,
+				quantity: cartProducts[0].quantity,
+			},
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {})
+			.catch(function (error) {
+				console.error(error);
+			});
+
+		setModalShow(true);
+
+		dispatch(clearCart());
+	};
+
 	const getPaytmInfo = async () => {
 		try {
 			const res = await fetch("/api/paytm/payment", {
@@ -113,14 +140,14 @@ const Cart = (props) => {
 										<div className="cart-items" key={idx}>
 											<div className="item-details">
 												<h2>{_.product?.name}</h2>
-												{/* <img
+												<img
 													src={
 														_.product
 															.productImages[0]
 															.image
 													}
 													alt="..."
-												/> */}
+												/>
 											</div>
 											<div className="calculation">
 												<div className="first-row float-right d-flex justify-content-between">
@@ -134,18 +161,10 @@ const Cart = (props) => {
 												</div>
 												<div className="second-row">
 													<p>Total:</p>
-													<p>
-														<s>
-															{" "}
-															Rs.{" "}
-															{_.product.price *
-																_.quantity}
-															/-{" "}
-														</s>
-													</p>
+
 													<p>
 														Rs.
-														{_.product.discount *
+														{_.product.price *
 															_.quantity}
 														/-
 													</p>
@@ -185,7 +204,7 @@ const Cart = (props) => {
 								{cartProducts.reduce(
 									(acc, curr) =>
 										acc +
-										curr.product.discount * curr.quantity,
+										curr.product.price * curr.quantity,
 									0
 								)}
 							</p>
@@ -195,7 +214,7 @@ const Cart = (props) => {
 							Subtotal : Rs.
 							{cartProducts.reduce(
 								(acc, curr) =>
-									acc + curr.product.discount * curr.quantity,
+									acc + curr.product.price * curr.quantity,
 								0
 							) + 150}
 							/-
@@ -203,7 +222,7 @@ const Cart = (props) => {
 					</div>
 				</div>
 				<div className="button-footer">
-					<button>
+					<button onClick={makeOrder}>
 						<img src={Checkout} alt="" />
 						<p>Cash on Delivery</p>
 					</button>
@@ -211,10 +230,7 @@ const Cart = (props) => {
 						onClick={makePayment}
 						className="comming soon bg-white "
 					>
-						<img
-							src="https://cdn.icon-icons.com/icons2/730/PNG/512/paytm_icon-icons.com_62778.png"
-							alt="..."
-						/>
+						<img src={paytm} alt="..." />
 						<p className="text-dark">
 							Buy with Paytm (comming soon)
 						</p>
@@ -310,6 +326,10 @@ const Cart = (props) => {
 					</button>
 				</div>
 			</Offcanvas>
+			<Updatedetails
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+			/>
 		</>
 	);
 };
