@@ -134,64 +134,86 @@ const Cart = (props) => {
 				<Offcanvas.Body>
 					<div className="cart-container">
 						<div className="cart-contents">
-							<div className="cart-item-container">
-								{cartProducts?.map((_, idx) => {
-									return (
-										<div className="cart-items" key={idx}>
-											<div className="item-details">
-												<h2>{_.product?.name}</h2>
-												<img
-													src={
-														_.product
-															.productImages[0]
-															.image
-													}
-													alt="..."
-												/>
-											</div>
-											<div className="calculation">
-												<div className="first-row float-right d-flex justify-content-between">
-													<p>
-														Quantity: {_.quantity}
-													</p>
-													<p className="text-right">
-														Rs. {_.product.price} *{" "}
-														{_.quantity}
-													</p>
-												</div>
-												<div className="second-row">
-													<p>Total:</p>
+							{
+								// check if cart is empty
+								cartProducts.length === 0 ? (
+									<div className="empty-cart">
+										<h1>Your Cart is Empty</h1>
+									</div>
+								) : (
+									<div className="cart-item-container">
+										{cartProducts?.map((_, idx) => {
+											return (
+												<div
+													className="cart-items"
+													key={idx}
+												>
+													<div className="item-details">
+														<h2>
+															{_.product?.name}
+														</h2>
+														<img
+															src={
+																_.product
+																	.productImages[0]
+																	.image
+															}
+															alt="..."
+														/>
+													</div>
+													<div className="calculation">
+														<div className="first-row float-right d-flex justify-content-between">
+															<p>
+																Quantity:{" "}
+																{_.quantity}
+															</p>
+															<p className="text-right">
+																Rs.{" "}
+																{
+																	_.product
+																		.price
+																}{" "}
+																* {_.quantity}
+															</p>
+														</div>
+														<div className="second-row">
+															<p>Total:</p>
 
-													<p>
-														Rs.
-														{_.product.price *
-															_.quantity}
-														/-
-													</p>
+															<p>
+																Rs.
+																{_.product
+																	.price *
+																	_.quantity}
+																/-
+															</p>
+														</div>
+													</div>
+													<div className="d-flex align-middle  justify-content-end">
+														<img
+															style={{
+																cursor: "pointer",
+															}}
+															onClick={() => {
+																dispatch(
+																	removeProduct(
+																		{
+																			product:
+																				_.product,
+																		}
+																	)
+																);
+															}}
+															src={Delete}
+															alt="..."
+															className="del float-right"
+														/>
+													</div>
 												</div>
-											</div>
-											<div className="d-flex align-middle  justify-content-end">
-												<img
-													style={{
-														cursor: "pointer",
-													}}
-													onClick={() => {
-														dispatch(
-															removeProduct({
-																product:
-																	_.product,
-															})
-														);
-													}}
-													src={Delete}
-													alt="..."
-													className="del float-right"
-												/>
-											</div>
-										</div>
-									);
-								})}
-							</div>
+											);
+										})}
+									</div>
+								)
+							}
 						</div>
 					</div>
 				</Offcanvas.Body>
@@ -199,33 +221,62 @@ const Cart = (props) => {
 					<div className="item-total d-block">
 						<div className="shipping-qnty d-flex justify-content-between">
 							<p>{cartProducts.length} items</p>
-							<p>
-								(Shipping charge) 150 +
-								{cartProducts.reduce(
-									(acc, curr) =>
-										acc +
-										curr.product.price * curr.quantity,
-									0
-								)}
-							</p>
+							{/* if cart is empty then shipping charge is 0 */}
+
+							{cartProducts.length === 0 ? (
+								<p>Shipping charge: Rs. 0</p>
+							) : (
+								<p>
+									(Shipping charge) 150 +
+									{cartProducts.reduce(
+										(acc, curr) =>
+											acc +
+											curr.product.price * curr.quantity,
+										0
+									)}
+								</p>
+							)}
 						</div>
 
-						<p className="my-1 d-flex justify-content-end">
-							Subtotal : Rs.
-							{cartProducts.reduce(
-								(acc, curr) =>
-									acc + curr.product.price * curr.quantity,
-								0
-							) + 150}
-							/-
-						</p>
+						{
+							// if cart is empty then subtotal is 0
+							cartProducts.length === 0 ? (
+								<p className="my-1 d-flex justify-content-end">
+									Subtotal : Rs. 0
+								</p>
+							) : (
+								<p className="my-1 d-flex justify-content-end">
+									Subtotal : Rs.
+									{cartProducts.reduce(
+										(acc, curr) =>
+											acc +
+											curr.product.price * curr.quantity,
+										0
+									) + 150}
+									/-
+								</p>
+							)
+						}
 					</div>
 				</div>
 				<div className="button-footer">
-					<button onClick={makeOrder}>
-						<img src={Checkout} alt="" />
-						<p>Cash on Delivery</p>
-					</button>
+					{
+						// if cart is empty then checkout button is disabled
+						cartProducts.length === 0 ? (
+							<button
+								className="btn btn-outline-dark btn-block"
+								disabled
+							>
+								Checkout
+							</button>
+						) : (
+							<button onClick={makeOrder}>
+								<img src={Checkout} alt="" />
+								<p>Cash on Delivery</p>
+							</button>
+						)
+					}
+
 					<button
 						onClick={makePayment}
 						className="comming soon bg-white "
