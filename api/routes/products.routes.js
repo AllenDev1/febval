@@ -11,7 +11,7 @@ router.post("/create", ensureAdmin, async (req, res) => {
 			name,
 			description,
 			category,
-			discount,
+
 			price,
 			images,
 			quantity,
@@ -29,7 +29,6 @@ router.post("/create", ensureAdmin, async (req, res) => {
 				name: name,
 				description: description,
 				category: category,
-				discount: discount,
 				price: price,
 				productImages: productImages,
 				quantity: quantity,
@@ -54,7 +53,7 @@ router.put("/update/:id", ensureAdmin, async (req, res) => {
 			name,
 			description,
 			category,
-			discount,
+
 			price,
 			images,
 			quantity,
@@ -69,7 +68,7 @@ router.put("/update/:id", ensureAdmin, async (req, res) => {
 				name: name,
 				description: description,
 				category: category,
-				discount: discount,
+
 				price: price,
 				productImages: productImages,
 				quantity: quantity,
@@ -119,7 +118,6 @@ router.get("/", async (req, res) => {
 		} else {
 			products = await Product.findAll({
 				include: { model: ProductImages, as: "productImages" },
-				
 			});
 		}
 

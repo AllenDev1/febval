@@ -25,10 +25,6 @@ const Product = sequelize.define(
 			allowNull: false,
 		},
 
-		discount: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
 		price: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
