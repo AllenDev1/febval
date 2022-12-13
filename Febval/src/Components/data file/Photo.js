@@ -1,6 +1,6 @@
 export const photos = [
 	{
-		src: "https://4.imimg.com/data4/PS/IA/MY-12958090/birthday-party-event-management-500x500.jpeg",
+		src: "https://static.toiimg.com/photo/msid-83566892/83566892.jpg",
 		width: 4,
 		height: 3,
 	},
