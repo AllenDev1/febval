@@ -1,5 +1,5 @@
-
-node_modules
-database.sqlite
-.env
 secrets
+node_modules
+.DS_Store
+sessions.db
+database.sqlite
