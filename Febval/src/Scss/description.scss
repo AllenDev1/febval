@@ -1,0 +1,36 @@
+.desc-container {
+	padding-top: 165px;
+	padding-bottom: 115px;
+
+	.cardDecRow {
+		.CDCol-Carousel {
+			.productCarousel {
+				.carousel-slider {
+					box-shadow: 5px 10px 15px -3px rgba(0,0,0,0.5);
+
+					.slider-wrapper {
+						.slider {
+							.slide {
+								justify-content: center;
+								display: flex;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.CDCol-dec{
+			.vstack{
+				.addtocart-buynow{
+					button{
+						border-radius: 200px;
+					}
+					button:hover{
+						opacity: 0.8;
+					}
+				}
+			}
+		}
+	}
+}
