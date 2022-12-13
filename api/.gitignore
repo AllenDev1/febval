@@ -1,5 +1,0 @@
-secrets
-node_modules
-.DS_Store
-sessions.db
-database.sqlite
