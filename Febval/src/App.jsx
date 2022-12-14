@@ -50,9 +50,9 @@ const App = () => {
 				iconBgColor="#25D366"
 				headerIcon="https://cdn-icons-png.flaticon.com/512/8377/8377198.png"
 				headerIconColor="#25D366"
-				headerTxtColor="black"
-				headerBgColor="#25D366"
-				headerTitle="Rupesh Khadka"
+				headerTxtColor="white"
+				headerBgColor="#128C7E"
+				headerTitle="Sarfaraj"
 				headerCaption="Online"
 				bodyBgColor="#bbb"
 				chatPersonName="Support"
@@ -62,7 +62,7 @@ const App = () => {
 						<br /> How can I help you?
 					</>
 				}
-				footerBgColor="#999"
+				footerBgColor="#128C7E"
 				btnBgColor="#25D366"
 				btnTxtColor="white"
 				btnTxt="Start Chat"
