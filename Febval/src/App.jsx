@@ -37,7 +37,7 @@ const App = () => {
 			</Router>
 			<Footer />
 			<WhatsAppWidget
-				phoneNo="9779863684870"
+				phoneNo="+917507664186"
 				position="right"
 				widgetWidth="300px"
 				widgetWidthMobile="260px"
