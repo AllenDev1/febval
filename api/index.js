@@ -1,6 +1,6 @@
 require("dotenv").config({ path: "secrets/.env" });
 const express = require("express");
-
+const path = require("path");
 const cors = require("cors");
 
 const cookieSession = require("cookie-session");
@@ -21,7 +21,7 @@ const PaytemRoutes = require("./routes/paytm.routes");
 const startAdmin = require("./admin/app");
 
 const app = express();
-const PORT = process.env.EXPRESS_PORT | 3001;
+const PORT = process.env.PORT | 3001;
 
 // Import morgan-body
 const morganBody = require("morgan-body");
@@ -37,11 +37,11 @@ sequelize.sync({});
 startAdmin(app);
 
 app.use(
-	cookieSession({
-		name: "session",
-		keys: [process.env.KEY],
-		maxAge: 24 * 60 * 60 * 1000,
-	})
+    cookieSession({
+        name: "session",
+        keys: [process.env.KEY],
+        maxAge: 24 * 60 * 60 * 1000,
+    })
 );
 
 app.use(passport.initialize());
@@ -67,11 +67,20 @@ app.use("/api/user", UserRoutes);
 app.use("/api/search", SearchRoute);
 
 app.use("/api/stripe", StripePaymentRoutes);
-app.use("/api/paytm", PaytemRoutes )
+app.use("/api/paytm", PaytemRoutes);
 
 app.listen(PORT, (err) => {
-	if (err) throw err;
-	console.log(`Listening to port ${PORT}`);
+    if (err) throw err;
+    console.log(`Listening to port ${PORT}`);
+});
+
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 // 3 Routes
