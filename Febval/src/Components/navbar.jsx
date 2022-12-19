@@ -57,30 +57,6 @@ const Navbars = () => {
 			});
 	}, []);
 
-	//search products by name
-	// const [search, setSearch] = useState("");
-	// const [searchResult, setSearchResult] = useState([]);
-
-	// const handleSearch = (e) => {
-	// 	e.preventDefault();
-	// 	setSearch(e.target.value);
-	// };
-
-	// useEffect(() => {
-	// 	const options = {
-	// 		method: "GET",
-	// 		url: "/api/search/products/" + search,
-	// 	};
-
-	// 	axios
-	// 		.request(options)
-	// 		.then(function (response) {
-	// 			setSearchResult(response.data.products);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// }, []);
 
 	return (
 		<>
@@ -134,7 +110,7 @@ const Navbars = () => {
 														localStorage.clear();
 														window.location.reload();
 														window.open(
-															"http://localhost:3001/auth/logout",
+															"https://febval.onrender.com/auth/logout",
 															"_self"
 														);
 													}}

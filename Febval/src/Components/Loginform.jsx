@@ -29,7 +29,7 @@ const Loginform = (props) => {
 						className="login-google"
 						onClick={() => {
 							window.open(
-								"http://localhost:3001/auth/google",
+								"https://febval.onrender.com/auth/google",
 								"_self"
 							);
 						}}

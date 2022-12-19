@@ -25,13 +25,13 @@ router.get("/login/success", (req, res) => {
 
 router.get("/logout", (req, res) => {
     req.logout();
-    return res.redirect("http://localhost:3000/");
+    return res.redirect("https://febval.onrender.com/");
 });
 
 router.get(
     "/google/callback",
     passort.authenticate("google", {
-        successRedirect: "http://localhost:3000/",
+        successRedirect: "https://febval.onrender.com/",
         failureRedirect: "/login/failure",
     })
 );
