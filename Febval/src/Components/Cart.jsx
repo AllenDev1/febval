@@ -1,7 +1,7 @@
 import GooglePayButton from "@google-pay/button-react";
 import axios from "axios";
 import React from "react";
-import { Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
@@ -81,11 +81,6 @@ const Cart = (props) => {
 
 	const makeOrder = (e) => {
 		e.preventDefault();
-		if (getUser().phone === null || getUser().address === null) {
-			setModalShow(true);
-			return;
-		}
-		console.log(getUser().phone);
 
 		const options = {
 			method: "POST",
@@ -371,7 +366,8 @@ const Cart = (props) => {
 							return {};
 						}}
 					/> */}
-					<button
+
+					<Button
 						className="shop"
 						onClick={() => {
 							let path = `/`;
@@ -381,7 +377,7 @@ const Cart = (props) => {
 					>
 						<img src={Shop} alt="..." />
 						<p>Continue Shopping</p>
-					</button>
+					</Button>
 				</div>
 			</Offcanvas>
 			<Updatedetails
