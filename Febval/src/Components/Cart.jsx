@@ -13,6 +13,7 @@ import paytm from "../Assets/paytm.png";
 import "../Scss/Cart.scss";
 import Updatedetails from "./Updatedetails";
 import { useState } from "react";
+import { getUser } from "../Auth/auth";
 
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
@@ -80,6 +81,13 @@ const Cart = (props) => {
 
 	const makeOrder = (e) => {
 		e.preventDefault();
+		//cheak if user has added address and phone number
+		const user = getUser();
+		if (!user.address || !user.phone) {
+			setModalShow(true);
+			return;
+		}
+		
 		const options = {
 			method: "POST",
 			url: "/api/order/checkout",
