@@ -100,7 +100,7 @@ const Cart = (props) => {
 
 	const makeOrder = (e) => {
 		e.preventDefault();
-		// place order if user phone number and address is not null
+		
 		if (user.phone && user.address) {
 			const options = {
 				method: "POST",
@@ -121,7 +121,9 @@ const Cart = (props) => {
 
 			dispatch(clearCart());
 		} else {
+
 			setModalShow(true);
+			alert("Please Try Again!");
 		}
 	};
 
