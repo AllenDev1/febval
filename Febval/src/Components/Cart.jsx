@@ -81,13 +81,12 @@ const Cart = (props) => {
 
 	const makeOrder = (e) => {
 		e.preventDefault();
-		//cheak if user has added address and phone number
-		const user = getUser();
-		if (!user.address || !user.phone) {
+		if (getUser().phone === null || getUser().address === null) {
 			setModalShow(true);
 			return;
 		}
-		
+		console.log(getUser().phone);
+
 		const options = {
 			method: "POST",
 			url: "/api/order/checkout",
