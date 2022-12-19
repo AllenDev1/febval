@@ -30,6 +30,10 @@ const Updatedetails = (props) => {
 			});
 	};
 
+	
+	
+
+
 	return (
 		<>
 			<Modal

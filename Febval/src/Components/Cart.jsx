@@ -12,7 +12,7 @@ import { removeProduct, clearCart } from "../redux/cartRedux";
 import paytm from "../Assets/paytm.png";
 import "../Scss/Cart.scss";
 import Updatedetails from "./Updatedetails";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getUser } from "../Auth/auth";
 
 const STRIPE_KEY =
@@ -79,28 +79,50 @@ const Cart = (props) => {
 	// 	form.remove();
 	// }
 
-	const makeOrder = (e) => {
-		e.preventDefault();
+	const [user, setUser] = useState(null);
 
+	useEffect(() => {
 		const options = {
-			method: "POST",
-			url: "/api/order/checkout",
-			data: {
-				productId: cartProducts[0].product.id,
-				quantity: cartProducts[0].quantity,
-			},
+			method: "GET",
+			url: "/api/user/info",
 		};
 
 		axios
 			.request(options)
-			.then(function (response) {})
+			.then(function (response) {
+				setUser(response.data.user);
+				console.log(response.data.user);
+			})
 			.catch(function (error) {
 				console.error(error);
 			});
+	}, []);
 
-		setModalShow(true);
+	const makeOrder = (e) => {
+		e.preventDefault();
+		// place order if user phone number and address is not null
+		if (user.phone && user.address) {
+			const options = {
+				method: "POST",
+				url: "/api/order/checkout",
+				data: {
+					productId: cartProducts[0].product.id,
+					quantity: cartProducts[0].quantity,
+				},
+			};
 
-		dispatch(clearCart());
+			axios
+				.request(options)
+				.then(function (response) {})
+				.catch(function (error) {
+					console.error(error);
+				});
+			setModalShow(true);
+
+			dispatch(clearCart());
+		} else {
+			setModalShow(true);
+		}
 	};
 
 	const getPaytmInfo = async () => {

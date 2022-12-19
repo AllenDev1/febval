@@ -7,6 +7,7 @@ import axios from "axios";
 import AutoButton from "./AutoButton";
 import da from "./data file/datafiles.json";
 import { CartState } from "../context/Context";
+import { addProduct } from "../redux/cartRedux";
 
 const Cardsgroup = ({ cat, sort, feature }) => {
 	const [products, setProducts] = useState([]);
@@ -17,7 +18,6 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 	const loadMore = () => {
 		setNext(next + productsPerRow);
 	};
-
 
 	useEffect(() => {
 		let url = "/api/products";
@@ -65,7 +65,7 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 	return (
 		<>
 			<Container className="card-container">
-				<Row xs={1} md={4}  className="g-4 cards-row">
+				<Row xs={1} md={4} className="g-4 cards-row">
 					{feature ? (
 						<>
 							{products.slice(0, 8).map((_, idx) => (

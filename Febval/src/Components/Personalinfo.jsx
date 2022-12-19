@@ -10,6 +10,8 @@ import axios from "axios";
 
 const Personalinfo = () => {
 	const [user, setUser] = useState(null);
+	const [phone, setPhone] = useState("");
+	const [address, setAddress] = useState("");
 	const [modalShow, setModalShow] = useState(false);
 	const navigate = useNavigate();
 	const [orders, setOrders] = useState([]);
@@ -28,6 +30,24 @@ const Personalinfo = () => {
 	useEffect(() => {
 		const options = {
 			method: "GET",
+			url: "/api/user/info",
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setPhone(response.data.user.phone);
+				setAddress(response.data.user.address);
+				
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	}, []);
+
+	useEffect(() => {
+		const options = {
+			method: "GET",
 			url: "/api/order/orders",
 		};
 
@@ -40,6 +60,10 @@ const Personalinfo = () => {
 				console.error(error);
 			});
 	}, []);
+
+	
+
+
 
 	return (
 		<>
@@ -63,10 +87,10 @@ const Personalinfo = () => {
 								<div className="address">
 									<h1>Address Book</h1>
 									<h2>
-										{user ? user.address : "Loading..."}
+										{user ? address : "Loading..."}
 									</h2>
 									<div className="personal-number text-white">
-										{user ? user.phone : "Loading..."}
+										{user ? phone : "Loading..."}
 									</div>
 									<div className="edit-det">
 										<Button
