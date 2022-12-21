@@ -149,6 +149,8 @@ const Cart = (props) => {
 		});
 	};
 
+
+
 	return (
 		<>
 			<Offcanvas placement="end" backdrop="static" {...props}>
@@ -162,7 +164,7 @@ const Cart = (props) => {
 						<div className="cart-contents">
 							{
 								// check if cart is empty
-								cartProducts.length === 0 ? (
+								cartProducts.length === 0 ? ( 
 									<div className="empty-cart">
 										<h1>Your Cart is Empty</h1>
 									</div>
