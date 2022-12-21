@@ -7,7 +7,7 @@ import {
 	Navbar,
 	Offcanvas,
 } from "react-bootstrap";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
 import events from "../Assets/events.svg";
@@ -29,7 +29,7 @@ import profileLogo from "../Assets/gift shop 2/Vector.svg";
 const Navbars = () => {
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
-	let navigate = useNavigate();
+
 	const cartProductsNumber = useSelector((state) => state.cart.products);
 
 	const [show, setShow] = useState(false);
@@ -56,6 +56,7 @@ const Navbars = () => {
 				setUser(null);
 			});
 	}, []);
+
 
 	return (
 		<>
@@ -179,11 +180,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/cake`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={cake} alt="..." />
 									Cakes
@@ -193,11 +189,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/wedding`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={wed} alt="..." />
 									Wedding
@@ -207,11 +198,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/him`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={giftbox} alt="..." />
 									Him
@@ -221,11 +207,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/her`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={giftbox} alt="..." />
 									Her
@@ -235,11 +216,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/kids`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={giftbox} alt="..." />
 									Kids
@@ -249,11 +225,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/birthday`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={giftbox} alt="..." />
 									Birthday
@@ -263,11 +234,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `events`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={events} alt="..." />
 									Events
@@ -277,11 +243,6 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									onClick={() => {
-										let path = `/products/other`;
-										navigate(path);
-										window.location.reload();
-									}}
 								>
 									<img src={other} alt="..." />
 									Others
