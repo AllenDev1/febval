@@ -57,7 +57,6 @@ const Navbars = () => {
 			});
 	}, []);
 
-
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
@@ -180,6 +179,14 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									// close offcanvas
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={cake} alt="..." />
 									Cakes
@@ -189,6 +196,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={wed} alt="..." />
 									Wedding
@@ -198,6 +212,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Him
@@ -207,6 +228,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Her
@@ -216,6 +244,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Kids
@@ -225,6 +260,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Birthday
@@ -234,6 +276,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={events} alt="..." />
 									Events
@@ -243,6 +292,13 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById(
+												"offcanvasNavbar-expand-sm"
+											)
+											.classList.remove("show");
+									}}
 								>
 									<img src={other} alt="..." />
 									Others
