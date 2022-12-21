@@ -179,12 +179,10 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
-									// close offcanvas
+									//onclick closeButton offcanvas
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -198,9 +196,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -214,9 +210,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -230,9 +224,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -246,9 +238,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -262,9 +252,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -278,9 +266,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
@@ -294,9 +280,7 @@ const Navbars = () => {
 									}
 									onClick={() => {
 										document
-											.getElementById(
-												"offcanvasNavbar-expand-sm"
-											)
+											.getElementById("navbar-collapse")
 											.classList.remove("show");
 									}}
 								>
