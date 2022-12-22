@@ -4,41 +4,64 @@ const router = express.Router();
 const { Order, User, Product, ProductOrder } = require("../models/index");
 const { ensureLoggedIn } = require("../middlewares/Auth.js");
 
-router.post("/checkout", ensureLoggedIn, async (req, res) => {
+router.post("/checkout", async (req, res) => {
 	const user = req.user;
-	try {
-		const { productId, quantity } = req.body;
+	const products = req.body.products;
 
-		const product = await Product.findAll({
+	// Validate items
+	for (const product_ of products) {
+		const { productId, quantity } = product_;
+
+		let p = await Product.findAll({
 			where: {
 				id: productId,
 			},
 		});
 
-		if (!product) throw "Product doesn't exist";
+		if (!p)
+			return res
+				.send(500)
+				.json({ error: "Product ID not found: " + productId });
+		// Product is ok, check quantity
+		if (quantity <= 0)
+			return res.send(500).json({ error: "Quantity is invalid!" });
+	}
 
-		const order = await Order.create({
-			orderComplete: false,
-			deliveryType: "cod",
-			userId: user.id,
-		});
+	// Create order
+	const order = await Order.create({
+		orderComplete: false,
+		deliveryType: "cod",
+		userId: 4,
+	});
 
-		product.forEach(async (product) => {
+	console.log("order", order.id);
+
+	for (const product_ of products) {
+		try {
+			const { productId, quantity } = product_;
+
+			const product = await Product.findOne({
+				where: {
+					id: productId,
+				},
+			});
+
 			const productOrder = await ProductOrder.create({
 				quantity: quantity,
 				orderId: order.id,
 				productId: product.id,
 			});
-		});
-
-		const result = await Order.findOne({
-			id: order.id,
-		});
-
-		res.status(201).json({ result });
-	} catch (error) {
-		res.status(500).json({ error: error.message });
+		} catch (error) {
+			return res.status(500).json({ error: error.message });
+		}
 	}
+
+	const result = await Order.findOne({
+		where: { id: order.id },
+		include: Product,
+	});
+
+	return res.status(201).json({ result });
 });
 
 router.get("/orders", ensureLoggedIn, async (req, res) => {
