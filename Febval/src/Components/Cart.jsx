@@ -91,7 +91,6 @@ const Cart = (props) => {
 			.request(options)
 			.then(function (response) {
 				setUser(response.data.user);
-				console.log(response.data.user);
 			})
 			.catch(function (error) {
 				console.error(error);
@@ -100,28 +99,32 @@ const Cart = (props) => {
 
 	const makeOrder = (e) => {
 		e.preventDefault();
-		
+
 		if (user.phone && user.address) {
+			const reqData = cartProducts.map((item) => {
+				return {
+					productId: item.product.id,
+					quantity: item.quantity,
+				};
+			});
+
 			const options = {
 				method: "POST",
 				url: "/api/order/checkout",
-				data: {
-					productId: cartProducts[0].product.id,
-					quantity: cartProducts[0].quantity,
-				},
+				data: { products: reqData },
 			};
 
 			axios
 				.request(options)
-				.then(function (response) {})
+				.then(function (response) {
+					setModalShow(true);
+
+					dispatch(clearCart());
+				})
 				.catch(function (error) {
 					console.error(error);
 				});
-			setModalShow(true);
-
-			dispatch(clearCart());
 		} else {
-
 			setModalShow(true);
 			alert("Please Try Again!");
 		}

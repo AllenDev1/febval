@@ -8,7 +8,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "https://febval.onrender.com/auth/google/callback",
+            callbackURL: `${process.env.URL}auth/google/callback`,
         },
         async function (accessToken, refreshToken, profile, done) {
             const { id, displayName, emails, photos } = profile;

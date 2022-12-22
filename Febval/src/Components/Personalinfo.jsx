@@ -7,7 +7,6 @@ import "../Scss/personalinfo.scss";
 import Updatedetails from "./Updatedetails";
 import axios from "axios";
 
-
 const Personalinfo = () => {
 	const [user, setUser] = useState(null);
 	const [phone, setPhone] = useState("");
@@ -38,7 +37,6 @@ const Personalinfo = () => {
 			.then(function (response) {
 				setPhone(response.data.user.phone);
 				setAddress(response.data.user.address);
-				
 			})
 			.catch(function (error) {
 				console.error(error);
@@ -61,9 +59,10 @@ const Personalinfo = () => {
 			});
 	}, []);
 
-	
-
-
+	const formatDate = (createdAt) => {
+		const options = { year: "numeric", month: "long", day: "numeric" };
+		return new Date(createdAt).toLocaleDateString(undefined, options);
+	};
 
 	return (
 		<>
@@ -86,9 +85,7 @@ const Personalinfo = () => {
 							<div className="address-book">
 								<div className="address">
 									<h1>Address Book</h1>
-									<h2>
-										{user ? address : "Loading..."}
-									</h2>
+									<h2>{user ? address : "Loading..."}</h2>
 									<div className="personal-number text-white">
 										{user ? phone : "Loading..."}
 									</div>
@@ -120,7 +117,7 @@ const Personalinfo = () => {
 											<tbody>
 												<tr>
 													<td>{order.id}</td>
-													<td>{order.createdAt}</td>
+													<td>{formatDate(order.createdAt)}</td>
 													<td>
 														{order.Products[0].name}
 													</td>

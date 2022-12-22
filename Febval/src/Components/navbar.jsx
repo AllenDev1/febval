@@ -109,7 +109,7 @@ const Navbars = () => {
 														localStorage.clear();
 														window.location.reload();
 														window.open(
-															"https://febval.onrender.com/auth/logout",
+															`${process.env.REACT_APP_URL}/auth/logout`,
 															"_self"
 														);
 													}}

@@ -25,13 +25,13 @@ router.get("/login/success", (req, res) => {
 
 router.get("/logout", (req, res) => {
     req.logout();
-    return res.redirect("https://febval.onrender.com/");
+    return res.redirect(process.env.URL);
 });
 
 router.get(
     "/google/callback",
     passort.authenticate("google", {
-        successRedirect: "https://febval.onrender.com/",
+        successRedirect: `${process.env.URL}`,
         failureRedirect: "/login/failure",
     })
 );

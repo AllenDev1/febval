@@ -29,7 +29,7 @@ const Loginform = (props) => {
 						className="login-google"
 						onClick={() => {
 							window.open(
-								"https://febval.onrender.com/auth/google",
+								`${process.env.REACT_APP_URL}/auth/google`,
 								"_self"
 							);
 						}}
