@@ -4,7 +4,7 @@ const router = express.Router();
 const { Order, User, Product, ProductOrder } = require("../models/index");
 const { ensureLoggedIn } = require("../middlewares/Auth.js");
 
-router.post("/checkout", async (req, res) => {
+router.post("/checkout", ensureLoggedIn, async (req, res) => {
 	const user = req.user;
 	const products = req.body.products;
 
@@ -31,7 +31,7 @@ router.post("/checkout", async (req, res) => {
 	const order = await Order.create({
 		orderComplete: false,
 		deliveryType: "cod",
-		userId: 4,
+		userId: user.id,
 	});
 
 	console.log("order", order.id);
