@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "secrets/.env" });
+require("dotenv").config({ path: "/etc/secrets/.env" }); // Render stores .env file at /etc/secrets/
 const express = require("express");
 const AdminJS = require("adminjs");
 const AdminJSExpress = require("@adminjs/express");
