@@ -6,13 +6,16 @@
 		.CDCol-Carousel {
 			.productCarousel {
 				.carousel-slider {
-					box-shadow: 5px 10px 15px -3px rgba(0,0,0,0.5);
-
+					box-shadow: 5px 10px 15px -3px rgba(0, 0, 0, 0.5);
+					height: 50vh;
 					.slider-wrapper {
 						.slider {
 							.slide {
 								justify-content: center;
 								display: flex;
+								img {
+									height: 50vh;
+								}
 							}
 						}
 					}
@@ -20,14 +23,37 @@
 			}
 		}
 
-		.CDCol-dec{
-			.vstack{
-				.addtocart-buynow{
-					button{
+		.CDCol-dec {
+			.vstack {
+				.addtocart-buynow {
+					button {
 						border-radius: 200px;
 					}
-					button:hover{
+					button:hover {
 						opacity: 0.8;
+					}
+				}
+			}
+		}
+	}
+}
+// production ready
+@media (max-width: 425px) {
+	.desc-container {
+		.cardDecRow {
+			.CDCol-Carousel {
+				.productCarousel {
+					.carousel-slider {
+						height: 300px;
+						.slider-wrapper {
+							.slider {
+								.slide {
+									img {
+										height: 300px;
+									}
+								}
+							}
+						}
 					}
 				}
 			}
