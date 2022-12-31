@@ -57,31 +57,6 @@ const Navbars = () => {
 			});
 	}, []);
 
-	//search products by name
-	// const [search, setSearch] = useState("");
-	// const [searchResult, setSearchResult] = useState([]);
-
-	// const handleSearch = (e) => {
-	// 	e.preventDefault();
-	// 	setSearch(e.target.value);
-	// };
-
-	// useEffect(() => {
-	// 	const options = {
-	// 		method: "GET",
-	// 		url: "/api/search/products/" + search,
-	// 	};
-
-	// 	axios
-	// 		.request(options)
-	// 		.then(function (response) {
-	// 			setSearchResult(response.data.products);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// }, []);
-
 	return (
 		<>
 			<Navbar collapseOnSelect expand="lg" className="main-nav">
@@ -134,7 +109,7 @@ const Navbars = () => {
 														localStorage.clear();
 														window.location.reload();
 														window.open(
-															"http://localhost:3001/auth/logout",
+															`${process.env.REACT_APP_URL}/auth/logout`,
 															"_self"
 														);
 													}}
@@ -204,6 +179,12 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									//onclick closeButton offcanvas
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={cake} alt="..." />
 									Cakes
@@ -213,6 +194,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={wed} alt="..." />
 									Wedding
@@ -222,6 +208,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Him
@@ -231,6 +222,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Her
@@ -240,6 +236,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Kids
@@ -249,6 +250,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Birthday
@@ -258,6 +264,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={events} alt="..." />
 									Events
@@ -267,6 +278,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={other} alt="..." />
 									Others

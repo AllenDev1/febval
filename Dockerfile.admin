@@ -1,0 +1,18 @@
+FROM nikolaik/python-nodejs:python3.11-nodejs14-alpine AS Production
+
+# Set working directory
+WORKDIR /app
+
+COPY api/package.json api/package-lock.json ./
+
+# Install dependencies
+RUN npm install --only=production
+
+# Copy source files
+COPY api .
+
+# Expose port
+EXPOSE 8080
+
+# Start app
+CMD ["node", "admin-index.js"]

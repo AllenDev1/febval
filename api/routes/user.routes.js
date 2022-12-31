@@ -11,7 +11,9 @@ router.get("/info", ensureLoggedIn, async (req, res) => {
 		const userInfo = await User.findOne({
 			where: { id: user.id },
 		});
-		return res.sendStatus(200).json(userInfo);
+		// retun user info
+
+		return res.status(200).json({ user: userInfo });
 	} catch (error) {
 		console.error(error);
 		return res.sendStatus(500).json({ error: error.message });

@@ -22,10 +22,10 @@ const cartSlice = createSlice({
 			let oldProduct = currentProducts.filter(
 				(item) => item.product.id === product.id
 			);
-			if (oldProduct.length !== 0) {
-				// Increment the count of the newProduct
-				newProduct.quantity += oldProduct.quantity;
-			}
+			// if (oldProduct.length !== 0) {
+			// 	// Increment the count of the newProduct
+			// 	newProduct.quantity += oldProduct.quantity;
+			// }
 			// Make array of products that are different from newProduct
 			let newProducts = currentProducts.filter(
 				(item) => item.product.id !== product.id
@@ -39,18 +39,25 @@ const cartSlice = createSlice({
 		},
 
 		removeProduct: (state, action) => {
-			const {product} = action.payload;
+			const { product } = action.payload;
 			// Make a copy of the products array
 			let currentProducts = [...state.products];
 
 			// Filter out those products that has matching id
-			let newProducts = currentProducts.filter((item) => item.product.id !== product.id);
+			let newProducts = currentProducts.filter(
+				(item) => item.product.id !== product.id
+			);
 
 			// Update the state
 			state.products = newProducts;
-		}
+		},
+
+		// clear cart
+		clearCart: (state) => {
+			state.products = [];
+		},
 	},
 });
 
-export const { addProduct, removeProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

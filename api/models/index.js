@@ -16,10 +16,6 @@ const ProductOrder = sequelize.define(
 			autoIncrement: true,
 			primaryKey: true,
 		},
-		price: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
 		quantity: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -41,13 +37,22 @@ User.Order = User.hasMany(Order, {
 	sourceKey: "id",
 });
 
-Product.Order = Product.belongsToMany(Order, {
+// Order.User = Order.hasOne(User)
+
+// order user relation
+
+Order.belongsTo(User, {
+	foreignKey: "userId",
+	targetKey: "id",
+});
+
+Product.belongsToMany(Order, {
 	through: ProductOrder,
 	foreignKey: "productId",
 	otherKey: "orderId",
 });
 
-Order.Product = Order.belongsToMany(Product, {
+Order.belongsToMany(Product, {
 	through: ProductOrder,
 	foreignKey: "orderId",
 	otherKey: "productId",
@@ -59,7 +64,6 @@ module.exports = {
 	Order,
 	ProductImages,
 	ProductOrder,
-
 	SalesBanner,
 	SalesCarousel,
 	sequelize,

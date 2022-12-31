@@ -11,7 +11,7 @@ const Updatedetails = (props) => {
 
 	const updateInfo = (e) => {
 		e.preventDefault();
-		
+
 		const options = {
 			method: "POST",
 			url: "/api/user/info",
@@ -30,26 +30,9 @@ const Updatedetails = (props) => {
 			});
 	};
 
-	//update user data after update
+	
+	
 
-	// useEffect(() => {
-	// 	const options = {
-	// 		method: "GET",
-	// 		url: "/api/user/info",
-
-	// 	};
-
-	// 	axios
-
-	// 		.request(options)
-	// 		.then(function (response) {
-	// 			setPhone(response.data.phone);
-	// 			setAddress(response.data.address);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// }, []);
 
 	return (
 		<>
