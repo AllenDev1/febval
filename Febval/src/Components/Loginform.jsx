@@ -25,17 +25,15 @@ const Loginform = (props) => {
 				</Modal.Body>
 				<Modal.Footer className="login-modal-footer">
 					<a
-						href="#"
 						className="login-google"
 						onClick={() => {
 							window.open(
-								// `${window.location.origin}/auth/google`,
-								`http://localhost:3001/auth/google`,
+								`${window.location.origin}/auth/google`,
 								"_self"
 							);
 						}}
 					>
-						<img src={google} alt=".." /> Login with Google
+						<img src={google} alt=".login" /> Login with Google
 					</a>
 
 					<p className="footer-text">
