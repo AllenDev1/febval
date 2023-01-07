@@ -2,7 +2,6 @@
 	padding: 150px 0px;
 	.carousel-container {
 		border-radius: 20px;
-
 		background: transparent;
 		.carousel-inner {
 			border-radius: 20px;
@@ -27,9 +26,7 @@
 			margin: 0%;
 			bottom: -40px;
 		}
-		.carousel-control-next,
-		.carousel-control-prev {
-		}
+		
 		h3 {
 			
 			font-style: normal;
@@ -47,5 +44,45 @@
 			line-height: 20px;
 			color: #ffffff;
 		}
-	}
+		
+
+
 }
+
+
+
+	}
+	@media only screen and (max-width: 768px){
+		
+		.main-carousel-container {
+			padding: 120px 0px;
+			padding-bottom: 30px;
+			.w-100 {
+				height:150px;
+				object-fit: cover;
+				border-radius: 20px;
+			}
+		
+			.carousel-indicators [data-bs-target] {
+				height: 10px !important;
+				width: 10px !important;
+				border-radius: 70px;
+				border-top: 0;
+				border-bottom: 0px;
+				background-color: #f96666;
+			}
+			.carousel-indicators {
+				margin-bottom: 20px!important;
+			}
+			.carousel-container{
+				height: 150px;
+			}
+			.carousel-inner{
+				height: 146px;
+				border-radius: 4px;
+			}
+		}
+	
+
+}
+
