@@ -1,7 +1,7 @@
 import GooglePayButton from "@google-pay/button-react";
 import axios from "axios";
 import React from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
@@ -79,6 +79,8 @@ const Cart = (props) => {
 	// 	form.remove();
 	// }
 
+	
+
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -117,16 +119,15 @@ const Cart = (props) => {
 			axios
 				.request(options)
 				.then(function (response) {
-					setModalShow(true);
-
+					alert("Order Placed Successfully");
 					dispatch(clearCart());
+					window.location.reload();
 				})
 				.catch(function (error) {
 					console.error(error);
 				});
 		} else {
 			setModalShow(true);
-			alert("Please Try Again!");
 		}
 	};
 
@@ -185,7 +186,7 @@ const Cart = (props) => {
 															src={
 																_.product
 																	.productImages[0]
-																	.image
+																	?.image
 															}
 															alt="..."
 														/>

@@ -28,11 +28,9 @@ const Updatedetails = (props) => {
 			.catch(function (error) {
 				console.error(error);
 			});
+
+		props.onHide();
 	};
-
-	
-	
-
 
 	return (
 		<>
@@ -76,13 +74,7 @@ const Updatedetails = (props) => {
 										required
 									/>
 								</label>
-								<Button
-									variant="light"
-									type="submit"
-									onClick={() => {
-										window.location.reload();
-									}}
-								>
+								<Button variant="light" type="submit">
 									Update
 								</Button>
 							</form>
