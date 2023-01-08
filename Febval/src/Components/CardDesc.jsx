@@ -96,6 +96,7 @@ const CardDesc = ({ id, name }) => {
 										showIndicators={false}
 										swipeable={false}
 										showStatus={false}
+										
 									>
 										{product.productImages.map((_, idx) => (
 											<div key={idx}>
