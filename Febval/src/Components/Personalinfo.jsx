@@ -111,13 +111,17 @@ const Personalinfo = () => {
 								</tr>
 							</thead>
 							{orders ? (
-								orders?.map((order) => {
+								orders?.map((order, idx) => {
 									return (
 										<>
-											<tbody>
+											<tbody key={idx}>
 												<tr>
 													<td>{order.id}</td>
-													<td>{formatDate(order.createdAt)}</td>
+													<td>
+														{formatDate(
+															order.createdAt
+														)}
+													</td>
 													<td>
 														{order.Products[0].name}
 													</td>

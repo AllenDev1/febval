@@ -7,7 +7,7 @@ import "../Scss/updatedetails.scss";
 const Updatedetails = (props) => {
 	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
-	const user = props.user;
+	const [user, setUser] = useState(null);
 
 	const updateInfo = (e) => {
 		e.preventDefault();
@@ -31,6 +31,26 @@ const Updatedetails = (props) => {
 
 		props.onHide();
 	};
+
+	const getUserInfo = () => {
+		const options = {
+			method: "GET",
+			url: "/api/user/info",
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setUser(response.data.user);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	};
+
+	useEffect(() => {
+		getUserInfo();
+	}, []);
 
 	return (
 		<>

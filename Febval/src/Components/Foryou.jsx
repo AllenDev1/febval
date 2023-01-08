@@ -16,15 +16,15 @@ const Foryou = () => {
 
 					<Form.Select
 						aria-label="Default select example"
-						className="border-0 w-auto h-100"
+						className="border-0  h-100 sort-select"
 						onChange={(e) => {
 							SetSort(e.target.value);
 						}}
 					>
 						<option value="new">Sort</option>
 
-						<option value="high">Price: High to Low</option>
-						<option value="low">Price: Low to High</option>
+						<option value="high"> High to Low</option>
+						<option value="low"> Low to High</option>
 					</Form.Select>
 				</div>
 				<Cardsgroup sort={sort} cat={cat} />

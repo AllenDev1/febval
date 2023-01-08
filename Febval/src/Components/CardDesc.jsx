@@ -48,6 +48,7 @@ const CardDesc = ({ id, name }) => {
 				.request(options)
 				.then(function (response) {
 					setProduct(response.data.product);
+					console.log(response.data.product);
 				})
 				.catch(function (error) {
 					console.error(error);
@@ -72,6 +73,8 @@ const CardDesc = ({ id, name }) => {
 			<Container className="desc-container">
 				<Breadcrumb>
 					<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+					<Breadcrumb.Item href={`/products/${product?.category}`}>{product?.category}</Breadcrumb.Item>
+
 
 					<Breadcrumb.Item active>{name}</Breadcrumb.Item>
 				</Breadcrumb>
@@ -84,6 +87,11 @@ const CardDesc = ({ id, name }) => {
 										className="productCarousel"
 										showArrows={false}
 										showIndicators={false}
+										swipeable={false}
+										showStatus={false}
+										infiniteLoop={true}
+										autoPlay={true}
+										interval={4000}
 									>
 										{product.productImages.map((_, idx) => (
 											<div>

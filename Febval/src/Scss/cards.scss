@@ -20,12 +20,13 @@
 			.card-link {
 				text-decoration: none;
 				.cards-card {
+					height: 40vh;
 					background-color: transparent;
 					border-radius: 10px;
 
 					.cards-img {
 						border-radius: 10px;
-						height: 300px;
+						height: 70%;
 					}
 					.cards-card-body {
 						padding: 10px;
@@ -93,12 +94,17 @@
 			.cards-col {
 				.card-link {
 					.cards-card {
+						height: 30vh;
+						.cards-img{
+							
+						}
 						.cards-card-body {
 							.cards-text {
 								.price-cards {
 									font-size: 12px;
 								}
 								span {
+									display: none;
 									font-size: 7px;
 									height: auto;
 									width: auto;

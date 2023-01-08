@@ -168,7 +168,7 @@ const Cart = (props) => {
 								// check if cart is empty
 								cartProducts.length === 0 ? (
 									<div className="empty-cart">
-										<h1>Your Cart is Empty</h1>
+										<h>Your Cart is Empty!</h>
 									</div>
 								) : (
 									<div className="cart-item-container">

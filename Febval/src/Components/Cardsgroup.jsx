@@ -65,7 +65,7 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 	return (
 		<>
 			<Container className="card-container">
-				<Row xs={1} md={4} className="g-4 cards-row">
+				<Row xs={2} md={4} className="g-4 cards-row">
 					{feature ? (
 						<>
 							{products.slice(0, 8).map((_, idx) => (

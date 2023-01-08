@@ -1,6 +1,8 @@
 .card-container {
 	
 	.feature-products {
+		padding-right: calc(var(--bs-gutter-x) * .5);
+		padding-left: calc(var(--bs-gutter-x) * .5);
 		font-style: normal;
 		font-weight: 400;
 		font-size: 36px;
@@ -14,6 +16,9 @@
             text-decoration: underline;
             text-underline-offset: 5px;
         }
+	}
+	.sort-select{
+		width: auto;
 	}
 	
 }
@@ -38,6 +43,9 @@
 		}
 		.h-100 {
 			margin-top: 10px;
+		}
+		.sort-select{
+			width: 85px;
 		}
 		
 	}

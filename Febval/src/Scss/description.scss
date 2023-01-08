@@ -1,5 +1,5 @@
 .desc-container {
-	padding-top: 165px;
+	padding-top: 125px;
 	padding-bottom: 115px;
 
 	.cardDecRow {
@@ -15,6 +15,17 @@
 								display: flex;
 								img {
 									height: 50vh;
+								}
+							}
+						}
+					}
+				}
+				.carousel{
+					.thumbs-wrapper{
+						.thumbs{
+							.thumb{
+								img{
+									height: 5rem;
 								}
 							}
 						}
