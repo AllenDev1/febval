@@ -1,9 +1,7 @@
 .card-container {
-	
 	.feature-products {
-		font-family: 'Sacramento', cursive;
-		padding-right: calc(var(--bs-gutter-x) * .5);
-		padding-left: calc(var(--bs-gutter-x) * .5);
+		padding-right: calc(var(--bs-gutter-x) * 0.5);
+		padding-left: calc(var(--bs-gutter-x) * 0.5);
 		font-style: normal;
 		font-weight: 400;
 		font-size: 36px;
@@ -13,42 +11,39 @@
 		text-align: left;
 
 		color: #4f4f4f;
-        p{
-            text-decoration: underline;
-            text-underline-offset: 5px;
-        }
+		p {
+			font-family: "Sacramento", cursive;
+
+			text-decoration: underline;
+			text-underline-offset: 5px;
+		}
 	}
-	.sort-select{
+	.sort-select {
 		width: auto;
 	}
-	
 }
 @media only screen and (max-width: 768px) {
 	.card-container {
-	
 		.feature-products {
 			font-style: normal;
 			font-weight: bold;
 			font-size: 16px;
 			line-height: 53px;
-			
+
 			/* identical to box height */
-	
+
 			text-align: left;
-	
+
 			color: #4f4f4f;
-			p{
+			p {
 				margin-bottom: 0px;
-				
 			}
 		}
 		.h-100 {
 			margin-top: 10px;
 		}
-		.sort-select{
+		.sort-select {
 			width: 85px;
 		}
-		
 	}
-
 }

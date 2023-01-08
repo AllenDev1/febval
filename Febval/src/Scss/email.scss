@@ -5,17 +5,19 @@
 		.email-row {
 			display: grid;
 			.newsletter-col {
-				font-family: "Sacramento", cursive;
 				font-style: normal;
 				font-weight: bolder;
 				font-size: 36px;
 				line-height: 53px;
 				text-align: center;
 				color: #4f4f4f;
+				h1 {
+					font-family: "Sacramento", cursive;
+				}
 				p {
 					font-style: normal;
 					font-weight: 500;
-					font-size: 25px;
+					font-size: 16px;
 					line-height: 19px;
 					text-align: center;
 					color: #4f4f4f;
