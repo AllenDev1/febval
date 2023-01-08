@@ -14,6 +14,7 @@ import "../Scss/Cart.scss";
 import Updatedetails from "./Updatedetails";
 import { useState, useEffect } from "react";
 import { getUser } from "../Auth/auth";
+import OrderCompltedModel from "./OrderCompltedModel";
 
 const STRIPE_KEY =
 	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
@@ -21,6 +22,7 @@ const STRIPE_KEY =
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
 	const [modalShow, setModalShow] = useState(false);
+	const [orderAlert, setOrderAlert] = useState(false);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -79,8 +81,6 @@ const Cart = (props) => {
 	// 	form.remove();
 	// }
 
-	
-
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -119,9 +119,9 @@ const Cart = (props) => {
 			axios
 				.request(options)
 				.then(function (response) {
-					alert("Order Placed Successfully");
+					setOrderAlert(true);
 					dispatch(clearCart());
-					window.location.reload();
+					props.onHide();
 				})
 				.catch(function (error) {
 					console.error(error);
@@ -411,6 +411,10 @@ const Cart = (props) => {
 			<Updatedetails
 				show={modalShow}
 				onHide={() => setModalShow(false)}
+			/>
+			<OrderCompltedModel
+				show={orderAlert}
+				onHide={() => setOrderAlert(false)}
 			/>
 		</>
 	);

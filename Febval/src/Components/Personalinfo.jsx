@@ -108,6 +108,7 @@ const Personalinfo = () => {
 									<th>Placed on</th>
 									<th>Items</th>
 									<th>Total</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							{orders ? (
@@ -116,7 +117,7 @@ const Personalinfo = () => {
 										<>
 											<tbody key={idx}>
 												<tr>
-													<td>{order.id}</td>
+													<td>{idx}</td>
 													<td>
 														{formatDate(
 															order.createdAt
@@ -132,6 +133,12 @@ const Personalinfo = () => {
 															order.Products[0]
 																.price
 														}
+													</td>
+													<td>
+														{order.orderComplete ===
+														false
+															? "Pending"
+															: "Shipped"}
 													</td>
 												</tr>
 											</tbody>
