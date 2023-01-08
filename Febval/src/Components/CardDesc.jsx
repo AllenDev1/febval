@@ -48,7 +48,6 @@ const CardDesc = ({ id, name }) => {
 				.request(options)
 				.then(function (response) {
 					setProduct(response.data.product);
-					console.log(response.data.product);
 				})
 				.catch(function (error) {
 					console.error(error);
@@ -93,14 +92,13 @@ const CardDesc = ({ id, name }) => {
 								<Col className="CDCol-Carousel" xl={5}>
 									<Carousel
 										className="productCarousel"
-										showArrows={false}
+										showArrows={true}
 										showIndicators={false}
 										swipeable={false}
 										showStatus={false}
-										showArrows={true}
 									>
 										{product.productImages.map((_, idx) => (
-											<div>
+											<div key={idx}>
 												<img src={_.image} alt="..." />
 											</div>
 										))}

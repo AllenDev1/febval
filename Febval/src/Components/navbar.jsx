@@ -7,7 +7,7 @@ import {
 	Navbar,
 	Offcanvas,
 } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
 import events from "../Assets/events.svg";
@@ -25,10 +25,13 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
 import profileLogo from "../Assets/gift shop 2/Vector.svg";
+import SearchPage from "./SearchPage";
 
 const Navbars = () => {
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
+	const [search, setSearch] = useState("");
+	const navigate = useNavigate();
 
 	const cartProductsNumber = useSelector((state) => state.cart.products);
 
@@ -66,8 +69,18 @@ const Navbars = () => {
 							<img src={logo} alt=".." />
 						</Navbar.Brand>
 						<div className="search-bar">
-							<Form className="search-from">
-								<input placeholder="Search Gifts..."></input>
+							<Form
+								className="search-from"
+								onSubmit={(e) => {
+									e.preventDefault();
+									navigate(`/search/${search}`);
+								}}
+							>
+								<input
+									placeholder="Search Gifts..."
+									value={search}
+									onChange={(e) => setSearch(e.target.value)}
+								></input>
 							</Form>
 						</div>
 						<div className="searchbarAndLogo">

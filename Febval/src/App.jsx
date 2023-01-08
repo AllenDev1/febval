@@ -8,6 +8,7 @@ import Home from "./Pages/home";
 import ProductsByCategory from "./Pages/ProductsByCategory";
 import Events from "./Pages/Events";
 import Terms from "./Pages/Terms";
+import SearchPage from "./Components/SearchPage";
 import Pagenotfound from "./Pages/Pagenotfound";
 import WhatsAppWidget from "react-whatsapp-chat-widget";
 import "react-whatsapp-chat-widget/index.css";
@@ -30,6 +31,8 @@ const App = () => {
 						path="/description/:id/:name"
 						element={<Description />}
 					/>
+
+					<Route path="/search/:search" element={<SearchPage />} />
 					<Route path="terms" element={<Terms />} />
 
 					<Route path="*" element={<Pagenotfound />} />
@@ -67,7 +70,6 @@ const App = () => {
 				btnTxtColor="white"
 				btnTxt="Start Chat"
 			/>
-			
 		</>
 	);
 };
