@@ -73,10 +73,18 @@ const CardDesc = ({ id, name }) => {
 			<Container className="desc-container">
 				<Breadcrumb>
 					<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-					<Breadcrumb.Item href={`/products/${product?.category}`}>{product?.category}</Breadcrumb.Item>
+					<Breadcrumb.Item href={`/products/${product?.category}`}>
+						{product?.category}
+					</Breadcrumb.Item>
 
-
-					<Breadcrumb.Item active>{name}</Breadcrumb.Item>
+					<Breadcrumb.Item active>
+						<span
+							className="d-inline-block text-truncate"
+							style={{ maxWidth: 200 }}
+						>
+							{name}
+						</span>
+					</Breadcrumb.Item>
 				</Breadcrumb>
 				<Row className="cardDecRow">
 					{product ? (
@@ -89,9 +97,7 @@ const CardDesc = ({ id, name }) => {
 										showIndicators={false}
 										swipeable={false}
 										showStatus={false}
-										infiniteLoop={true}
-										autoPlay={true}
-										interval={4000}
+										showArrows={true}
 									>
 										{product.productImages.map((_, idx) => (
 											<div>

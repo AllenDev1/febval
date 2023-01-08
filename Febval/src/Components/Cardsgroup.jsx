@@ -81,7 +81,12 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 												src={_.productImages[0]?.image}
 											/>
 											<Card.Body className="cards-card-body">
-												<Card.Title className="cards-title">
+												<Card.Title
+													className="cards-title text-truncate "
+													style={{
+														maxWidth: "100%",
+													}}
+												>
 													{_.name}
 												</Card.Title>
 
@@ -110,7 +115,12 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 												src={_.productImages[0]?.image}
 											/>
 											<Card.Body className="cards-card-body">
-												<Card.Title className="cards-title">
+												<Card.Title
+													className="cards-title text-truncate "
+													style={{
+														maxWidth: "100%",
+													}}
+												>
 													{_.name}
 												</Card.Title>
 
