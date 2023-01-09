@@ -127,6 +127,7 @@ const Cart = (props) => {
 					console.error(error);
 				});
 		} else {
+			alert("Please update your details and try again");
 			setModalShow(true);
 		}
 	};

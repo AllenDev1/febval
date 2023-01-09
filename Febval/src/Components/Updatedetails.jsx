@@ -29,7 +29,7 @@ const Updatedetails = (props) => {
 				console.error(error);
 			});
 
-		props.onHide();
+		window.location.reload();
 	};
 
 	const getUserInfo = () => {

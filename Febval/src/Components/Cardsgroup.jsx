@@ -1,13 +1,11 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import "../Scss/cards.scss";
-import axios from "axios";
 import AutoButton from "./AutoButton";
 import da from "./data file/datafiles.json";
-import { CartState } from "../context/Context";
-import { addProduct } from "../redux/cartRedux";
 
 const Cardsgroup = ({ cat, sort, feature }) => {
 	const [products, setProducts] = useState([]);
@@ -82,7 +80,7 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 											/>
 											<Card.Body className="cards-card-body">
 												<Card.Title
-													className="cards-title text-truncate "
+													className="cards-title text-truncate"
 													style={{
 														maxWidth: "100%",
 													}}

@@ -9,6 +9,7 @@ import {
 	Stack,
 	Tab,
 	Tabs,
+	ButtonGroup,
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
@@ -96,7 +97,6 @@ const CardDesc = ({ id, name }) => {
 										showIndicators={false}
 										swipeable={false}
 										showStatus={false}
-										
 									>
 										{product.productImages.map((_, idx) => (
 											<div key={idx}>
@@ -135,6 +135,19 @@ const CardDesc = ({ id, name }) => {
 												{product.description}
 											</span>
 										</div>
+										{/* <div className="size-container">
+											<ButtonGroup aria-label="Basic example">
+												{product.productSize?.map(
+													(_) => {
+														return (
+															<Button variant="secondary">
+																{_.size}
+															</Button>
+														);
+													}
+												)}
+											</ButtonGroup>
+										</div> */}
 										<div className="qty-change d-flex justify-content-center align-items-center">
 											<ButtonIncrement
 												onClickFunc={incrementCounter}
@@ -152,15 +165,6 @@ const CardDesc = ({ id, name }) => {
 											>
 												Add to Bag
 											</Button>
-
-											{/* <Button
-
-												variant="light"
-												className="px-5 py-2 "
-											>
-												Rs. {product.price + 150} Buy
-												Now
-											</Button> */}
 										</div>
 										<div className="fulldesc-shipping mt-5">
 											<Tabs
@@ -188,7 +192,7 @@ const CardDesc = ({ id, name }) => {
 						</>
 					) : (
 						<>
-							<h1>NO DATA</h1>
+							<h5>Loading...</h5>
 						</>
 					)}
 				</Row>

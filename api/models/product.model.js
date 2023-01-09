@@ -24,14 +24,14 @@ const Product = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-
+		
 		price: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 		quantity: {
 			type: DataTypes.INTEGER,
-			allowNull: false,
+			allowNull: true,
 		},
 		active: {
 			type: DataTypes.BOOLEAN,
