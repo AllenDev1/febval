@@ -84,51 +84,55 @@ const Cart = (props) => {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		const options = {
-			method: "GET",
-			url: "/api/user/info",
-		};
-
-		axios
-			.request(options)
-			.then(function (response) {
-				setUser(response.data.user);
-			})
-			.catch(function (error) {
-				console.error(error);
-			});
-	}, []);
-
-	const makeOrder = (e) => {
-		e.preventDefault();
-
-		if (user.phone && user.address) {
-			const reqData = cartProducts.map((item) => {
-				return {
-					productId: item.product.id,
-					quantity: item.quantity,
-				};
-			});
-
+		if(user){
 			const options = {
-				method: "POST",
-				url: "/api/order/checkout",
-				data: { products: reqData },
+				method: "GET",
+				url: "/api/user/info",
 			};
-
+	
 			axios
 				.request(options)
 				.then(function (response) {
-					setOrderAlert(true);
-					dispatch(clearCart());
-					props.onHide();
+					setUser(response.data.user);
 				})
 				.catch(function (error) {
 					console.error(error);
 				});
-		} else {
-			alert("Please update your details and try again");
-			setModalShow(true);
+		}
+		
+	}, []);
+
+	const makeOrder = (e) => {
+		e.preventDefault();
+		if (user) {
+			if (user.phone && user.address) {
+				const reqData = cartProducts.map((item) => {
+					return {
+						productId: item.product.id,
+						quantity: item.quantity,
+					};
+				});
+
+				const options = {
+					method: "POST",
+					url: "/api/order/checkout",
+					data: { products: reqData },
+				};
+
+				axios
+					.request(options)
+					.then(function (response) {
+						setOrderAlert(true);
+						dispatch(clearCart());
+						props.onHide();
+					})
+					.catch(function (error) {
+						console.error(error);
+					});
+			} else {
+				alert("Please update your details and try again");
+				setModalShow(true);
+			}
 		}
 	};
 

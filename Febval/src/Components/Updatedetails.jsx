@@ -49,7 +49,10 @@ const Updatedetails = (props) => {
 	};
 
 	useEffect(() => {
-		getUserInfo();
+		// check if useris logged in
+		if (user) {
+			getUserInfo();
+		}
 	}, []);
 
 	return (
