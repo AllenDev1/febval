@@ -157,9 +157,11 @@ const CardDesc = ({ id, name }) => {
 												{product.description}
 											</span>
 										</div>
-										<div className="size-container">
+										<Col className="size-container  ">
+											<p>Size: </p>
 											<Form.Select
 												aria-label="Default select example"
+												className="w-25 "
 												onChange={(e) => {
 													setCakeSize(e.target.value);
 												}}
@@ -180,7 +182,7 @@ const CardDesc = ({ id, name }) => {
 													2 KG
 												</option>
 											</Form.Select>
-										</div>
+										</Col>
 										<div className="qty-change d-flex justify-content-center align-items-center">
 											<ButtonIncrement
 												onClickFunc={incrementCounter}
