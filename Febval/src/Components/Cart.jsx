@@ -9,130 +9,95 @@ import Checkout from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
 import { removeProduct, clearCart } from "../redux/cartRedux";
-import paytm from "../Assets/paytm.png";
+import paytmlogo from "../Assets/paytm.png";
 import "../Scss/Cart.scss";
 import Updatedetails from "./Updatedetails";
 import { useState, useEffect } from "react";
 import { getUser } from "../Auth/auth";
 import OrderCompltedModel from "./OrderCompltedModel";
-
-const STRIPE_KEY =
-	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
+// import Paytm from 'paytm-sdk-js';
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
+	
 	const [modalShow, setModalShow] = useState(false);
 	const [orderAlert, setOrderAlert] = useState(false);
+	const [amount, setAmount] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const handleToken = (token, address) => {
-		axios
-
-			.post("/api/stripe/checkout", { token, cartProducts })
-			.then((res) => {
-				console.log(res);
-				alert("Payment Successful");
-			})
-			.catch((err) => {
-				console.log(err);
-				alert("Payment Failed");
-			});
-	};
-
-	// function isDate(val) {
-	// 	// Cross realm comptatible
-	// 	return Object.prototype.toString.call(val) === "[object Date]";
-	// }
-
-	// function isObj(val) {
-	// 	return typeof val === "object";
-	// }
-
-	// function stringifyValue(val) {
-	// 	if (isObj(val) && !isDate(val)) {
-	// 		return JSON.stringify(val);
-	// 	} else {
-	// 		return val;
-	// 	}
-	// }
-
-	// function buildForm({ action, params }) {
-	// 	const form = document.createElement("form");
-	// 	form.setAttribute("method", "post");
-	// 	form.setAttribute("action", action);
-
-	// 	Object.keys(params).forEach((key) => {
-	// 		const input = document.createElement("input");
-	// 		input.setAttribute("type", "hidden");
-	// 		input.setAttribute("name", key);
-	// 		input.setAttribute("value", stringifyValue(params[key]));
-	// 		form.appendChild(input);
-	// 	});
-
-	// 	return form;
-	// }
-
-	// function post(details) {
-	// 	const form = buildForm(details);
-	// 	document.body.appendChild(form);
-	// 	form.submit();
-	// 	form.remove();
-	// }
-
 	const [user, setUser] = useState(null);
 
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	setError("");
+	// 	setIsLoading(true);
+
+	// 	try {
+	// 		const { data } = await axios.post("/paytm-payment", {
+	// 			amount,
+	// 			email,
+	// 			phone,
+	// 		});
+	// 		const { paytmParams, checksum } = data;
+	// 		paytm.startPayment(paytmParams, checksum);
+	// 	} catch (err) {
+	// 		setError(err.response.data.message);
+	// 	} finally {
+	// 		setIsLoading(false);
+	// 	}
+	// };
 	useEffect(() => {
-		if(user){
-			const options = {
-				method: "GET",
-				url: "/api/user/info",
-			};
-	
-			axios
-				.request(options)
-				.then(function (response) {
-					setUser(response.data.user);
-				})
-				.catch(function (error) {
-					console.error(error);
-				});
-		}
-		
+		const options = {
+			method: "GET",
+			url: "/api/user/info",
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setUser(response.data.user);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 	}, []);
 
 	const makeOrder = (e) => {
 		e.preventDefault();
-		if (user) {
-			if (user.phone && user.address) {
-				const reqData = cartProducts.map((item) => {
-					return {
-						productId: item.product.id,
-						quantity: item.quantity,
-					};
-				});
 
-				const options = {
-					method: "POST",
-					url: "/api/order/checkout",
-					data: { products: reqData },
+		if (user.phone && user.address) {
+			const reqData = cartProducts.map((item) => {
+				return {
+					productId: item.product.id,
+					quantity: item.quantity,
 				};
+			});
 
-				axios
-					.request(options)
-					.then(function (response) {
-						setOrderAlert(true);
-						dispatch(clearCart());
-						props.onHide();
-					})
-					.catch(function (error) {
-						console.error(error);
-					});
-			} else {
-				alert("Please update your details and try again");
-				setModalShow(true);
-			}
+			const options = {
+				method: "POST",
+				url: "/api/order/checkout",
+				data: { products: reqData },
+			};
+
+			axios
+				.request(options)
+				.then(function (response) {
+					setOrderAlert(true);
+					dispatch(clearCart());
+					props.onHide();
+				})
+				.catch(function (error) {
+					console.error(error);
+				});
+		} else {
+			alert("Please update your details and try again");
+			setModalShow(true);
 		}
 	};
 
@@ -206,7 +171,7 @@ const Cart = (props) => {
 																Rs.{" "}
 																{
 																	_.product
-																		.price
+																		.pri
 																}{" "}
 																* {_.quantity}
 															</p>
@@ -217,7 +182,7 @@ const Cart = (props) => {
 															<p>
 																Rs.
 																{_.product
-																	.price *
+																	.pri *
 																	_.quantity}
 																/-
 															</p>
@@ -266,7 +231,7 @@ const Cart = (props) => {
 									{cartProducts.reduce(
 										(acc, curr) =>
 											acc +
-											curr.product.price * curr.quantity,
+											curr.product.pri * curr.quantity,
 										0
 									)}
 								</p>
@@ -285,7 +250,7 @@ const Cart = (props) => {
 									{cartProducts.reduce(
 										(acc, curr) =>
 											acc +
-											curr.product.price * curr.quantity,
+											curr.product.pri * curr.quantity,
 										0
 									) + 150}
 									/-
@@ -316,7 +281,7 @@ const Cart = (props) => {
 						onClick={makePayment}
 						className="comming soon bg-white "
 					>
-						<img src={paytm} alt="..." />
+						<img src={paytmlogo} alt="..." />
 						<p className="text-dark">
 							Buy with Paytm (comming soon)
 						</p>
@@ -372,9 +337,9 @@ const Cart = (props) => {
 								merchantName: "Demo Merchant",
 							},
 							transactionInfo: {
-								totalPriceStatus: "FINAL",
-								totalPriceLabel: "Total",
-								totalPrice: "100.00",
+								totalpriStatus: "FINAL",
+								totalpriLabel: "Total",
+								totalpri: "100.00",
 								currencyCode: "INR",
 								countryCode: "IN",
 							},

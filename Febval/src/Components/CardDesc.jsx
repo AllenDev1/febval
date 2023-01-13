@@ -9,7 +9,7 @@ import {
 	Stack,
 	Tab,
 	Tabs,
-	ButtonGroup,
+	Form,
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
@@ -24,16 +24,24 @@ const CardDesc = ({ id, name }) => {
 	const dispatch = useDispatch();
 	const [counter, setCounter] = useState(1);
 	const [user, setUser] = useState(null);
-
+	const [cakeSize, setCakeSize] = useState("0.5kg");
+	const [price, setPrice] = useState(0);
+	let pric;
+	console.log(product);
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
 	if (counter <= 1) {
 		decrementCounter = () => setCounter(1);
 	}
 	const addtoCartClick = () => {
+		const products = {
+			...product,
+			pri: pric,
+		};
+
 		dispatch(
 			addProduct({
-				product: product,
+				product: products,
 				quantity: counter,
 			})
 		);
@@ -49,6 +57,7 @@ const CardDesc = ({ id, name }) => {
 				.request(options)
 				.then(function (response) {
 					setProduct(response.data.product);
+					setPrice(response.data.product.price);
 				})
 				.catch(function (error) {
 					console.error(error);
@@ -124,8 +133,21 @@ const CardDesc = ({ id, name }) => {
 											</div>
 										</div>
 										<div className="price text-secondary d-flex gap-3">
-											<h5>Rs. {product.price}</h5> +
-											<h5>Rs. 150 shipping charge</h5>
+											<h5>
+												Rs.
+												{product?.category === "cakes"
+													? cakeSize === "0.5kg"
+														? (pric = price * 0.5)
+														: cakeSize === "1kg"
+														? (pric = price)
+														: cakeSize === "1.5kg"
+														? (pric = price * 1.5)
+														: cakeSize === "2kg"
+														? (pric = price * 2)
+														: price * 0
+													: product.price}
+											</h5>
+											+<h5>Rs. 150 shipping charge</h5>
 										</div>
 										<div className="small-desc text-muted">
 											<span
@@ -135,19 +157,30 @@ const CardDesc = ({ id, name }) => {
 												{product.description}
 											</span>
 										</div>
-										{/* <div className="size-container">
-											<ButtonGroup aria-label="Basic example">
-												{product.productSize?.map(
-													(_) => {
-														return (
-															<Button variant="secondary">
-																{_.size}
-															</Button>
-														);
-													}
-												)}
-											</ButtonGroup>
-										</div> */}
+										<div className="size-container">
+											<Form.Select
+												aria-label="Default select example"
+												onChange={(e) => {
+													setCakeSize(e.target.value);
+												}}
+											>
+												<option disabled>
+													Select size
+												</option>
+												<option value="0.5kg">
+													0.5 KG
+												</option>
+												<option value="1kg">
+													1 KG
+												</option>
+												<option value="1.5kg">
+													1.5 KG
+												</option>
+												<option value="2kg">
+													2 KG
+												</option>
+											</Form.Select>
+										</div>
 										<div className="qty-change d-flex justify-content-center align-items-center">
 											<ButtonIncrement
 												onClickFunc={incrementCounter}
