@@ -135,7 +135,7 @@ const CardDesc = ({ id, name }) => {
 										<div className="price text-secondary d-flex gap-3">
 											<h5>
 												Rs.
-												{product?.category === "cakes"
+												{product?.category === "cake"
 													? cakeSize === "0.5kg"
 														? (pric = price * 0.5)
 														: cakeSize === "1kg"
@@ -145,7 +145,7 @@ const CardDesc = ({ id, name }) => {
 														: cakeSize === "2kg"
 														? (pric = price * 2)
 														: price * 0
-													: product.price}
+													: 0}
 											</h5>
 											+<h5>Rs. 150 shipping charge</h5>
 										</div>
