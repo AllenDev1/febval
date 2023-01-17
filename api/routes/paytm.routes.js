@@ -6,7 +6,7 @@ const formidable = require("formidable");
 const https = require("https");
 
 const paytm_config = {
-	MID: "PtoitZ07358175676917",
+	MID: "uqaqor71832119145372",
 	WEBSITE: "WEBSTAGING",
 	CHANNEL_ID: "WEB",
 	INDUSTRY_TYPE_ID: "Retail",
