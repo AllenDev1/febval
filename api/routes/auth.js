@@ -31,7 +31,7 @@ router.get("/logout", (req, res) => {
 router.get(
     "/google/callback",
     passort.authenticate("google", {
-        successRedirect: `${process.env.URL}`,
+        successRedirect: `https://febval-upem.onrender.com`,
         failureRedirect: "/login/failure",
     })
 );
