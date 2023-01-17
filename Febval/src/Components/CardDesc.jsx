@@ -27,7 +27,7 @@ const CardDesc = ({ id, name }) => {
 	const [cakeSize, setCakeSize] = useState("0.5kg");
 	const [price, setPrice] = useState(0);
 	let pric;
-	console.log(product);
+	
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
 	if (counter <= 1) {

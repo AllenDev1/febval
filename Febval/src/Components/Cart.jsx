@@ -19,7 +19,7 @@ import OrderCompltedModel from "./OrderCompltedModel";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
-	
+
 	const [modalShow, setModalShow] = useState(false);
 	const [orderAlert, setOrderAlert] = useState(false);
 	const [amount, setAmount] = useState("");
@@ -33,25 +33,6 @@ const Cart = (props) => {
 
 	const [user, setUser] = useState(null);
 
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	setError("");
-	// 	setIsLoading(true);
-
-	// 	try {
-	// 		const { data } = await axios.post("/paytm-payment", {
-	// 			amount,
-	// 			email,
-	// 			phone,
-	// 		});
-	// 		const { paytmParams, checksum } = data;
-	// 		paytm.startPayment(paytmParams, checksum);
-	// 	} catch (err) {
-	// 		setError(err.response.data.message);
-	// 	} finally {
-	// 		setIsLoading(false);
-	// 	}
-	// };
 	useEffect(() => {
 		const options = {
 			method: "GET",
@@ -101,25 +82,73 @@ const Cart = (props) => {
 		}
 	};
 
-	const getPaytmInfo = async () => {
-		try {
-			const res = await fetch("/api/paytm/payment", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: { cartProducts },
-			});
-			return await res.json();
-		} catch (err) {
-			return console.log(err);
+	function isDate(val) {
+		// Cross realm comptatible
+		return Object.prototype.toString.call(val) === "[object Date]";
+	}
+
+	function isObj(val) {
+		return typeof val === "object";
+	}
+
+	function stringifyValue(val) {
+		if (isObj(val) && !isDate(val)) {
+			return JSON.stringify(val);
+		} else {
+			return val;
 		}
+	}
+
+	function buildForm({ action, params }) {
+		const form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", action);
+
+		Object.keys(params).forEach((key) => {
+			const input = document.createElement("input");
+			input.setAttribute("type", "hidden");
+			input.setAttribute("name", key);
+			input.setAttribute("value", stringifyValue(params[key]));
+			form.appendChild(input);
+		});
+
+		return form;
+	}
+
+	function post(details) {
+		const form = buildForm(details);
+		document.body.appendChild(form);
+		form.submit();
+		form.remove();
+	}
+
+	const getPaytmInfo = (data) => {
+		return fetch(`http://localhost:3001/api/paytm/paytm-payment`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(data),
+		})
+			.then((response) => {
+				return response.json();
+			})
+			.catch((err) => console.log(err));
 	};
 
 	const makePayment = () => {
-		getPaytmInfo({ cartProducts }).then((response) => {
-			console.log(response);
+		getPaytmInfo({
+			amount: "500",
+			email: "abc@gmail.com",
+			phone: "1234567890",
+		}).then((response) => {
+			let information = {
+				action: "https://securegw-stage.paytm.in/order/process",
+				params: response,
+			};
+
+			post(information);
 		});
 	};
 
@@ -169,10 +198,7 @@ const Cart = (props) => {
 															</p>
 															<p className="text-right">
 																Rs.{" "}
-																{
-																	_.product
-																		.pri
-																}{" "}
+																{_.product.pri}{" "}
 																* {_.quantity}
 															</p>
 														</div>
@@ -181,8 +207,7 @@ const Cart = (props) => {
 
 															<p>
 																Rs.
-																{_.product
-																	.pri *
+																{_.product.pri *
 																	_.quantity}
 																/-
 															</p>

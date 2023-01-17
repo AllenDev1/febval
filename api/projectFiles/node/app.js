@@ -12,7 +12,7 @@ app.set('views', __dirname);
 app.use(express.static('./assets'));
 
 const port = 8080
-const PaytmChecksum = require('./PaytmChecksum');
+const PaytmChecksum = require('../../routes/PaytmChecksum');
 const Config = require('./config');
 var orderId = "Ord_" + Date.now();
 var amount = "1.00";
