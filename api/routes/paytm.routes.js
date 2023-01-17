@@ -26,7 +26,7 @@ route.post("/paytm-payment", (req, res) => {
 	paytmParams["CHANNEL_ID"] = paytm_config.CHANNEL_ID;
 	paytmParams["TXN_AMOUNT"] = amount;
 	paytmParams["WEBSITE"] = paytm_config.WEBSITE;
-	paytmParams["CALLBACK_URL"] = "https://febval-upem.onrender.com/api/paytm/callback";
+	paytmParams["CALLBACK_URL"] = "http://localhost:3001/api/paytm/callback";
 	paytmParams["EMAIL"] = email;
 	paytmParams["MOBILE_NO"] = phone;
 

@@ -29,7 +29,7 @@ const Loginform = (props) => {
 						onClick={() => {
 							window.open(
 								// `${window.location.origin}/auth/google`,
-								`https://febval-upem.onrender.com/auth/google`,
+								`http://localhost:3001/auth/google`,
 								"_self"
 							);
 						}}
