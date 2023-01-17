@@ -6,7 +6,7 @@ const formidable = require("formidable");
 const https = require("https");
 
 const paytm_config = {
-	MID: "uqaqor71832119145372",
+	MID: "PtoitZ07358175676917",
 	WEBSITE: "WEBSTAGING",
 	CHANNEL_ID: "WEB",
 	INDUSTRY_TYPE_ID: "Retail",
@@ -26,7 +26,7 @@ route.post("/paytm-payment", (req, res) => {
 	paytmParams["CHANNEL_ID"] = paytm_config.CHANNEL_ID;
 	paytmParams["TXN_AMOUNT"] = amount;
 	paytmParams["WEBSITE"] = paytm_config.WEBSITE;
-	paytmParams["CALLBACK_URL"] = "http://localhost:3001/api/paytm/callback";
+	paytmParams["CALLBACK_URL"] = "https://febval-upem.onrender.com/api/paytm/callback";
 	paytmParams["EMAIL"] = email;
 	paytmParams["MOBILE_NO"] = phone;
 
@@ -95,10 +95,10 @@ route.post("/callback", (req, res) => {
 
 				var options = {
 					/* for Staging */
-					hostname: "securegw-stage.paytm.in",
+					// hostname: "securegw-stage.paytm.in",
 
 					/* for Production */
-					// hostname: 'securegw.paytm.in',
+					hostname: 'securegw.paytm.in',
 
 					port: 443,
 					path: "/v3/order/status",
@@ -117,7 +117,7 @@ route.post("/callback", (req, res) => {
 					});
 
 					post_res.on("end", function () {
-						res.json(response)
+						res.json(response);
 					});
 				});
 
@@ -131,73 +131,5 @@ route.post("/callback", (req, res) => {
 	});
 });
 
-route.get("/txnstatus", (req, res) => {
-	var paytmParams = {};
-	/* body parameters */
-	paytmParams.body = {
-		mid: paytm_config.MID,
-		/* Enter your order id which needs to be check status for */
-		orderId: "Your_ORDERId_Here",
-	};
-	PaytmChecksum.generateSignature(
-		JSON.stringify(paytmParams.body),
-		paytm_config.MKEY
-	).then(function (checksum) {
-		/* head parameters */
-		paytmParams.head = {
-			signature: checksum,
-		};
-		/* prepare JSON string for request */
-		var post_data = JSON.stringify(paytmParams);
-
-		var options = {
-			hostname: paytm_config.ENV,
-			port: 443,
-			path: "/v3/order/status",
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"Content-Length": post_data.length,
-			},
-		};
-		var response = "";
-		var post_req = https.request(options, function (post_res) {
-			post_res.on("data", function (chunk) {
-				response += chunk;
-			});
-
-			post_res.on("end", function () {
-				var obj = JSON.parse(response);
-				res.render(__dirname + "/txnstatus.html", {
-					data: obj.body,
-					msg: obj.body.resultInfo.resultMsg,
-				});
-			});
-		});
-		post_req.write(post_data);
-		post_req.end();
-	});
-});
-
-// Email validation function
-function validateEmail(email) {
-	const re =
-		/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(String(email).toLowerCase());
-}
-
-// Phone validation function
-function validatePhone(phone) {
-	const re = /^[0-9]{10}$/;
-	return re.test(String(phone));
-}
-
-// Update order status function (placeholder, you should implement this function according to your application needs)
-function updateOrderStatus(orderId, status, txnId, bankTxnId, txnDate) {
-	console.log(`Updating order ${orderId} status to ${status}`);
-	console.log(`Transaction ID: ${txnId}`);
-	console.log(`Bank Transaction ID: ${bankTxnId}`);
-	console.log(`Transaction Date: ${txnDate}`);
-}
 
 module.exports = route;

@@ -123,7 +123,7 @@ const Cart = (props) => {
 	}
 
 	const getPaytmInfo = (data) => {
-		return fetch(`http://localhost:3001/api/paytm/paytm-payment`, {
+		return fetch(`https://febval-upem.onrender.com/api/paytm/paytm-payment`, {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
@@ -137,7 +137,7 @@ const Cart = (props) => {
 			.catch((err) => console.log(err));
 	};
 
-	const makePayment = () => {
+	const makePayment = async (e) => {
 		getPaytmInfo({
 			amount: "500",
 			email: "abc@gmail.com",
@@ -150,6 +150,7 @@ const Cart = (props) => {
 
 			post(information);
 		});
+		
 	};
 
 	return (

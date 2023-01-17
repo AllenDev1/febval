@@ -100,7 +100,7 @@ const Navbars = () => {
 											>
 												<img
 													src={user?.image}
-													alt="..."
+													alt={user.name}
 												/>
 											</Dropdown.Toggle>
 
@@ -112,7 +112,7 @@ const Navbars = () => {
 													>
 														<img
 															src={profileLogo}
-															alt=""
+															alt=".."
 														/>
 														Profile
 													</Link>
