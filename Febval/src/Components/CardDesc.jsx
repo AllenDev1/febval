@@ -136,15 +136,19 @@ const CardDesc = ({ id, name }) => {
 											<h5>
 												Rs.
 												{product?.category === "cake"
-													? cakeSize === "0.5kg"
-														? (pric = price * 0.5)
-														: cakeSize === "1kg"
-														? (pric = price)
-														: cakeSize === "1.5kg"
-														? (pric = price * 1.5)
+													? cakeSize === "1kg"
+														? (pric = price * 1)
 														: cakeSize === "2kg"
 														? (pric = price * 2)
-														: price * 0
+														: cakeSize === "3kg"
+														? (pric = price * 3)
+														: cakeSize === "4kg"
+														? (pric = price * 4)
+														: cakeSize === "5kg"
+														? (pric = price * 5)
+														: cakeSize === "6kg"
+														? (pric = price * 6)
+														: price
 													: product.price}
 											</h5>
 											+<h5>Rs. 150 shipping charge</h5>
