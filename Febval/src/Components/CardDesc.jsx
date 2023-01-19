@@ -197,7 +197,6 @@ const CardDesc = ({ id, name }) => {
 												</Form.Select>
 											</Col>
 										)}
-
 										<div className="qty-change d-flex justify-content-center align-items-center">
 											<ButtonIncrement
 												onClickFunc={incrementCounter}
