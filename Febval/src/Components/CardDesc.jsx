@@ -27,7 +27,7 @@ const CardDesc = ({ id, name }) => {
 	const [cakeSize, setCakeSize] = useState("0.5kg");
 	const [price, setPrice] = useState(0);
 	let pric;
-	
+
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
 	if (counter <= 1) {
@@ -145,7 +145,7 @@ const CardDesc = ({ id, name }) => {
 														: cakeSize === "2kg"
 														? (pric = price * 2)
 														: price * 0
-													: 0}
+													: product.price}
 											</h5>
 											+<h5>Rs. 150 shipping charge</h5>
 										</div>
@@ -157,32 +157,43 @@ const CardDesc = ({ id, name }) => {
 												{product.description}
 											</span>
 										</div>
-										<Col className="size-container  ">
-											<p>Size: </p>
-											<Form.Select
-												aria-label="Default select example"
-												className="w-25 "
-												onChange={(e) => {
-													setCakeSize(e.target.value);
-												}}
-											>
-												<option disabled>
-													Select size
-												</option>
-												<option value="0.5kg">
-													0.5 KG
-												</option>
-												<option value="1kg">
-													1 KG
-												</option>
-												<option value="1.5kg">
-													1.5 KG
-												</option>
-												<option value="2kg">
-													2 KG
-												</option>
-											</Form.Select>
-										</Col>
+										{product?.category === "cake" && (
+											<Col className="size-container  ">
+												<p>Size: </p>
+												<Form.Select
+													aria-label="Default select example"
+													className="w-25 "
+													onChange={(e) => {
+														setCakeSize(
+															e.target.value
+														);
+													}}
+												>
+													<option disabled>
+														Select size
+													</option>
+													<option value="1kg">
+														1 KG
+													</option>
+													<option value="2kg">
+														2 KG
+													</option>
+													<option value="3kg">
+														3 KG
+													</option>
+													<option value="4kg">
+														4 KG
+													</option>
+													<option value="5kg">
+														5 KG
+													</option>
+													<option value="6kg">
+														6 KG
+													</option>
+												</Form.Select>
+											</Col>
+										)}
+
 										<div className="qty-change d-flex justify-content-center align-items-center">
 											<ButtonIncrement
 												onClickFunc={incrementCounter}

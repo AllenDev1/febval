@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Col, Row } from "react-bootstrap";
-import { useLocation, Link } from "react-router-dom";
-import Cardsgroup from "./Cardsgroup";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import { Link, useLocation } from "react-router-dom";
 
 const SearchPage = () => {
 	let location = useLocation();

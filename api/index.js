@@ -21,7 +21,6 @@ const { sequelize } = require("./models/index");
 const CarouselRoutes = require("./routes/carousel.routes");
 const salesBanner = require("./routes/salesBanner.routes");
 const NewsLetterRoutes = require("./routes/newsLetter.routes");
-const StripePaymentRoutes = require("./routes/stripe.routes");
 const PaytemRoutes = require("./routes/paytm.routes");
 const startAdmin = require("./admin/app");
 
@@ -71,7 +70,6 @@ app.use("/api/user", UserRoutes);
 
 app.use("/api/search", SearchRoute);
 
-app.use("/api/stripe", StripePaymentRoutes);
 app.use("/api/paytm", PaytemRoutes);
 
 app.listen(PORT, (err) => {

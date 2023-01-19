@@ -1,25 +1,21 @@
-import GooglePayButton from "@google-pay/button-react";
 import axios from "axios";
-import React from "react";
-import { Button, Offcanvas, Alert } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout";
 import Checkout from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
-import Shop from "../Assets/Shopp.svg";
-import { removeProduct, clearCart } from "../redux/cartRedux";
 import paytmlogo from "../Assets/paytm.png";
+import Shop from "../Assets/Shopp.svg";
+import { clearCart, removeProduct } from "../redux/cartRedux";
 import "../Scss/Cart.scss";
-import Updatedetails from "./Updatedetails";
-import { useState, useEffect } from "react";
-import { getUser } from "../Auth/auth";
 import OrderCompltedModel from "./OrderCompltedModel";
+import Updatedetails from "./Updatedetails";
 // import Paytm from 'paytm-sdk-js';
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
-
+	console.log(cartProducts);
 	const [modalShow, setModalShow] = useState(false);
 	const [orderAlert, setOrderAlert] = useState(false);
 	const [amount, setAmount] = useState("");
@@ -139,7 +135,7 @@ const Cart = (props) => {
 
 	const makePayment = async (e) => {
 		getPaytmInfo({
-			amount: "500",
+			amount: "200",
 			email: "abc@gmail.com",
 			phone: "1234567890",
 		}).then((response) => {
@@ -150,7 +146,6 @@ const Cart = (props) => {
 
 			post(information);
 		});
-		
 	};
 
 	return (
@@ -198,9 +193,34 @@ const Cart = (props) => {
 																{_.quantity}
 															</p>
 															<p className="text-right">
-																Rs.{" "}
-																{_.product.pri}{" "}
-																* {_.quantity}
+																Rs.
+																{_.product
+																	.category ===
+																"cake" ? (
+																	<>
+																		{
+																			_
+																				.product
+																				.pri
+																		}
+																		*{" "}
+																		{
+																			_.quantity
+																		}
+																	</>
+																) : (
+																	<>
+																		{
+																			_
+																				.product
+																				.price
+																		}
+																		*{" "}
+																		{
+																			_.quantity
+																		}
+																	</>
+																)}
 															</p>
 														</div>
 														<div className="second-row">
@@ -208,8 +228,23 @@ const Cart = (props) => {
 
 															<p>
 																Rs.
-																{_.product.pri *
-																	_.quantity}
+																{_.product
+																	.category ===
+																"cake" ? (
+																	<>
+																		{_
+																			.product
+																			.pri *
+																			_.quantity}
+																	</>
+																) : (
+																	<>
+																		{_
+																			.product
+																			.price *
+																			_.quantity}
+																	</>
+																)}
 																/-
 															</p>
 														</div>
@@ -257,7 +292,11 @@ const Cart = (props) => {
 									{cartProducts.reduce(
 										(acc, curr) =>
 											acc +
-											curr.product.pri * curr.quantity,
+											(curr.product.category === "cake"
+												? curr.product.pri *
+												  curr.quantity
+												: curr.product.price *
+												  curr.quantity),
 										0
 									)}
 								</p>
@@ -276,7 +315,11 @@ const Cart = (props) => {
 									{cartProducts.reduce(
 										(acc, curr) =>
 											acc +
-											curr.product.pri * curr.quantity,
+											(curr.product.category === "cake"
+												? curr.product.pri *
+												  curr.quantity
+												: curr.product.price *
+												  curr.quantity),
 										0
 									) + 150}
 									/-
@@ -312,84 +355,6 @@ const Cart = (props) => {
 							Buy with Paytm (comming soon)
 						</p>
 					</button>
-					{/* <StripeCheckout
-						className="comming soon"
-						stripeKey={STRIPE_KEY}
-						token={handleToken}
-						currency="INR"
-						billingAddress
-						shippingAddress
-						amount={
-							(cartProducts.reduce(
-								(acc, curr) =>
-									acc + curr.product.discount * curr.quantity,
-								0
-							) +
-								150) *
-							100
-						}
-					/> */}
-					{/* <GooglePayButton
-						className="w-100 comming soon"
-						environment="TEST"
-						paymentRequest={{
-							apiVersion: 2,
-							apiVersionMinor: 0,
-							allowedPaymentMethods: [
-								{
-									type: "CARD",
-									parameters: {
-										allowedAuthMethods: [
-											"PAN_ONLY",
-											"CRYPTOGRAM_3DS",
-										],
-										allowedCardNetworks: [
-											"MASTERCARD",
-											"VISA",
-										],
-									},
-									tokenizationSpecification: {
-										type: "PAYMENT_GATEWAY",
-										parameters: {
-											gateway: "example",
-											gatewayMerchantId:
-												"exampleGatewayMerchantId",
-										},
-									},
-								},
-							],
-							merchantInfo: {
-								merchantId: "12345678901234567890",
-								merchantName: "Demo Merchant",
-							},
-							transactionInfo: {
-								totalpriStatus: "FINAL",
-								totalpriLabel: "Total",
-								totalpri: "100.00",
-								currencyCode: "INR",
-								countryCode: "IN",
-							},
-							shippingAddressRequired: true,
-							callbackIntents: [
-								"PAYMENT_AUTHORIZATION",
-								"SHIPPING_ADDRESS",
-							],
-						}}
-						onLoadPaymentData={(paymentRequest) => {
-							console.log("load payment data", paymentRequest);
-						}}
-						onPaymentAuthorized={(paymentData) => {
-							console.log(
-								"Payment Authorised Success",
-								paymentData
-							);
-							return { transactionState: "SUCCESS" };
-						}}
-						onPaymentDataChanged={(paymentData) => {
-							console.log("On Payment Data Changed", paymentData);
-							return {};
-						}}
-					/> */}
 
 					<Button
 						className="shop"

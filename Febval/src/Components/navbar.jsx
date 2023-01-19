@@ -5,12 +5,15 @@ import {
 	Form,
 	Nav,
 	Navbar,
-	Offcanvas,
+	Offcanvas
 } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
 import events from "../Assets/events.svg";
+import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
+import profileLogo from "../Assets/gift shop 2/Vector.svg";
 import cake from "../Assets/gift shop/cakes.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
@@ -21,11 +24,6 @@ import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
-import profileLogo from "../Assets/gift shop 2/Vector.svg";
-import SearchPage from "./SearchPage";
 
 const Navbars = () => {
 	const [user, setUser] = useState(null);
