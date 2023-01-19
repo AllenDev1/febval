@@ -123,3 +123,38 @@
 		}
 	}
 }
+
+// media query above 1440px
+
+@media (min-width: 1400px) {
+	.card-container {
+		.cards-row {
+			.cards-col {
+				.card-link {
+					.cards-card {
+						height: 350px;
+						.cards-img{
+							
+						}
+						.cards-card-body {
+							.cards-title{
+								font-size: 20px;
+							}
+							.cards-text {
+								.price-cards {
+									font-size: 20px;
+								}
+								span {
+									display: none;
+									font-size: 7px;
+									height: auto;
+									width: auto;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
