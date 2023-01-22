@@ -12,6 +12,8 @@ import SearchPage from "./Components/SearchPage";
 import Pagenotfound from "./Pages/Pagenotfound";
 import WhatsAppWidget from "react-whatsapp-chat-widget";
 import "react-whatsapp-chat-widget/index.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 	return (
@@ -71,6 +73,8 @@ const App = () => {
 				btnTxtColor="white"
 				btnTxt="Start Chat"
 			/>
+
+			<ToastContainer />
 		</>
 	);
 };

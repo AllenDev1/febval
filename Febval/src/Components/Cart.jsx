@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout";
 import CheckoutImg from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
 import paytmlogo from "../Assets/paytm.png";
@@ -12,7 +11,7 @@ import { clearCart, removeProduct } from "../redux/cartRedux";
 import "../Scss/Cart.scss";
 import OrderCompltedModel from "./OrderCompltedModel";
 import Updatedetails from "./Updatedetails";
-import {CheckoutProvider, Checkout} from 'paytm-blink-checkout-react'
+import { toast } from 'react-toastify';
 // import Paytm from 'paytm-sdk-js';
 
 const Cart = (props) => {
@@ -26,6 +25,8 @@ const Cart = (props) => {
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const [paytmConfig, setPaytmConfig] = useState(undefined);
+
+	const [paytmInitInfo, setPaytmInitInfo] = useState(undefined);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -56,7 +57,14 @@ const Cart = (props) => {
 			axios.request(options).then(function (response) {
 				console.log(response.data);
 
-				makePayment_(response.data.orderID, response.data.amount, response.data.body.txnToken, response.data.mid);
+				setPaytmInitInfo({
+					orderID: response.data.orderID,
+					amount: response.data.amount,
+					token: response.data.body.txnToken,
+					mid: response.data.mid
+				})
+
+				setIsLoading(false);
 			}).catch(function (error) {
 				alert("Something went wrong");
 				console.error(error);
@@ -64,7 +72,23 @@ const Cart = (props) => {
 		}
     }, [cartProducts, props.show]);
 
-	const makePayment_ = (orderID, amount, token, mid) => {
+	const makePayment_ = () => {
+		if (!paytmInitInfo){
+			alert("Something went wrong");
+			return;
+		}
+
+		const orderID = paytmInitInfo.orderID;
+		const amount = paytmInitInfo.amount;
+		const token = paytmInitInfo.token;
+		const mid = paytmInitInfo.mid;
+
+		if (!orderID || !amount || !token || !mid){
+			alert("Something went wrong");
+			console.error("paytmInitInfo => ", paytmInitInfo);
+			return;
+		}
+
         setIsLoading(true);
         var config = {
             "root":"",
@@ -111,8 +135,27 @@ const Cart = (props) => {
             },
             "handler": {
               "transactionStatus":function transactionStatus(paymentStatus){
-                console.log("paymentStatus => ",paymentStatus);
-                setIsLoading(false);
+				setIsLoading(false);
+
+				if (paymentStatus.STATUS === "TXN_SUCCESS"){
+					toast.success("Payment Successful.", {
+						position: toast.POSITION.TOP_LEFT
+					});
+
+					// toast.promise with position top left
+					toast.promise(verifyPayment(orderID), {
+						pending: "Verifying Payment...",
+						success: "Payment Verified. Redirecting...",
+						error: "Payment Verification Failed. Contact Support",
+					}, {
+						position: toast.POSITION.TOP_LEFT
+					});
+				} else {
+					toast.error("Payment Failed. Contact Support", {
+						position: toast.POSITION.TOP_LEFT
+					});
+					console.log("paymentStatus => ", paymentStatus);
+				}
               },
               "notifyMerchant":function notifyMerchant(eventName,data){
                 console.log("Closed");
@@ -122,16 +165,43 @@ const Cart = (props) => {
         };
       
         if (window.Paytm && window.Paytm.CheckoutJS) {
-        // initialze configuration using init method
-        window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-            console.log('Before JS Checkout invoke');
-            // after successfully update configuration invoke checkoutjs
-            window.Paytm.CheckoutJS.invoke();
-        }).catch(function onError(error) {
-            console.log("Error => ", error);
-        });
+			// initialze configuration using init method
+			window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+				console.log('Before JS Checkout invoke');
+				// after successfully update configuration invoke checkoutjs
+				window.Paytm.CheckoutJS.invoke();
+			}).catch(function onError(error) {
+				console.log("Error => ", error);
+			});
         }
     }
+
+	const verifyPayment = (orderId) => {
+		setIsLoading(true);
+
+		return new Promise((resolve, reject) => {
+			const options = {
+				method: 'POST',
+				url: 'http://localhost:3001/api/paytm/callback',
+				headers: {'Content-Type': 'application/json'},
+				data: {ORDERID: orderId}
+			};
+		  
+			axios.request(options).then(function (response) {
+				console.log(response.data);
+				setIsLoading(false);
+
+				// Refresh page in 5 seconds
+				setTimeout(() => {
+					window.location.reload();
+				}, 5000);
+				resolve();
+			}).catch(function (error) {
+				console.error(error);
+				reject();
+			});
+		});
+	};
 
 	const makeOrder = (e) => {
 		e.preventDefault();
@@ -435,7 +505,7 @@ const Cart = (props) => {
 					}
 
 					<button
-						onClick={makePayment}
+						onClick={makePayment_}
 						className="comming soon bg-white "
 						disabled={isLoading}
 					>
