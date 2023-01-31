@@ -3,7 +3,7 @@ const Product = require("./product.model");
 const Order = require("./order.model");
 const ProductImages = require("./productImages.model");
 const sequelize = require("../database/sequelize");
-const ProductSize = require("./productSize.model");
+const ProductVariant = require("./productVariant.model");
 const SalesBanner = require("./salesBanner.model");
 const SalesCarousel = require("./salesCarousel.model");
 const { Sequelize, DataTypes } = require("sequelize");
@@ -19,7 +19,7 @@ const ProductOrder = sequelize.define(
 		quantity: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-		},
+		}
 	},
 	{
 		timestamps: true,
@@ -32,10 +32,10 @@ Product.ProductImages = Product.hasMany(ProductImages, {
 	as: "productImages",
 });
 
-Product.ProductSize = Product.hasMany(ProductSize, {
+Product.ProductVariant = Product.hasMany(ProductVariant, {
 	foreignKey: "productId",
 	sourceKey: "id",
-	as: "productSize",
+	as: "productVariant",
 });
 
 User.Order = User.hasMany(Order, {
@@ -72,6 +72,6 @@ module.exports = {
 	ProductOrder,
 	SalesBanner,
 	SalesCarousel,
-	ProductSize,
+	ProductVariant,
 	sequelize,
 };

@@ -1,22 +1,26 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/sequelize");
 
-const ProductSize = sequelize.define(
-	"productSize",
+const ProductVariant = sequelize.define(
+	"productVariant",
 	{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
 		},
-		size: {
+		label: {
 			type: DataTypes.STRING,
-			allowNull: true,
+			allowNull: false,
 		},
+		price: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		}
 	},
 	{
 		timestamps: true,
 	}
 );
 
-module.exports = ProductSize;
+module.exports = ProductVariant;

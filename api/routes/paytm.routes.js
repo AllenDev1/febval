@@ -16,8 +16,8 @@ const paytm_config = {
 route.post("/paytm-payment", (req, res) => {
     let paytmParams = {};
 
-    let orderID = uuid();
-    let amount = "1.00";
+    let orderID = uuid(); 
+    let amount = "1.00"; // TODO: calculate amount depending on cart
 
     paytmParams.body = {
         requestType: "Payment",
