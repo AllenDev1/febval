@@ -24,9 +24,8 @@ const Product = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-
-		discount: {
-			type: DataTypes.INTEGER,
+		featured: {
+			type: DataTypes.BOOLEAN,
 			allowNull: false,
 		},
 		price: {
@@ -35,7 +34,7 @@ const Product = sequelize.define(
 		},
 		quantity: {
 			type: DataTypes.INTEGER,
-			allowNull: false,
+			allowNull: true,
 		},
 		active: {
 			type: DataTypes.BOOLEAN,

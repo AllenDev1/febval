@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database/sequelize");
 
-// Cart model
-const Cart = sequelize.define(
-	"Cart",
+// define search model
+const Search = sequelize.define(
+	"Search",
 	{
 		// Model attributes are defined here
 		id: {
@@ -11,18 +11,10 @@ const Cart = sequelize.define(
 			autoIncrement: true,
 			primaryKey: true,
 		},
-		userId: {
-			type: DataTypes.INTEGER,
+
+		keyword: {
+			type: DataTypes.STRING,
 			allowNull: false,
-		},
-		productId: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
-		quantity: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-            defaultValue: 1,
 		},
 	},
 	{
@@ -30,4 +22,4 @@ const Cart = sequelize.define(
 	}
 );
 
-module.exports = Cart;
+module.exports = Search;

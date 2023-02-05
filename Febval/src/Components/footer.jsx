@@ -4,51 +4,71 @@ import Logo from "../Assets/Febval.png";
 import Facebook from "../Assets/Facebook.svg";
 import Insta from "../Assets/Insta.svg";
 import Twitter from "../Assets/Twitter.svg";
+import { Container } from "react-bootstrap";
 
 const Footer = () => {
-  return (
-    <>
-      <div className="footer-container">
-        <div className="footer-contents">
-          <div className="footer-logo">
-            <img src={Logo} />
-            <div className="tagline">
-              <text>The joy of giving</text>
-            </div>
-          </div>
-          <div className="footer-links">
-            <text>Quick Links</text>
-            <div className="Quick-links">
-              <a href="#">Product</a>
-              <a href="#">How does it work? </a>
-              <a href="#">Pricing</a>
-              <a href="#">Support</a>
-              <a href="#">Report an issue</a>
-              <a href="#">Wishlist</a>
-            </div>
-          </div>
-          <div className="footer-sites">
-            <text>Find us on</text>
-            <div className="social-media">
-              <img src={Facebook} alt="" />
-              <img src={Insta}alt="" />
-              <img src={Facebook} alt=""/>
+	return (
+		<>
+			<div className="footer-container">
+				<Container className="container-footer">
+					<div className="footer-contents">
+						<div className="footer-logo">
+							<img src={Logo} />
+							<div className="tagline">
+								<p>The joy of giving</p>
+							</div>
+						</div>
+						<div className="footer-links">
+							<p>Quick Links</p>
+							<div className="Quick-links">
+								<a href="/">Product</a>
+								<a href="terms">How does it work? </a>
 
-            </div>
-          </div>
-        </div>
-        <div className="copyright-container">
-          <div className="copyright-items">
-            <div className="footer-copyright-l">Copyright @2022 FEBVAL</div>
-            <div className="footer-copyright-r">
-              <text>Terms of Use</text>
-              <text>Privacy Policy</text>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+								<a href="mailto:someone@example.com">Support</a>
+								<a href="mailto:someone@example.com">
+									Report an issue
+								</a>
+								<a href="mailto:someone@example.com">
+									Wishlist
+								</a>
+							</div>
+						</div>
+						<div className="footer-sites">
+							<p>Find us on</p>
+							<div className="social-media">
+								<a href="https://www.facebook.com/profile.php?id=100085282614251/" target="_blank">
+									<img src={Facebook} alt=".." />
+								</a>
+								<a href="https://www.instagram.com/febvalgifts/" target="_blank">
+									<img src={Insta} alt=".." />
+								</a>
+								<a href="https://twitter.com/Febvalgifts?t=k97eoefKw4BQRMUHjRp_Jg&s=08" target="_blank">
+									<img src={Twitter} alt=".." />
+								</a>
+							</div>
+						</div>
+					</div>
+				</Container>
+				<div className="copyright-container">
+					<Container>
+						<div className="copyright-items">
+							<div className="footer-copyright-l">
+								Copyright @2022 FEBVAL
+							</div>
+							<div className="footer-copyright-r">
+								<a href="/terms" className="text-decoration-none">
+									<p>Terms of Use</p>
+								</a>
+								<a href="/terms" className="text-decoration-none">
+									<p>Privacy Policy</p>
+								</a>
+							</div>
+						</div>
+					</Container>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default Footer;

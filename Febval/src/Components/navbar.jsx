@@ -5,29 +5,33 @@ import {
 	Form,
 	Nav,
 	Navbar,
-	Offcanvas,
+	Offcanvas
 } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import cart from "../Assets/cart.svg";
 import logo from "../Assets/Company Name.svg";
+import events from "../Assets/events.svg";
+import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
+import profileLogo from "../Assets/gift shop 2/Vector.svg";
 import cake from "../Assets/gift shop/cakes.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
 import other from "../Assets/gift shop/other.svg";
 import wed from "../Assets/gift shop/wed.svg";
-import events from "../Assets/events.svg";
 import signin from "../Assets/signin.svg";
 import { getUser } from "../Auth/auth";
 import "../Scss/navbar.scss";
 import "../Scss/offcanvasmenu.scss";
 import Cart from "./Cart";
 import Loginform from "./Loginform";
-import { productDes } from "./data file/dummydata";
-
 
 const Navbars = () => {
-	
 	const [user, setUser] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
+	const [search, setSearch] = useState("");
+	const navigate = useNavigate();
+
+	const cartProductsNumber = useSelector((state) => state.cart.products);
 
 	const [show, setShow] = useState(false);
 
@@ -45,11 +49,13 @@ const Navbars = () => {
 	}, []);
 
 	useEffect(() => {
-		getUser().then((user) => {
-			setUser(user);
-		}).catch((err) => {
-			setUser(null);
-		});
+		getUser()
+			.then((user) => {
+				setUser(user);
+			})
+			.catch((err) => {
+				setUser(null);
+			});
 	}, []);
 
 	return (
@@ -61,8 +67,18 @@ const Navbars = () => {
 							<img src={logo} alt=".." />
 						</Navbar.Brand>
 						<div className="search-bar">
-							<Form className="search-from">
-								<input placeholder="Search Gifts..."></input>
+							<Form
+								className="search-from"
+								onSubmit={(e) => {
+									e.preventDefault();
+									navigate(`/search/${search}`);
+								}}
+							>
+								<input
+									placeholder="Search Gifts..."
+									value={search}
+									onChange={(e) => setSearch(e.target.value)}
+								></input>
 							</Form>
 						</div>
 						<div className="searchbarAndLogo">
@@ -81,26 +97,38 @@ const Navbars = () => {
 												id="dropdown-basic"
 											>
 												<img
-													src={user.image}
-													alt="..."
+													src={user?.image}
+													alt={user.name}
 												/>
 											</Dropdown.Toggle>
 
-											<Dropdown.Menu>
+											<Dropdown.Menu className="dropdown">
 												<Dropdown.Item href="/userdetails">
-													<Link to={`/userdetails/${user.googleId}`}> Profile</Link>
-												</Dropdown.Item>
-												<Dropdown.Item href="/userdetails">
-													Orders
+													<Link
+														to={`/userdetails/${user?.googleId}`}
+														className="text-decoration-none text-dark"
+													>
+														<img
+															src={profileLogo}
+															alt=".."
+														/>
+														Profile
+													</Link>
 												</Dropdown.Item>
 												<Dropdown.Item
 													onClick={() => {
+														localStorage.clear();
+														window.location.reload();
 														window.open(
-															"http://localhost:3001/auth/logout",
+															`${process.env.REACT_APP_URL}/auth/logout`,
 															"_self"
 														);
 													}}
 												>
+													<img
+														src={logoutlogo}
+														alt=""
+													/>
 													Logout
 												</Dropdown.Item>
 											</Dropdown.Menu>
@@ -118,7 +146,9 @@ const Navbars = () => {
 												className="cartimg"
 											/>
 											<div className="num-0f-items-cart">
-												<span>2</span>{" "}
+												<span>
+													{cartProductsNumber.length}
+												</span>
 											</div>
 										</NavLink>
 									</>
@@ -160,6 +190,12 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									//onclick closeButton offcanvas
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={cake} alt="..." />
 									Cakes
@@ -169,6 +205,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={wed} alt="..." />
 									Wedding
@@ -178,6 +219,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Him
@@ -187,6 +233,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Her
@@ -196,6 +247,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Kids
@@ -205,6 +261,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={giftbox} alt="..." />
 									Birthday
@@ -214,6 +275,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={events} alt="..." />
 									Events
@@ -223,6 +289,11 @@ const Navbars = () => {
 									className={({ isActive }) =>
 										isActive ? "active" : ""
 									}
+									onClick={() => {
+										document
+											.getElementById("navbar-collapse")
+											.classList.remove("show");
+									}}
 								>
 									<img src={other} alt="..." />
 									Others

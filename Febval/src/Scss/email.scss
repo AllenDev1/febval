@@ -6,11 +6,13 @@
 			display: grid;
 			.newsletter-col {
 				font-style: normal;
-				font-weight: 400;
+				font-weight: bolder;
 				font-size: 36px;
 				line-height: 53px;
 				text-align: center;
 				color: #4f4f4f;
+				h1 {
+				}
 				p {
 					font-style: normal;
 					font-weight: 500;
@@ -56,6 +58,22 @@
 				}
 				.email-fomr:hover {
 					border-color: #ef6d58;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.bg-email {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		.email-container {
+			.email-row {
+				.sub-col {
+					.email-fomr {
+						width: 100%;
+					}
 				}
 			}
 		}

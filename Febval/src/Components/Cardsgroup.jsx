@@ -1,13 +1,21 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import "../Scss/cards.scss";
-import axios from "axios";
+import AutoButton from "./AutoButton";
+import da from "./data file/datafiles.json";
 
 const Cardsgroup = ({ cat, sort, feature }) => {
 	const [products, setProducts] = useState([]);
 	const [sortedProducts, setSortedProducts] = useState([]);
+	const productsPerRow = 12;
+	const [next, setNext] = useState(productsPerRow);
+
+	const loadMore = () => {
+		setNext(next + productsPerRow);
+	};
 
 	useEffect(() => {
 		let url = "/api/products";
@@ -32,116 +40,101 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 	}, [cat]);
 
 	useEffect(() => {
+		let products_ = [...products];
+
 		if (sort === "new") {
-			setSortedProducts(
-				products.sort((a, b) => {
-					return b.createdAt - a.createdAt;
-				})
-			);
-		} else if (sort === "high") {
-			setSortedProducts(
-				products.sort((a, b) => {
-					return a.price - b.price;
-				})
-			);
+			products_.sort((a, b) => {
+				return b.createdAt - a.createdAt;
+			});
+			setSortedProducts(products_);
+		} else if (sort === "low") {
+			products_.sort((a, b) => {
+				return a.price - b.price;
+			});
+			setSortedProducts(products_);
 		} else {
-			setSortedProducts(
-				products.sort((a, b) => {
-					return b.price - a.price;
-				})
-			);
+			products_.sort((a, b) => {
+				return b.price - a.price;
+			});
+			setSortedProducts(products_);
 		}
-	}, [sort, products, sortedProducts]);
+	}, [sort, products]);
 
 	return (
 		<>
 			<Container className="card-container">
-				<Row xs={1} md={4} className="g-4 cards-row">
-					{cat ? (
-						sortedProducts.map((_, idx) => (
-							<Col className="cards-col" key={idx}>
-								<Link
-									to={`/description/${_.id}/${_.name}`}
-									className="card-link"
-								>
-									<Card className="cards-card">
-										<Card.Img
-											className="cards-img"
-											variant="top"
-											src={_.productImages[0].image}
-										/>
-										<Card.Body className="cards-card-body">
-											<Card.Title className="cards-title">
-												{_.name}
-											</Card.Title>
+				<Row xs={2} md={4} className="g-4 cards-row">
+					{feature ? (
+						<>
+							{products.slice(0, 8).map((_, idx) => (
+								<Col className="cards-col" key={idx}>
+									<Link
+										to={`/description/${_.id}/${_.name}`}
+										className="card-link"
+									>
+										<Card className="cards-card">
+											<Card.Img
+												className="cards-img"
+												variant="top"
+												src={_.productImages[0]?.image}
+											/>
+											<Card.Body className="cards-card-body">
+												<Card.Title
+													className="cards-title text-truncate"
+													style={{
+														maxWidth: "100%",
+													}}
+												>
+													{_.name}
+												</Card.Title>
 
-											<Card.Text className="cards-text price-cards">
-												Rs. {_.price}
-												<span>Buy Now</span>
-											</Card.Text>
-										</Card.Body>
-									</Card>
-								</Link>
-							</Col>
-						))
+												<Card.Text className="cards-text price-cards">
+													Rs. {_.price}
+													<span>Buy Now</span>
+												</Card.Text>
+											</Card.Body>
+										</Card>
+									</Link>
+								</Col>
+							))}
+						</>
 					) : (
 						<>
-							{feature
-								? products.slice(0, 8).map((_, idx) => (
-										<Col className="cards-col" key={idx}>
-											<Link
-												to={`/description/${_.id}/${_.name}`}
-												className="card-link"
-											>
-												<Card className="cards-card">
-													<Card.Img
-														className="cards-img"
-														variant="top"
-														// src={_.productImages[0].image}
-													/>
-													<Card.Body className="cards-card-body">
-														<Card.Title className="cards-title">
-															{_.name}
-														</Card.Title>
+							{sortedProducts.slice(0, next)?.map((_, idx) => (
+								<Col className="cards-col" key={idx}>
+									<Link
+										to={`/description/${_.id}/${_.name}`}
+										className="card-link"
+									>
+										<Card className="cards-card">
+											<Card.Img
+												className="cards-img"
+												variant="top"
+												src={_.productImages[0]?.image}
+											/>
+											<Card.Body className="cards-card-body">
+												<Card.Title
+													className="cards-title text-truncate "
+													style={{
+														maxWidth: "100%",
+													}}
+												>
+													{_.name}
+												</Card.Title>
 
-														<Card.Text className="cards-text price-cards">
-															Rs. {_.price}
-															<span>Buy Now</span>
-														</Card.Text>
-													</Card.Body>
-												</Card>
-											</Link>
-										</Col>
-								  ))
-								: products.map((_, idx) => (
-										<Col className="cards-col" key={idx}>
-											<Link
-												to={`/description/${_.id}/${_.name}`}
-												className="card-link"
-											>
-												<Card className="cards-card">
-													<Card.Img
-														className="cards-img"
-														variant="top"
-														// src={
-														// 	_.productImages[0]
-														// 		.image
-														// }
-													/>
-													<Card.Body className="cards-card-body">
-														<Card.Title className="cards-title">
-															{_.name}
-														</Card.Title>
-
-														<Card.Text className="cards-text price-cards">
-															Rs. {_.price}
-															<span>Buy Now</span>
-														</Card.Text>
-													</Card.Body>
-												</Card>
-											</Link>
-										</Col>
-								  ))}
+												<Card.Text className="cards-text price-cards">
+													Rs. {_.price}
+													<span>Buy Now</span>
+												</Card.Text>
+											</Card.Body>
+										</Card>
+									</Link>
+								</Col>
+							))}
+							<div className="seemore-btn d-flex justify-content-center py-5">
+								{next < products?.length &&
+									AutoButton(da["see more"], loadMore)}
+							</div>
 						</>
 					)}
 				</Row>

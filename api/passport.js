@@ -8,7 +8,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "/auth/google/callback",
+            callbackURL: `${process.env.APP_URL}/auth/google/callback`,
         },
         async function (accessToken, refreshToken, profile, done) {
             const { id, displayName, emails, photos } = profile;
@@ -18,7 +18,7 @@ passport.use(
 
             let user = await User.findOne({ where: { googleId: id } });
             if (user) {
-                done(null, user);
+                done(null, user);``
             } else {
                 user = await User.create({
                     googleId: id,

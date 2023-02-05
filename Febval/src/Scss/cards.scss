@@ -1,5 +1,8 @@
 .card-container {
 	// padding: 0px;
+	.search-resule{
+		padding-top: 130px ;
+	}
 	.feature-products {
 		font-style: normal;
 		font-weight: 400;
@@ -20,12 +23,13 @@
 			.card-link {
 				text-decoration: none;
 				.cards-card {
+					height: 40vh;
 					background-color: transparent;
 					border-radius: 10px;
 
 					.cards-img {
 						border-radius: 10px;
-						height: 300px;
+						height: 70%;
 					}
 					.cards-card-body {
 						padding: 10px;
@@ -93,12 +97,55 @@
 			.cards-col {
 				.card-link {
 					.cards-card {
+						height: 30vh;
+						.cards-img{
+							
+						}
 						.cards-card-body {
+							.cards-title{
+								font-size: 12px;
+							}
 							.cards-text {
 								.price-cards {
 									font-size: 12px;
 								}
 								span {
+									display: none;
+									font-size: 7px;
+									height: auto;
+									width: auto;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// media query above 1440px
+
+@media (min-width: 1400px) {
+	.card-container {
+		.cards-row {
+			.cards-col {
+				.card-link {
+					.cards-card {
+						height: 350px;
+						.cards-img{
+							
+						}
+						.cards-card-body {
+							.cards-title{
+								font-size: 20px;
+							}
+							.cards-text {
+								.price-cards {
+									font-size: 20px;
+								}
+								span {
+									display: none;
 									font-size: 7px;
 									height: auto;
 									width: auto;

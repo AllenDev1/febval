@@ -1,19 +1,36 @@
 import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Toast } from "react-bootstrap";
 import sendicon from "../Assets/send.svg";
 import "../Scss/email.scss";
+import axios from "axios";
 
 const Email = () => {
 	const [email, setEmail] = useState();
+	const [error, setError] = useState(null);
+	
 
-	const postEmail = () => {
+	const postEmail = (e) => {
+		e.preventDefault();
 		const options = {
 			method: "POST",
-			url: "/mail",
-			headers: { "Content-Type": "application/json" },
+			url: "/api/newsletter/create",
+
 			data: { email: email },
 		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				alert("Email added to newsletter");
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 	};
+
+	function isValidEmail(email) {
+		return /\S+@\S+\.\S+/.test(email);
+	}
 	return (
 		<>
 			<div className="bg-email">
@@ -33,6 +50,12 @@ const Email = () => {
 									placeholder="Your email address"
 									value={email}
 									onChange={(e) => {
+										if (!isValidEmail(e.target.value)) {
+											setError("Email is invalid");
+										} else {
+											setError(null);
+										}
+
 										setEmail(e.target.value);
 									}}
 									required
@@ -41,9 +64,11 @@ const Email = () => {
 									Subscribe <img src={sendicon} alt="..." />
 								</Button>
 							</Form>
+							{error && console.log(error)}
 						</Col>
 					</Row>
 				</Container>
+				
 			</div>
 		</>
 	);

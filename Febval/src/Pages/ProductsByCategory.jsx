@@ -1,29 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { Breadcrumb, Col, Container, Form, Row } from "react-bootstrap";
+import { useLocation, useParams } from "react-router-dom";
 import Cardsgroup from "../Components/Cardsgroup";
-import { Container, Breadcrumb, Form, Row, Col } from "react-bootstrap";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
 import "../Scss/productslistcat.scss";
-import AutoButton from "../Components/AutoButton";
-import da from "../Components/data file/datafiles.json";
-import { useParams } from "react-router-dom";
 
 const ProductsByCategory = () => {
 	const location = useLocation();
 	const whereAt = location.pathname.split("/")[2];
 	const { cat } = useParams();
-	const [sort, SetSort] = useState("Sort");
+	const [sort, SetSort] = useState("new");
 
 	return (
 		<>
 			<Container className="products-list-cat">
+				<Col>
+					<Breadcrumb>
+						<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+
+						<Breadcrumb.Item active>{whereAt}</Breadcrumb.Item>
+					</Breadcrumb>
+				</Col>
 				<Row className="mb-5">
-					<Col>
-						<Breadcrumb>
-							<Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-							<Breadcrumb.Item active>{whereAt}</Breadcrumb.Item>
-						</Breadcrumb>
-					</Col>
 					<Col>
 						<Form.Select
 							aria-label="Default select example"
@@ -40,10 +37,6 @@ const ProductsByCategory = () => {
 				</Row>
 
 				<Cardsgroup cat={cat} sort={sort} />
-
-				<div className="seemore-btn d-flex justify-content-center py-5">
-					{AutoButton(da["see more"])}
-				</div>
 			</Container>
 		</>
 	);

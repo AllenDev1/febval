@@ -1,9 +1,60 @@
-import React from "react";
-import "../Scss/updatedetails.scss";
-import Form from "react-bootstrap/Form";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import "../Scss/updatedetails.scss";
 
 const Updatedetails = (props) => {
+	const [phone, setPhone] = useState("");
+	const [address, setAddress] = useState("");
+	const [user, setUser] = useState(null);
+
+	const updateInfo = (e) => {
+		e.preventDefault();
+
+		const options = {
+			method: "POST",
+			url: "/api/user/info",
+
+			data: {
+				phone: phone,
+				address: address,
+			},
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {})
+			.catch(function (error) {
+				console.error(error);
+			});
+
+		window.location.reload();
+	};
+
+	const getUserInfo = () => {
+		const options = {
+			method: "GET",
+			url: "/api/user/info",
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				setUser(response.data.user);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	};
+
+	useEffect(() => {
+		// check if useris logged in
+		if (user) {
+			getUserInfo();
+		}
+	}, []);
+
 	return (
 		<>
 			<Modal
@@ -13,45 +64,44 @@ const Updatedetails = (props) => {
 			>
 				<Modal.Header closeButton>
 					<Modal.Title id="contained-modal-title-vcenter">
-						<text>Personal Details</text>
+						<p>Personal Details</p>
 					</Modal.Title>
 				</Modal.Header>
 				<div className="update-details">
 					<div className="update-container">
 						<div className="form-fill">
-							<form>
-								<label>
-									Enter your full name*
-									<br />
-									<input type="text" />
-								</label>
-								<label>
-									Enter Email*
-									<br />
-									<input type="text" />
-								</label>
+							<form onSubmit={updateInfo}>
 								<label>
 									Enter Phone Number*
 									<br />
-									<input type="number" />
+									<input
+										type="number"
+										placeholder={user?.phone}
+										value={phone}
+										onChange={(e) => {
+											setPhone(e.target.value);
+										}}
+										required
+									/>
 								</label>
 								<label>
 									Enter Address*
 									<br />
-									<input type="text" />
+									<input
+										placeholder={user?.address}
+										value={address}
+										type="text"
+										onChange={(e) => {
+											setAddress(e.target.value);
+										}}
+										required
+									/>
 								</label>
+								<Button variant="light" type="submit">
+									Update
+								</Button>
 							</form>
 						</div>
-						<checkbox />
-						<div className="footer-text">
-							<Form.Check aria-label="option 1" />
-							<p>
-								You agree to the{" "}
-								<a href="/"> Terms and Conditions </a>
-							</p>
-						</div>
-
-						<button>Update</button>
 					</div>
 				</div>
 			</Modal>
