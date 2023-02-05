@@ -24,7 +24,10 @@ const Product = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		
+		featured: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+		},
 		price: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
