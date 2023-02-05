@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout";
 import CheckoutImg from "../Assets/Checkout.svg";
 import Delete from "../Assets/delete-outlined.svg";
 import paytmlogo from "../Assets/paytm.png";
@@ -12,7 +11,6 @@ import { clearCart, removeProduct } from "../redux/cartRedux";
 import "../Scss/Cart.scss";
 import OrderCompltedModel from "./OrderCompltedModel";
 import Updatedetails from "./Updatedetails";
-import {CheckoutProvider, Checkout} from 'paytm-blink-checkout-react'
 // import Paytm from 'paytm-sdk-js';
 
 const Cart = (props) => {
