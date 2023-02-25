@@ -16,8 +16,8 @@ const paytm_config = {
 route.post("/paytm-payment", (req, res) => {
     let paytmParams = {};
 
-    let orderID = uuid();
-    let amount = "1.00";
+    let orderID = uuid(); 
+    let amount = "1.00"; // TODO: calculate amount depending on cart
 
     paytmParams.body = {
         requestType: "Payment",
@@ -84,83 +84,80 @@ route.post("/paytm-payment", (req, res) => {
 });
 
 route.post("/callback", (req, res) => {
-    const form = new formidable.IncomingForm();
+    const orderID = req.body.ORDERID;
+    /* initialize an object */
+    var paytmParams = {};
 
-    form.parse(req, (err, fields, files) => {
-        let paytmChecksum = fields.CHECKSUMHASH;
-        delete fields.CHECKSUMHASH;
+    /* body parameters */
+    paytmParams.body = {
+        /* Find your MID in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
+        mid: paytm_config.MID,
 
-        let isVerifySignature = PaytmChecksum.verifySignature(
-            fields,
-            paytm_config.MERCHANT_KEY,
-            paytmChecksum
-        );
-        if (isVerifySignature) {
-            /* initialize an object */
-            let paytmParams = {};
+        /* Enter your order id which needs to be check status for */
+        orderId: orderID,
+    };
 
-            /* body parameters */
-            paytmParams.body = {
-                /* Find your MID in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
-                mid: fields.MID,
-
-                /* Enter your order id which needs to be check status for */
-                orderId: fields.ORDER_ID,
+    /**
+     * Generate checksum by parameters we have in body
+     * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
+     */
+    PaytmChecksum.generateSignature(
+        JSON.stringify(paytmParams.body),
+        paytm_config.MERCHANT_KEY
+    )
+        .then(function (checksum) {
+            /* head parameters */
+            paytmParams.head = {
+                /* put generated checksum value here */
+                signature: checksum,
             };
 
-            /**
-             * Generate checksum by parameters we have in body
-             * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
-             */
-            PaytmChecksum.generateSignature(
-                JSON.stringify(paytmParams.body),
-                paytm_config.MERCHANT_KEY
-            ).then(function (checksum) {
-                /* head parameters */
-                paytmParams.head = {
-                    /* put generated checksum value here */
-                    signature: checksum,
-                };
+            /* prepare JSON string for request */
+            var post_data = JSON.stringify(paytmParams);
 
-                /* prepare JSON string for request */
-                let post_data = JSON.stringify(paytmParams);
+            var options = {
+                /* for Staging */
+                hostname: "securegw-stage.paytm.in",
 
-                let options = {
-                    /* for Staging */
-                    hostname: "securegw-stage.paytm.in",
+                /* for Production */
+                // hostname: 'securegw.paytm.in',
 
-                    /* for Production */
-                    // hostname: 'securegw.paytm.in',
+                port: 443,
+                path: "/v3/order/status",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Content-Length": post_data.length,
+                },
+            };
 
-                    port: 443,
-                    path: "/v3/order/status",
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Content-Length": post_data.length,
-                    },
-                };
-
-                // Set up the request
-                let response = "";
-                let post_req = https.request(options, function (post_res) {
-                    post_res.on("data", function (chunk) {
-                        response += chunk;
-                    });
-
-                    post_res.on("end", function () {
-                        res.json(response);
-                    });
+            // Set up the request
+            var response = "";
+            var post_req = https.request(options, function (post_res) {
+                post_res.on("data", function (chunk) {
+                    response += chunk;
                 });
 
-                // post the data
-                post_req.write(post_data);
-                post_req.end();
+                post_res.on("end", function () {
+                    console.log("Response: ", response);
+
+                    let responseJson = JSON.parse(response);
+                    if (responseJson.body.resultInfo.resultStatus === "TXN_SUCCESS") {
+                        return res.sendStatus(200);
+                    } else {
+                        console.log("Verification Failed: ", responseJson);
+                        return res.sendStatus(400);
+                    }
+                });
             });
-        } else {
-            console.log("Checksum Mismatched");
-        }
-    });
+
+            // post the data
+            post_req.write(post_data);
+            post_req.end();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 module.exports = route;

@@ -2,7 +2,7 @@
 const express = require("express");
 const { ensureAdmin } = require("../middlewares/Auth.js");
 const router = express.Router();
-const { Product, ProductImages, ProductSize } = require("../models");
+const { Product, ProductImages, ProductSize,ProductVariant } = require("../models");
 
 // create product
 router.post("/create", ensureAdmin, async (req, res) => {
@@ -125,7 +125,7 @@ router.get("/", async (req, res) => {
 			products = await Product.findAll({
 				include: [
 					{ model: ProductImages, as: "productImages" },
-					{ model: ProductSize, as: "productSize" },
+					{model: ProductVariant, as: "productVariant"}
 				],
 
 				where: { category: cat },
@@ -134,7 +134,7 @@ router.get("/", async (req, res) => {
 			products = await Product.findAll({
 				include: [
 					{ model: ProductImages, as: "productImages" },
-					{ model: ProductSize, as: "productSize" },
+					{model: ProductVariant, as: "productVariant"}
 				],
 			});
 		}
@@ -153,7 +153,7 @@ router.get("/get/:id", async (req, res) => {
 			where: { id: id },
 			include: [
 				{ model: ProductImages, as: "productImages" },
-				{ model: ProductSize, as: "productSize" },
+				{model: ProductVariant, as: "productVariant"}
 			],
 		});
 		if (product) {
@@ -203,30 +203,13 @@ router.get("/name/:name", async (req, res) => {
 	}
 });
 
-//Get product by price
-router.get("/price/:price", async (req, res) => {
-	try {
-		const { price } = req.params;
-		const products = await Product.findAll({
-			where: { price: price },
-		});
-		if (products) {
-			return res.status(200).json({ products });
-		}
-
-		return res
-			.status(404)
-			.send("Product with the specified price does not exists");
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
-});
-
-//get product price assending
-router.get("/price/assending", async (req, res) => {
+//get product price ascending
+router.get("/price/ascending", async (req, res) => {
 	try {
 		const products = await Product.findAll({
-			order: [["price", "ASC"]],
+			include: [
+				{ model: ProductVariant, as: "productVariant", order: [["price", "ASC"]] },
+			],
 		});
 		if (products) {
 			return res.status(200).json({ products });
@@ -243,11 +226,34 @@ router.get("/price/assending", async (req, res) => {
 router.get("/price/descending", async (req, res) => {
 	try {
 		const products = await Product.findAll({
-			order: [["price", "DESC"]],
+			include: [
+				{ model: ProductVariant, as: "productVariant", order: [["price", "DESC"]] },
+			],
 		});
 		if (products) {
 			return res.status(200).json({ products });
 		}
+		return res
+			.status(404)
+			.send("Product with the specified price does not exists");
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+});
+
+//Get product by price
+router.get("/price/:price", async (req, res) => {
+	try {
+		const { price } = req.params;
+		const products = await Product.findAll({
+			include: [
+				{ model: ProductVariant, as: "productVariant", where: { price: price } },
+			],
+		});
+		if (products) {
+			return res.status(200).json({ products });
+		}
+
 		return res
 			.status(404)
 			.send("Product with the specified price does not exists");
