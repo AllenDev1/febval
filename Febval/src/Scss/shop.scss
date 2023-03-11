@@ -1,0 +1,31 @@
+.main-box {
+  margin-bottom: 55px;
+  padding-top: 145px;
+  margin: auto;
+  max-width: 1340px;
+  position: relative;
+
+  img {
+    position: relative;
+    width: 100%;
+  }
+  h1{
+    position: absolute;
+    bottom: 10%;
+    left: 4%;
+    text-decoration: underline;
+    cursor: pointer;
+
+  }
+
+}
+@media screen and (max-width:760px){
+    .main-box{
+        h1{
+            font-size:14px;
+
+        }
+
+    }
+    
+}
