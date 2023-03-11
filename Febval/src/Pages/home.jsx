@@ -10,13 +10,12 @@ const Home = () => {
 	
 	return (
 		<>
-			<Carouse />
 			{/* <Categories /> */}
 			<FeaturedProducts />
 			<Sale />
 			<Foryou />
+			<Carouse />
 			<Email />
-		
 		</>
 	);
 };
