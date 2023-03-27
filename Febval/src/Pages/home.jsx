@@ -17,9 +17,8 @@ const Home = () => {
 			<Shopnow/>
 			<FeaturedProducts />
 			<Categories /> 
-			
+			<Sale/>
 			<Number/>
-
 			<Foryou />
 			<Carouse />
 			<Email />
