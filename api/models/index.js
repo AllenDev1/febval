@@ -32,11 +32,11 @@ Product.ProductImages = Product.hasMany(ProductImages, {
 	as: "productImages",
 });
 
-Product.ProductSize = Product.hasMany(ProductSize, {
-	foreignKey: "productId",
-	sourceKey: "id",
-	as: "productSize",
-});
+// Product.ProductSize = Product.hasMany(ProductSize, {
+// 	foreignKey: "productId",
+// 	sourceKey: "id",
+// 	as: "productSize",
+// });
 
 User.Order = User.hasMany(Order, {
 	foreignKey: "userId",
@@ -72,6 +72,6 @@ module.exports = {
 	ProductOrder,
 	SalesBanner,
 	SalesCarousel,
-	ProductSize,
+	// ProductSize,
 	sequelize,
 };
