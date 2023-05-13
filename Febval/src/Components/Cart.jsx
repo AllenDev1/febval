@@ -354,12 +354,13 @@ const Cart = (props) => {
 																Rs.
 																{_.product
 																	.category ===
-																"cake" ? (
+																"cake"  ? (
 																	<>
 																		{
-																			_
-																				.product
-																				.pri
+																			// price of the variant
+																			
+
+																			
 																		}
 																		*{" "}
 																		{

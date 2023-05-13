@@ -13,6 +13,7 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 	const productsPerRow = 12;
 	const [next, setNext] = useState(productsPerRow);
 
+
 	const loadMore = () => {
 		setNext(next + productsPerRow);
 	};

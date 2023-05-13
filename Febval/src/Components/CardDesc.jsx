@@ -24,9 +24,8 @@ const CardDesc = ({ id, name }) => {
 	const dispatch = useDispatch();
 	const [counter, setCounter] = useState(1);
 	const [user, setUser] = useState(null);
-	const [cakeSize, setCakeSize] = useState("0.5kg");
-	const [price, setPrice] = useState(0);
-	let pric;
+	const [variant, setVariant] = useState("large");
+	
 
 	const incrementCounter = () => setCounter(counter + 1);
 	let decrementCounter = () => setCounter(counter - 1);
@@ -36,7 +35,7 @@ const CardDesc = ({ id, name }) => {
 	const addtoCartClick = () => {
 		const products = {
 			...product,
-			pri: pric,
+			variant : variant,
 		};
 
 		dispatch(
@@ -57,7 +56,6 @@ const CardDesc = ({ id, name }) => {
 				.request(options)
 				.then(function (response) {
 					setProduct(response.data.product);
-					setPrice(response.data.product.price);
 				})
 				.catch(function (error) {
 					console.error(error);
@@ -135,21 +133,13 @@ const CardDesc = ({ id, name }) => {
 										<div className="price text-secondary d-flex gap-3">
 											<h5>
 												Rs.
-												{product?.category === "cake"
-													? cakeSize === "1kg"
-														? (pric = price * 1)
-														: cakeSize === "2kg"
-														? (pric = price * 2)
-														: cakeSize === "3kg"
-														? (pric = price * 3)
-														: cakeSize === "4kg"
-														? (pric = price * 4)
-														: cakeSize === "5kg"
-														? (pric = price * 5)
-														: cakeSize === "6kg"
-														? (pric = price * 6)
-														: price
-													: product.price}
+												{
+													//show price according to variant selected and store in a variable
+													product.productVariant?.find(
+														(_) =>
+															_.label === variant
+													)?.price 
+												}
 											</h5>
 											+<h5>Rs. 150 shipping charge</h5>
 										</div>
@@ -168,7 +158,7 @@ const CardDesc = ({ id, name }) => {
 													aria-label="Default select example"
 													className="w-25 "
 													onChange={(e) => {
-														setCakeSize(
+														setVariant(
 															e.target.value
 														);
 													}}
@@ -176,24 +166,23 @@ const CardDesc = ({ id, name }) => {
 													<option disabled>
 														Select size
 													</option>
-													<option value="1kg">
-														1 KG
-													</option>
-													<option value="2kg">
-														2 KG
-													</option>
-													<option value="3kg">
-														3 KG
-													</option>
-													<option value="4kg">
-														4 KG
-													</option>
-													<option value="5kg">
-														5 KG
-													</option>
-													<option value="6kg">
-														6 KG
-													</option>
+													{product.productVariant?.map(
+														(_, idx) => {
+															return (
+																<>
+																	<option
+																		key={
+																			idx
+																		}
+																	>
+																		{
+																			_?.label
+																		}
+																	</option>
+																</>
+															);
+														}
+													)}
 												</Form.Select>
 											</Col>
 										)}
