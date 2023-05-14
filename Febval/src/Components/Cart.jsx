@@ -25,60 +25,6 @@ const Cart = (props) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const handleToken = (token, address) => {
-		axios
-
-			.post("/api/stripe/checkout", { token, cartProducts })
-			.then((res) => {
-				console.log(res);
-				alert("Payment Successful");
-			})
-			.catch((err) => {
-				console.log(err);
-				alert("Payment Failed");
-			});
-	};
-
-	// function isDate(val) {
-	// 	// Cross realm comptatible
-	// 	return Object.prototype.toString.call(val) === "[object Date]";
-	// }
-
-	// function isObj(val) {
-	// 	return typeof val === "object";
-	// }
-
-	// function stringifyValue(val) {
-	// 	if (isObj(val) && !isDate(val)) {
-	// 		return JSON.stringify(val);
-	// 	} else {
-	// 		return val;
-	// 	}
-	// }
-
-	// function buildForm({ action, params }) {
-	// 	const form = document.createElement("form");
-	// 	form.setAttribute("method", "post");
-	// 	form.setAttribute("action", action);
-
-	// 	Object.keys(params).forEach((key) => {
-	// 		const input = document.createElement("input");
-	// 		input.setAttribute("type", "hidden");
-	// 		input.setAttribute("name", key);
-	// 		input.setAttribute("value", stringifyValue(params[key]));
-	// 		form.appendChild(input);
-	// 	});
-
-	// 	return form;
-	// }
-
-	// function post(details) {
-	// 	const form = buildForm(details);
-	// 	document.body.appendChild(form);
-	// 	form.submit();
-	// 	form.remove();
-	// }
-
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -130,27 +76,27 @@ const Cart = (props) => {
 		}
 	};
 
-	const getPaytmInfo = async () => {
-		try {
-			const res = await fetch("/api/paytm/payment", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: { cartProducts },
-			});
-			return await res.json();
-		} catch (err) {
-			return console.log(err);
-		}
-	};
+	// const getPaytmInfo = async () => {
+	// 	try {
+	// 		const res = await fetch("/api/paytm/payment", {
+	// 			method: "POST",
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 				Accept: "application/json",
+	// 			},
+	// 			body: { cartProducts },
+	// 		});
+	// 		return await res.json();
+	// 	} catch (err) {
+	// 		return console.log(err);
+	// 	}
+	// };
 
-	const makePayment = () => {
-		getPaytmInfo({ cartProducts }).then((response) => {
-			console.log(response);
-		});
-	};
+	// const makePayment = () => {
+	// 	getPaytmInfo({ cartProducts }).then((response) => {
+	// 		console.log(response);
+	// 	});
+	// };
 
 	return (
 		<>
@@ -306,7 +252,7 @@ const Cart = (props) => {
 						)
 					}
 
-					<button
+					{/* <button
 						onClick={makePayment}
 						className="comming soon bg-white "
 					>
@@ -314,7 +260,7 @@ const Cart = (props) => {
 						<p className="text-dark">
 							Buy with Paytm (comming soon)
 						</p>
-					</button>
+					</button> */}
 					{/* <StripeCheckout
 						className="comming soon"
 						stripeKey={STRIPE_KEY}

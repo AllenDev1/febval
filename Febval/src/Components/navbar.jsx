@@ -23,8 +23,8 @@ import Cart from "./Cart";
 import Loginform from "./Loginform";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
-import profileLogo from "../Assets/gift shop 2/Vector.svg";
+// import logoutlogo from "../Assets/gift shop 2/Vector-1.svg";
+// import profileLogo from "../Assets/gift shop 2/Vector.svg";
 
 const Navbars = () => {
 	const [user, setUser] = useState(null);
@@ -98,7 +98,7 @@ const Navbars = () => {
 														className="text-decoration-none text-dark"
 													>
 														<img
-															src={profileLogo}
+															// src={profileLogo}
 															alt=""
 														/>
 														Profile
@@ -109,13 +109,13 @@ const Navbars = () => {
 														localStorage.clear();
 														window.location.reload();
 														window.open(
-															`${process.env.REACT_APP_URL}/auth/logout`,
+															`http://localhost:3001/auth/logout`,
 															"_self"
 														);
 													}}
 												>
 													<img
-														src={logoutlogo}
+														// src={logoutlogo}
 														alt=""
 													/>
 													Logout

@@ -34,6 +34,7 @@ const Cardsgroup = ({ cat, sort, feature }) => {
 		axios
 			.request(options)
 			.then(function (response) {
+				console.log(response.data.products);
 				setProducts(response.data.products);
 			})
 			.catch(function (error) {

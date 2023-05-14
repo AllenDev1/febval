@@ -29,7 +29,7 @@ const Loginform = (props) => {
 						className="login-google"
 						onClick={() => {
 							window.open(
-								`${window.location.origin}/auth/google`,
+								`http://localhost:3001/auth/google`,
 								"_self"
 							);
 						}}
