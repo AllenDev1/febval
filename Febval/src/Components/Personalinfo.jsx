@@ -1,11 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Badge, Button, Container, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Order from "../Assets/order.svg";
 import { getUser } from "../Auth/auth";
 import "../Scss/personalinfo.scss";
 import Updatedetails from "./Updatedetails";
-import axios from "axios";
 
 const Personalinfo = () => {
 	const [user, setUser] = useState(null);
@@ -108,30 +107,41 @@ const Personalinfo = () => {
 									<th>Placed on</th>
 									<th>Items</th>
 									<th>Total</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							{orders ? (
-								orders?.map((order) => {
+								orders?.map((order, i) => {
 									return (
-										<>
-											<tbody>
-												<tr>
-													<td>{order.id}</td>
-													<td>{formatDate(order.createdAt)}</td>
-													<td>
-														{order.Products[0].name}
-													</td>
+										<tbody key={i}>
+											<tr>
+												<td>{order.id}</td>
+												<td>
+													{formatDate(
+														order.createdAt
+													)}
+												</td>
+												<td>
+													{order.Products[0].name}
+												</td>
 
-													<td>
-														Rs.
-														{
-															order.Products[0]
-																.price
-														}
-													</td>
-												</tr>
-											</tbody>
-										</>
+												<td>
+													Rs.
+													{order.Products[0].price}
+												</td>
+												<td>
+													{order.orderComplete ? (
+														<Badge bg="success">
+															Completed
+														</Badge>
+													) : (
+														<Badge bg="warning">
+															Pending
+														</Badge>
+													)}
+												</td>
+											</tr>
+										</tbody>
 									);
 								})
 							) : (

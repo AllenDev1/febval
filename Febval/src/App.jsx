@@ -37,7 +37,7 @@ const App = () => {
 			</Router>
 			<Footer />
 			<WhatsAppWidget
-				phoneNo="+917507664186"
+				phoneNo="9813860595"
 				position="right"
 				widgetWidth="300px"
 				widgetWidthMobile="260px"
@@ -50,9 +50,9 @@ const App = () => {
 				iconBgColor="#25D366"
 				headerIcon="https://cdn-icons-png.flaticon.com/512/8377/8377198.png"
 				headerIconColor="#25D366"
-				headerTxtColor="white"
-				headerBgColor="#128C7E"
-				headerTitle="Sarfaraj"
+				headerTxtColor="black"
+				headerBgColor="#25D366"
+				headerTitle="Gift Nepal"
 				headerCaption="Online"
 				bodyBgColor="#bbb"
 				chatPersonName="Support"
@@ -62,12 +62,11 @@ const App = () => {
 						<br /> How can I help you?
 					</>
 				}
-				footerBgColor="#128C7E"
+				footerBgColor="#999"
 				btnBgColor="#25D366"
 				btnTxtColor="white"
 				btnTxt="Start Chat"
 			/>
-			
 		</>
 	);
 };
