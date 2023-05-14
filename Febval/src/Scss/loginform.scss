@@ -1,6 +1,10 @@
 .login-modal {
 	.modal-dialog {
 		.modal-content {
+			.logo{
+				width: 5rem;
+				height: 5rem;
+			}
 			.login-modal-footer {
 				.login-google {
 					background: rgba(0, 0, 0, 0.05);

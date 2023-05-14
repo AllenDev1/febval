@@ -1,22 +1,14 @@
-import GooglePayButton from "@google-pay/button-react";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout";
 import Checkout from "../Assets/Checkout.svg";
-import Delete from "../Assets/delete-outlined.svg";
 import Shop from "../Assets/Shopp.svg";
-import { removeProduct, clearCart } from "../redux/cartRedux";
-import paytm from "../Assets/paytm.png";
+import Delete from "../Assets/delete-outlined.svg";
 import "../Scss/Cart.scss";
+import { clearCart, removeProduct } from "../redux/cartRedux";
 import Updatedetails from "./Updatedetails";
-import { useState, useEffect } from "react";
-import { getUser } from "../Auth/auth";
-
-const STRIPE_KEY =
-	"pk_test_51MAxxaSIm7okGxm8CDzOuJNdJlyjrDiM7u8evYe22AktqFNDhEcI3x9xwEZgJmoeUATgTL2N877CWnFcBoQjk3t400ehvRU25W";
 
 const Cart = (props) => {
 	const cartProducts = useSelector((state) => state.cart.products);
@@ -76,28 +68,6 @@ const Cart = (props) => {
 		}
 	};
 
-	// const getPaytmInfo = async () => {
-	// 	try {
-	// 		const res = await fetch("/api/paytm/payment", {
-	// 			method: "POST",
-	// 			headers: {
-	// 				"Content-Type": "application/json",
-	// 				Accept: "application/json",
-	// 			},
-	// 			body: { cartProducts },
-	// 		});
-	// 		return await res.json();
-	// 	} catch (err) {
-	// 		return console.log(err);
-	// 	}
-	// };
-
-	// const makePayment = () => {
-	// 	getPaytmInfo({ cartProducts }).then((response) => {
-	// 		console.log(response);
-	// 	});
-	// };
-
 	return (
 		<>
 			<Offcanvas placement="end" backdrop="static" {...props}>
@@ -113,7 +83,7 @@ const Cart = (props) => {
 								// check if cart is empty
 								cartProducts.length === 0 ? (
 									<div className="empty-cart">
-										<h1>Your Cart is Empty</h1>
+										<h5>Your Cart is Empty</h5>
 									</div>
 								) : (
 									<div className="cart-item-container">
@@ -277,67 +247,6 @@ const Cart = (props) => {
 								150) *
 							100
 						}
-					/> */}
-					{/* <GooglePayButton
-						className="w-100 comming soon"
-						environment="TEST"
-						paymentRequest={{
-							apiVersion: 2,
-							apiVersionMinor: 0,
-							allowedPaymentMethods: [
-								{
-									type: "CARD",
-									parameters: {
-										allowedAuthMethods: [
-											"PAN_ONLY",
-											"CRYPTOGRAM_3DS",
-										],
-										allowedCardNetworks: [
-											"MASTERCARD",
-											"VISA",
-										],
-									},
-									tokenizationSpecification: {
-										type: "PAYMENT_GATEWAY",
-										parameters: {
-											gateway: "example",
-											gatewayMerchantId:
-												"exampleGatewayMerchantId",
-										},
-									},
-								},
-							],
-							merchantInfo: {
-								merchantId: "12345678901234567890",
-								merchantName: "Demo Merchant",
-							},
-							transactionInfo: {
-								totalPriceStatus: "FINAL",
-								totalPriceLabel: "Total",
-								totalPrice: "100.00",
-								currencyCode: "INR",
-								countryCode: "IN",
-							},
-							shippingAddressRequired: true,
-							callbackIntents: [
-								"PAYMENT_AUTHORIZATION",
-								"SHIPPING_ADDRESS",
-							],
-						}}
-						onLoadPaymentData={(paymentRequest) => {
-							console.log("load payment data", paymentRequest);
-						}}
-						onPaymentAuthorized={(paymentData) => {
-							console.log(
-								"Payment Authorised Success",
-								paymentData
-							);
-							return { transactionState: "SUCCESS" };
-						}}
-						onPaymentDataChanged={(paymentData) => {
-							console.log("On Payment Data Changed", paymentData);
-							return {};
-						}}
 					/> */}
 
 					<Button

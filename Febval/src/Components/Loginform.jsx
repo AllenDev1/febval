@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import logo from "../Assets/Company Name.svg";
+import logo from "../Assets/Febval.png";
 import google from "../Assets/google.svg";
 import img from "../Assets/image 6.svg";
 import "../Scss/loginform.scss";
@@ -17,7 +17,7 @@ const Loginform = (props) => {
 			>
 				<Modal.Header closeButton>
 					<Modal.Title id="contained-modal-title-vcenter">
-						<img src={logo} alt=".." />
+						<img src={logo} alt=".." className="logo" />
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body className="justify-content-center d-flex ">
@@ -38,7 +38,7 @@ const Loginform = (props) => {
 					</a>
 
 					<p className="footer-text">
-						If you continue, you are accepting FEBVAL{" "}
+						If you continue, you are accepting Gift Nepal{" "}
 						<a href="/terms"> Terms and Conditions </a>and{" "}
 						<a href="/terms"> Privacy Policy.</a>
 					</p>

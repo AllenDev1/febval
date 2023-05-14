@@ -13,6 +13,12 @@
 			width: 100%;
 			justify-content: space-between;
 			.onBigscreen {
+				img{
+					width: 5rem;
+					height: 5rem;
+					padding: 0% !important;
+				}
+			
 			}
 			.onSmallscreen{
 				display: none;
@@ -86,8 +92,11 @@
 				}
 			}
 		}
+
 		.bottom-menu {
+		
 			.menu-body {
+				
 				.buttom-nav {
 					align-items: center;
 					justify-content: space-between;
@@ -122,6 +131,7 @@
 }
 @media (max-width: 768px) {
 	.main-nav {
+		
 		.nav-container {
 			.always-on-nav {
 				display: block;
@@ -235,4 +245,9 @@
 			}
 		}
 	}
+}
+
+.logo1{
+	width: 5rem ;
+	height: 5rem;
 }

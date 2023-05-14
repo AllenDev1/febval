@@ -31,7 +31,7 @@ router.get("/logout", (req, res) => {
 router.get(
     "/google/callback",
     passort.authenticate("google", {
-        successRedirect: `http://localhost:3001/`,
+        successRedirect: `${process.env.URL}`,
         failureRedirect: "/login/failure",
     })
 );

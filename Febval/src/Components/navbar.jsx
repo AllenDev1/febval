@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import cart from "../Assets/cart.svg";
-import logo from "../Assets/Company Name.svg";
+import logo from "../Assets/Febval.png";
 import events from "../Assets/events.svg";
 import cake from "../Assets/gift shop/cakes.svg";
 import giftbox from "../Assets/gift shop/giftbox.svg";
@@ -169,7 +169,7 @@ const Navbars = () => {
 					>
 						<Offcanvas.Header closeButton>
 							<Offcanvas.Title id="offcanvasNavbarLabel-expand-sm">
-								<img src={logo} alt=".." />
+								<img src={logo} alt=".." className="logo1"/>
 							</Offcanvas.Title>
 						</Offcanvas.Header>
 						<Offcanvas.Body className="menu-body">

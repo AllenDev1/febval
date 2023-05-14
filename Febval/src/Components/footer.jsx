@@ -36,13 +36,13 @@ const Footer = () => {
 						<div className="footer-sites">
 							<p>Find us on</p>
 							<div className="social-media">
-								<a href="https://www.facebook.com/profile.php?id=100085282614251/" target="_blank">
+								<a href="#" target="_blank">
 									<img src={Facebook} alt=".." />
 								</a>
-								<a href="https://www.instagram.com/febvalgifts/" target="_blank">
+								<a href="#" target="_blank">
 									<img src={Insta} alt=".." />
 								</a>
-								<a href="https://twitter.com/Febvalgifts?t=k97eoefKw4BQRMUHjRp_Jg&s=08" target="_blank">
+								<a href="#" target="_blank">
 									<img src={Twitter} alt=".." />
 								</a>
 							</div>
@@ -53,7 +53,7 @@ const Footer = () => {
 					<Container>
 						<div className="copyright-items">
 							<div className="footer-copyright-l">
-								Copyright @2022 FEBVAL
+								Copyright @2022 Gift Nepal
 							</div>
 							<div className="footer-copyright-r">
 								<a href="/terms" className="text-decoration-none">

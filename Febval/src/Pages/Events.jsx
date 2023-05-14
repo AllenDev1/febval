@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Gallery from "react-photo-gallery";
-import { photos } from "../Components/data file/Photo.js";
+
 import "../Scss/Events.scss";
 import WhatsAppWidget from "react-whatsapp-chat-widget";
 import "react-whatsapp-chat-widget/index.css";
@@ -17,11 +16,10 @@ const Events = () => {
 						</h1>
 					</Col>
 				</Row>
-				<Gallery photos={photos} />
 			</Container>
 
 			<WhatsAppWidget
-				phoneNo="+917507664186"
+				phoneNo="9813860595"
 				position="right"
 				widgetWidth="300px"
 				widgetWidthMobile="260px"
@@ -36,7 +34,7 @@ const Events = () => {
 				headerIconColor="#25D366"
 				headerTxtColor="black"
 				headerBgColor="#25D366"
-				headerTitle="Rupesh Khadka"
+				headerTitle="Gift Nepal"
 				headerCaption="Online"
 				bodyBgColor="#bbb"
 				chatPersonName="Support"

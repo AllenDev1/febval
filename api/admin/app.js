@@ -43,8 +43,8 @@ const start = async (app) => {
 		loginPath: "/api/admin/login",
 		databases: [sequelize],
 		branding: {
-			companyName: "Fevbal",
-			logo: "https://pbs.twimg.com/profile_images/1590607513179033601/GMfWWfH0_400x400.jpg",
+			companyName: "Gift Nepal",
+			logo: "https://1.bp.blogspot.com/-Wmyw_D5ScRc/YGve7pi1xKI/AAAAAAAACQw/U0dZHZyfyvMXvJJrpYJaJxWue3YxdZvqACNcBGAsYHQ/s2048/Skylightz%2BGaming.png",
 			withMadeWithLove: false,
 		},
 	});
